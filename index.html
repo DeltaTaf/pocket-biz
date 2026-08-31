@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pocket Biz | Market Entry Intelligence | v12</title>
+<title>Pocket Biz | Market Entry Intelligence | v17</title>
 <style>
 :root{--bg:#f7f3ec;--card:#fffdf8;--text:#171615;--muted:#70685f;--line:#e8ddcf;--dark:#11110f;--accent:#b9823b;--soft:#efe2cf;--shadow:0 24px 70px rgba(32,25,18,.12);--radius:28px}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#fff7e9 0,transparent 32%),radial-gradient(circle at 100% 10%,#ead9c0 0,transparent 28%),var(--bg);color:var(--text)}.container{max-width:1180px;margin:auto;padding:26px 20px 80px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:44px;height:44px;border-radius:16px;background:var(--dark);color:#fff;display:grid;place-items:center}.nav-links{display:flex;gap:16px;align-items:center;color:var(--muted);font-size:14px}.nav-links a{text-decoration:none;color:inherit}select,input{border:1px solid var(--line);border-radius:16px;background:#faf7f1;padding:13px 14px;font:inherit;color:var(--text)}.lang-toggle{border-radius:999px;padding:8px 34px 8px 12px;font-weight:800}
@@ -10,91 +10,86 @@
 .section-title{margin:82px 0 18px;font-size:clamp(34px,5vw,48px);line-height:1;letter-spacing:-.065em}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card,.panel{padding:24px}.app-shell{background:var(--card);border:1px solid var(--line);border-radius:34px;box-shadow:var(--shadow);padding:18px;margin-top:24px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}input{flex:1;min-width:230px}.country-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.country-button{cursor:pointer;text-align:left;background:white;border:1px solid var(--line);border-radius:20px;padding:14px}.country-button.active{border-color:var(--accent)}.country-button strong{display:block;margin-top:8px}.country-button span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.profile-grid,.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px}.profile-main,.profile-side{background:white;border:1px solid var(--line);border-radius:28px;padding:24px}.profile-main h2{margin:0 0 8px;font-size:36px}.tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.infobox,.listitem{background:#faf7f1;border-radius:18px;padding:14px}.infobox small{display:block;color:var(--muted)}.list{display:grid;gap:10px;margin-top:14px}.dodont{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.do,.dont{border-radius:18px;padding:14px;line-height:1.45}.do{background:#edf3ee;color:#304d3a}.dont{background:#f5eeee;color:#6d3732}.scorebar{height:10px;background:#eee4d7;border-radius:999px;overflow:hidden;margin-top:8px}.scorebar span{display:block;height:100%;background:var(--accent)}.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.footer{margin-top:80px;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
 @media(max-width:980px){.hero,.profile-grid,.two-col{grid-template-columns:1fr}.grid3,.risk-grid,.timeline{grid-template-columns:1fr}.country-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.nav-links a{display:none}}
 
-.advisor-shell{margin-top:24px;background:var(--dark);color:white;border-radius:34px;padding:24px;box-shadow:var(--shadow)}
-.advisor-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
-.advisor-intro,.advisor-chat{border-radius:24px;padding:22px}
-.advisor-intro{background:#fff;color:var(--text)}
-.advisor-chat{background:#171715;display:flex;flex-direction:column;min-height:480px}
-.advisor-examples{display:grid;gap:10px;margin-top:18px}
-.advisor-example{border:1px solid var(--line);background:#faf7f1;color:var(--text);border-radius:16px;padding:13px;text-align:left;cursor:pointer;font:inherit}
+/* Pocket Biz v17 additions */
+.pb-flag{width:30px;height:20px;object-fit:cover;border-radius:3px;display:block;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.pb-flag-lg{width:44px;height:29px;display:inline-block;margin:0 9px 0 0;vertical-align:-6px;border-radius:4px}
+.profile-country-title{display:flex;align-items:center}
+.tool-card{position:relative}
+.tool-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:850;color:var(--muted);margin-bottom:7px}
+.tool-number{font-size:36px;font-weight:950;letter-spacing:-.05em}
+.tool-note{font-size:13px;color:var(--muted);line-height:1.5}
+.tool-meter{height:12px;background:#eee4d7;border-radius:999px;overflow:hidden;margin:12px 0}
+.tool-meter span{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .7s cubic-bezier(.22,1,.36,1)}
+.tool-controls{display:grid;gap:10px;margin-top:14px}
+.tool-controls label{font-size:12px;color:var(--muted);font-weight:800}
+.tool-controls select,.tool-controls input{width:100%;min-width:0}
+.tool-result{margin-top:14px;padding:13px;background:#faf7f1;border-radius:16px}
+.tool-row{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.tool-row:last-child{border-bottom:0}
+.verified-badge{display:inline-flex;align-items:center;gap:6px;background:#e8f5ea;color:#236b31;border:1px solid #b9dfbf;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}
+.verified-badge .check{width:16px;height:16px;border-radius:50%;background:#2f9b43;color:white;display:grid;place-items:center}
+.mistake-source{font-size:12px;color:var(--muted);text-decoration:none;display:block;margin-top:10px}
+.mistake-source:hover{text-decoration:underline}
+.timeline-step{position:relative}
+.timeline-step .step-number{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--dark);color:white;font-weight:900;margin-bottom:10px}
+.check-live{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.check-live:last-child{border-bottom:0}
+.check-live input{min-width:18px;flex:0 0 18px;margin-top:3px}
+.advisor-shell{margin-top:24px;background:var(--dark);color:white;border-radius:34px;padding:20px;box-shadow:var(--shadow)}
+.advisor-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:16px}
+.advisor-intro{background:white;color:var(--text);border-radius:26px;padding:24px}
+.advisor-chat{background:#181816;border-radius:26px;padding:18px;min-height:500px;display:flex;flex-direction:column}
+.advisor-examples{display:grid;gap:9px;margin-top:18px}
+.advisor-example{width:100%;border:1px solid var(--line);background:#faf7f1;color:var(--text);border-radius:15px;padding:12px;text-align:left;cursor:pointer;font:inherit;line-height:1.4}
 .advisor-example:hover{border-color:var(--accent);transform:translateY(-1px)}
-.advisor-messages{display:grid;gap:10px;flex:1;overflow:auto;max-height:430px;padding-right:4px}
-.advisor-bubble{border-radius:18px;padding:14px 16px;line-height:1.55;white-space:normal}
-.advisor-bubble.user{background:#252523;margin-left:10%;color:white}
-.advisor-bubble.answer{background:#fff;color:var(--text);margin-right:5%;min-height:52px}
+.advisor-messages{display:grid;gap:10px;overflow:auto;flex:1;max-height:410px;padding:2px}
+.advisor-bubble{padding:14px 16px;border-radius:18px;line-height:1.55;white-space:normal}
+.advisor-bubble.user{background:#292925;margin-left:12%;color:white}
+.advisor-bubble.answer{background:white;color:var(--text);margin-right:4%}
 .advisor-bubble.answer p{margin:0 0 10px;color:var(--text)}
 .advisor-bubble.answer p:last-child{margin-bottom:0}
 .advisor-bubble.answer strong{color:var(--text)}
 .advisor-bubble.answer ul{margin:7px 0 10px;padding-left:22px}
-.advisor-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px}
-.advisor-input{width:100%;background:#faf7f1;border-color:#3a3935;color:var(--text)}
+.advisor-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
+.advisor-input{width:100%;min-width:0;background:#faf7f1}
 .advisor-status{font-size:12px;color:#bdb8b0;margin-top:8px}
+.advisor-country{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#d6d0c8;font-size:13px}
 @media(max-width:980px){.advisor-grid{grid-template-columns:1fr}.advisor-form{grid-template-columns:1fr}}
-
-
-.pb-flag{width:32px;height:22px;object-fit:cover;border-radius:4px;display:inline-block;vertical-align:middle;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.pb-flag-lg{width:52px;height:36px;border-radius:6px}
-
-
-.country-flag{width:30px;height:20px;object-fit:cover;border-radius:3px;display:block;margin-bottom:9px;box-shadow:0 1px 2px rgba(0,0,0,.14)}
-.country-flag-large{width:42px;height:28px;border-radius:4px;display:inline-block;margin:0 10px 0 0;vertical-align:-5px}
-.bigflag{height:auto;font-size:0;line-height:0;margin-bottom:8px}
-.profile-country-title{display:flex;align-items:center;gap:0}
-
-
-.tool-live{position:relative;overflow:hidden}
-.tool-live .tool-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;margin-bottom:8px}
-.tool-live .tool-value{font-size:34px;font-weight:900;letter-spacing:-.05em}
-.tool-live .tool-note{color:var(--muted);font-size:14px;margin-top:8px}
-.tool-live .tool-action{margin-top:16px}
-.tool-live .tool-action button{cursor:pointer}
-.tool-risk-meter{height:12px;background:#eee6da;border-radius:99px;overflow:hidden;margin-top:12px}
-.tool-risk-meter span{display:block;height:100%;border-radius:99px;background:#b8792f;transition:width .7s cubic-bezier(.22,1,.36,1)}
-.verified-badge{display:inline-flex;align-items:center;gap:6px;background:#e8f5ea;color:#236b31;border:1px solid #b9dfbf;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:850}
-.verified-badge .check{width:16px;height:16px;border-radius:50%;background:#2f9b43;color:#fff;display:inline-grid;place-items:center;font-size:10px}
-.mistake-source{display:block;margin-top:12px;font-size:12px;color:var(--muted);text-decoration:none}
-.mistake-source:hover{text-decoration:underline}
-.mistake-loading{color:var(--muted);font-size:14px}
-.cost-total{font-size:30px;font-weight:900;letter-spacing:-.04em}
-.cost-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
-.cost-row:last-child{border-bottom:0}
 
 </style>
 </head>
 <body>
 <div class="container">
-<nav class="nav"><div class="brand"><div class="brand-mark">PB</div><span>Pocket Biz</span></div><div class="nav-links"><a href="#app" id="navDemo"></a><a href="#advisor" id="navAdvisor">Advisor</a><a href="#contacts" id="navContacts"></a><a href="#tools" id="navTools"></a><a href="#interest" id="navInterest"></a><select id="languageSelect" class="lang-toggle"><option value="en">English</option><option value="ja">日本語</option><option value="el">Ελληνικά</option></select></div></nav>
+<nav class="nav"><div class="brand"><div class="brand-mark">PB</div><span>Pocket Biz</span></div><div class="nav-links"><a href="#app" id="navDemo"></a><a href="#contacts" id="navContacts"></a><a href="#tools" id="navTools"></a><a href="#interest" id="navInterest"></a><select id="languageSelect" class="lang-toggle"><option value="en">English</option><option value="ja">日本語</option><option value="el">Ελληνικά</option></select></div></nav>
 <section class="hero"><div><div class="kicker"><span class="dot"></span><span id="kicker"></span></div><h1 id="heroTitle"></h1><p class="lead" id="heroLead"></p><div class="actions"><a href="#app" class="btn" id="openPreview"></a><a href="#interest" class="btn gold" id="interested"></a><a href="#provider" class="btn secondary" id="listCompany"></a></div><div class="stats"><div class="stat"><strong>8</strong><span id="starter"></span></div><div class="stat"><strong>AI</strong><span id="review"></span></div><div class="stat"><strong>€</strong><span id="listing"></span></div></div></div><div class="phone"><div class="screen" id="phonePreview"></div></div></section>
 <section><h2 class="section-title" id="why"></h2><p class="sub" id="whyText"></p><div class="grid3"><div class="card"><h3 id="cultureMarket"></h3><p id="cultureMarketText"></p></div><div class="card"><h3 id="contactsFeature"></h3><p id="contactsFeatureText"></p></div><div class="card"><h3 id="communityFeature"></h3><p id="communityFeatureText"></p></div></div></section>
 <section class="app-shell" id="app"><div class="toolbar"><input id="searchInput"><select id="regionFilter"></select></div><div id="countryButtons" class="country-grid"></div><div id="countryProfile" class="profile-grid"></div></section>
 
 <section id="advisor">
   <h2 class="section-title">Pocket Advisor</h2>
-  <p class="sub">Scenario-based guidance for business travelers, students, entrepreneurs, and market entry.</p>
+  <p class="sub">Ask a practical question about doing business in the selected country.</p>
   <div class="advisor-shell">
     <div class="advisor-grid">
       <div class="advisor-intro">
-        <h3>Ask about a business situation</h3>
-        <p>Describe what you are trying to do, where you are doing it, and what you are worried about. Pocket Advisor uses the selected country context to give practical guidance.</p>
+        <div class="advisor-country">Selected country: <strong id="advisorCountryName"></strong></div>
+        <h3>What are you trying to do?</h3>
+        <p>Ask about a meeting, market entry, negotiation, communication, partnerships, or a specific business situation. The Advisor uses the selected country's Pocket Biz context.</p>
         <div class="advisor-examples">
-          <button class="advisor-example" data-question="What should I avoid in a Japanese supplier meeting?">What should I avoid in a Japanese supplier meeting?</button>
-          <button class="advisor-example" data-question="How direct should I be with Swedish partners?">How direct should I be with Swedish partners?</button>
-          <button class="advisor-example" data-question="What should I prepare before entering Germany?">What should I prepare before entering Germany?</button>
-          <button class="advisor-example" data-question="How should I approach a first meeting in the UAE?">How should I approach a first meeting in the UAE?</button>
+          <button class="advisor-example" type="button" data-question="What should I prepare before entering this market?">What should I prepare before entering this market?</button>
+          <button class="advisor-example" type="button" data-question="What should I avoid in a first business meeting?">What should I avoid in a first business meeting?</button>
+          <button class="advisor-example" type="button" data-question="How should I approach a local potential partner?">How should I approach a local potential partner?</button>
+          <button class="advisor-example" type="button" data-question="What are the biggest risks for a foreign company here?">What are the biggest risks for a foreign company here?</button>
         </div>
       </div>
-
       <div class="advisor-chat">
         <div id="advisorMessages" class="advisor-messages">
           <div class="advisor-bubble answer">
             <p><strong>Pocket Advisor</strong></p>
-            <p>Tell me what you're trying to do, and I'll help you prepare.</p>
+            <p>Ask me about your next business move.</p>
           </div>
         </div>
-
         <div class="advisor-form">
-          <input id="advisorInput" class="advisor-input" autocomplete="off"
-                 placeholder="Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?">
+          <input id="advisorInput" class="advisor-input" autocomplete="off" placeholder="Ask a business question…">
           <button id="advisorAsk" class="btn gold" type="button">Ask Advisor</button>
         </div>
         <div id="advisorStatus" class="advisor-status">Ready</div>
@@ -124,11 +119,10 @@ function L(o){return o[lang]||o.en} function U(k){return DATA.ui[lang][k]||DATA.
 function set(id,k){document.getElementById(id).textContent=U(k)}
 function renderStatic(){['navDemo','navContacts','navTools','navInterest','kicker','heroTitle','heroLead','openPreview','interested','listCompany','starter','review','listing','why','whyText','cultureMarket','cultureMarketText','contactsFeature','contactsFeatureText','communityFeature','communityFeatureText','toolsTitle','toolsText','riskTitle','mistakesTitle','costTitle','timelineTitle','checklistTitle','contactsTitle','providerTitle','shareTitle','briefTitle','founderTitle','interestTitle','footer'].forEach(id=>set(id,id)); document.getElementById('searchInput').placeholder=U('search');}
 function renderRegionFilter(){let regions=['all','Europe','Asia','Middle East','North America'];let names={en:{Europe:'Europe',Asia:'Asia','Middle East':'Middle East','North America':'North America'},ja:{Europe:'ヨーロッパ',Asia:'アジア','Middle East':'中東','North America':'北米'},el:{Europe:'Ευρώπη',Asia:'Ασία','Middle East':'Μέση Ανατολή','North America':'Βόρεια Αμερική'}};document.getElementById('regionFilter').innerHTML=regions.map(r=>`<option value="${r}">${r==='all'?U('allRegions'):names[lang][r]}</option>`).join('')}
-function renderPhone(){document.getElementById('phonePreview').innerHTML=`<div class="phone-search">${U('search')}</div>`+DATA.countries.slice(0,3).map(c=>`<div class="phone-card"><h3>${countryFlag(c.code)}${L(c.name)}</h3><span class="pill">${L(c.tags).join(' • ')}</span><div class="metrics"><div class="metric">Risk<b>${c.difficulty}/10</b></div><div class="metric">${U('contacts')}<b>${c.contacts}</b></div></div><div class="quick">${L(c.summary)}</div></div>`).join('')}
-function renderCountries(){let q=document.getElementById('searchInput').value.toLowerCase(), r=document.getElementById('regionFilter').value;let filtered=DATA.countries.filter(c=>(r==='all'||c.region.en===r)&&[L(c.name),L(c.region),L(c.summary)].join(' ').toLowerCase().includes(q));document.getElementById('countryButtons').innerHTML=filtered.map(c=>`<button class="country-button ${c.code===selected.code?'active':''}" onclick="selectCountry('${c.code}')"><div class="bigflag">${countryFlag(c.code)}</div><strong>${L(c.name)}</strong><span>${L(c.region)} • ${U('difficulty')} ${c.difficulty}/10</span></button>`).join('')}
-function selectCountry(code){
-  pbSaveSelectedCountry(selected);selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];renderCountries();renderProfile()}
-function renderProfile(){let c=selected;document.getElementById('countryProfile').innerHTML=`<div class="profile-main"><h2 class="profile-country-title">${countryFlag(c.code,true)}<span>${L(c.name)}</span></h2><p class="sub">${L(c.summary)}</p><div class="tags">${L(c.tags).map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="info-grid"><div class="infobox"><small>${U('cultureDifficulty')}</small><strong>${c.difficulty}/10</strong></div><div class="infobox"><small>${U('opportunity')}</small><strong>${c.opportunity}/10</strong></div><div class="infobox"><small>${U('contacts')}</small><strong>${c.contacts}</strong></div><div class="infobox"><small>${U('bestFor')}</small><strong>${U('marketPrep')}</strong></div></div><div class="dodont"><div class="do"><b>${U('do')}</b><br>${L(c.dos).map(x=>'• '+x).join('<br>')}</div><div class="dont"><b>${U('dont')}</b><br>${L(c.donts).map(x=>'• '+x).join('<br>')}</div></div></div><div class="profile-side"><h3>${U('businessGuide')}</h3><div class="list"><div class="listitem"><b>${U('culture')}:</b> ${L(c.culture)}</div><div class="listitem"><b>${U('etiquette')}:</b> ${L(c.etiquette)}</div><div class="listitem"><b>${U('law')}:</b> ${L(c.laws)}</div><div class="listitem"><b>${U('market')}:</b> ${L(c.market)}</div></div></div>`}
+function renderPhone(){document.getElementById('phonePreview').innerHTML=`<div class="phone-search">${U('search')}</div>`+DATA.countries.slice(0,3).map(c=>`<div class="phone-card"><h3>${L(c.name)}</h3><span class="pill">${L(c.tags).join(' • ')}</span><div class="metrics"><div class="metric">Risk<b>${c.difficulty}/10</b></div><div class="metric">${U('contacts')}<b>${c.contacts}</b></div></div><div class="quick">${L(c.summary)}</div></div>`).join('')}
+function renderCountries(){let q=document.getElementById('searchInput').value.toLowerCase(), r=document.getElementById('regionFilter').value;let filtered=DATA.countries.filter(c=>(r==='all'||c.region.en===r)&&[L(c.name),L(c.region),L(c.summary)].join(' ').toLowerCase().includes(q));document.getElementById('countryButtons').innerHTML=filtered.map(c=>`<button class="country-button ${c.code===selected.code?'active':''}" onclick="selectCountry('${c.code}')"><div class="bigflag">${pbFlag(c.code)}</div><strong>${L(c.name)}</strong><span>${L(c.region)} • ${U('difficulty')} ${c.difficulty}/10</span></button>`).join('')}
+function selectCountry(code){selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];try{localStorage.setItem('pbSelectedCountry',selected.code)}catch(e){};renderCountries();renderProfile();renderSections();pbUpdateAdvisorCountry();}
+function renderProfile(){let c=selected;document.getElementById('countryProfile').innerHTML=`<div class="profile-main"><h2 class="profile-country-title">${pbFlag(c.code,true)}<span>${L(c.name)}</span></h2><p class="sub">${L(c.summary)}</p><div class="tags">${L(c.tags).map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="info-grid"><div class="infobox"><small>${U('cultureDifficulty')}</small><strong>${c.difficulty}/10</strong></div><div class="infobox"><small>${U('opportunity')}</small><strong>${c.opportunity}/10</strong></div><div class="infobox"><small>${U('contacts')}</small><strong>${c.contacts}</strong></div><div class="infobox"><small>${U('bestFor')}</small><strong>${U('marketPrep')}</strong></div></div><div class="dodont"><div class="do"><b>${U('do')}</b><br>${L(c.dos).map(x=>'• '+x).join('<br>')}</div><div class="dont"><b>${U('dont')}</b><br>${L(c.donts).map(x=>'• '+x).join('<br>')}</div></div></div><div class="profile-side"><h3>${U('businessGuide')}</h3><div class="list"><div class="listitem"><b>${U('culture')}:</b> ${L(c.culture)}</div><div class="listitem"><b>${U('etiquette')}:</b> ${L(c.etiquette)}</div><div class="listitem"><b>${U('law')}:</b> ${L(c.laws)}</div><div class="listitem"><b>${U('market')}:</b> ${L(c.market)}</div></div></div>`}
 function extraText(){return {
 en:{tools:[['📊 Country Risk Meter','Culture difficulty, bureaucracy, language barrier, setup complexity, market opportunity, and contacts available.'],['❌ Top Mistakes','Common mistakes foreigners make in meetings, negotiations, paperwork, communication, and local expectations.'],['💰 Cost of Entry','Estimated categories: company setup, translation, legal review, accountant, local advisor, workspace, and market research.']],risk:['Culture Difficulty','Language Barrier','Bureaucracy','Setup Complexity','Market Opportunity','Contact Availability'],mistakes:[['🇯🇵 Japan','Rushing decisions, being too direct too early, treating business cards casually, assuming silence means agreement.'],['🇸🇪 Sweden','Overselling aggressively, ignoring planning, being late, or acting superior because of title.'],['🇬🇷 Greece','Ignoring relationships, relying only on verbal agreements, expecting bureaucracy to move instantly.']],cost:[['Basic preparation','Market research, translated documents, cultural preparation, and initial legal consultation.'],['Setup support','Company formation, tax registration, local accountant, workspace, permits, and visa/work support.'],['Growth support','Local partner search, distributor contacts, business development, advertising, and customer research.']],timeline:[['Week 1','Research','Study culture, risks, laws, costs, competitors, and customer behavior.'],['Week 2','Contacts','Find legal, tax, translation, and market-entry providers.'],['Week 3','Preparation','Prepare documents, meetings, pitch material, and market assumptions.'],['Week 4','Entry','Start meetings, validate demand, and adjust strategy with local feedback.']],check:['☐ Understand business culture and negotiation style','☐ Check company setup and tax basics','☐ Identify local legal/accounting support','☐ Review common cultural mistakes'],provider:'Companies that help foreign entrepreneurs enter a market can apply for a listing.',share:'Have you traveled, studied, worked, or done business in another country? Share a practical insight.',founder:'Pocket Biz started while studying International Business and noticing how many factors companies must consider before entering a new market.'},
 ja:{tools:[['📊 国別リスクメーター','文化的難易度、官僚制、言語の壁、設立の複雑さ、市場機会、利用可能な連絡先を確認できます。'],['❌ よくある失敗','外国人が会議、交渉、書類、コミュニケーション、現地の期待でしやすい失敗。'],['💰 参入コスト','会社設立、翻訳、法務確認、会計士、現地アドバイザー、ワークスペース、市場調査などの推定カテゴリ。']],risk:['文化難易度','言語の壁','官僚制','設立の複雑さ','市場機会','連絡先の利用可能性'],mistakes:[['🇯🇵 日本','決定を急ぐ、最初から直接的すぎる、名刺を雑に扱う、沈黙を同意とみなす。'],['🇸🇪 スウェーデン','強引に売り込む、計画を無視する、遅刻する、肩書きで上から目線になる。'],['🇬🇷 ギリシャ','関係性を無視する、口約束だけに頼る、手続きがすぐ進むと期待する。']],cost:[['基本準備','市場調査、翻訳済み書類、文化理解、初期法務相談。'],['設立支援','会社設立、税務登録、現地会計士、ワークスペース、許認可、ビザ・就労支援。'],['成長支援','現地パートナー探し、販売代理店、事業開発、広告、顧客調査。']],timeline:[['1週目','調査','文化、リスク、法律、コスト、競合、消費者行動を調査します。'],['2週目','連絡先','法務、税務、翻訳、市場参入支援のプロバイダーを探します。'],['3週目','準備','書類、会議、ピッチ資料、市場仮説を準備します。'],['4週目','参入','会議を始め、需要を検証し、現地フィードバックで戦略を調整します。']],check:['☐ ビジネス文化と交渉スタイルを理解する','☐ 会社設立と税務の基本を確認する','☐ 現地の法務・会計支援を見つける','☐ よくある文化的な失敗を確認する'],provider:'外国人起業家の市場参入を支援する企業は掲載申請ができます。',share:'海外で旅行、留学、仕事、ビジネスをした経験がありますか？実用的なインサイトを共有できます。',founder:'Pocket Bizは、国際ビジネスを勉強している中で生まれました。'},
@@ -141,387 +135,375 @@ function renderSections(){
   const opportunity=Number(c.opportunity||5);
   const contacts=Number(c.contacts||0);
 
-  // Keep the preview risk score transparent and tied to the existing country data.
+  // Transparent preview risk model. This is a screening indicator, not a legal/investment rating.
   const languageRisk=["JP","AE","FR","IT","ES","DE"].includes(c.code)?55:35;
-  const bureaucracy=Math.min(95,Math.round(35+difficulty*6));
-  const setupComplexity=Math.min(95,Math.round(30+difficulty*6));
-  const risk=Math.round(
+  const bureaucracy=Math.min(95,Math.round(32+difficulty*6));
+  const setup=Math.min(95,Math.round(30+difficulty*6));
+  const opportunityScore=Math.min(100,opportunity*10);
+  const risk=Math.min(99,Math.round(
     difficulty*3 +
     languageRisk*.15 +
     bureaucracy*.20 +
-    setupComplexity*.20 +
-    (100-opportunity*10)*.15
-  );
+    setup*.20 +
+    (100-opportunityScore)*.15
+  ));
+  const riskLabel=risk>=70?"High":risk>=45?"Medium":"Low";
 
-  // Only useful tools remain here.
   toolsGrid.innerHTML=`
-    <div class="card tool-live">
-      <div class="tool-kicker">Selected country · ${name}</div>
-      <h3>Country Risk</h3>
-      <div class="tool-value">${risk}/100</div>
-      <div class="tool-risk-meter"><span style="width:${Math.min(100,risk)}%"></span></div>
-      <p class="tool-note">A preview screening score based on the country's Pocket Biz difficulty, opportunity and setup indicators. It is not a legal or investment risk rating.</p>
-    </div>
-
-    <div class="card tool-live">
-      <div class="tool-kicker">Current web research · ${name}</div>
-      <h3>Top Mistakes</h3>
-      <p class="tool-note">Research practical mistakes foreign businesses should know before entering this market.</p>
-      <div class="tool-action">
-        <button class="btn gold" id="researchMistakes" type="button">Research current mistakes</button>
+    <div class="card tool-card">
+      <div class="tool-kicker">Live · ${name}</div>
+      <h3>Country Risk Meter</h3>
+      <div class="tool-number">${risk}/100</div>
+      <div class="tool-meter"><span style="width:${risk}%"></span></div>
+      <p class="tool-note"><b>${riskLabel} screening risk.</b> Based on the existing Pocket Biz country indicators. Use it to decide what deserves deeper research.</p>
+      <div class="tool-result">
+        <div class="tool-row"><span>Market difficulty</span><b>${difficulty}/10</b></div>
+        <div class="tool-row"><span>Opportunity</span><b>${opportunity}/10</b></div>
+        <div class="tool-row"><span>Contacts</span><b>${contacts}</b></div>
       </div>
-      <div id="mistakeToolStatus" class="tool-note">Ready to research ${name}.</div>
     </div>
 
-    <div class="card tool-live">
-      <div class="tool-kicker">Planning estimate · ${name}</div>
+    <div class="card tool-card">
+      <div class="tool-kicker">Live research · ${name}</div>
+      <h3>Top Mistakes</h3>
+      <p class="tool-note">Search the current web for mistakes relevant to foreign businesses entering ${name}. Results are returned with sources.</p>
+      <button class="btn gold" id="researchMistakes" type="button">Research ${name}</button>
+      <div id="mistakeToolStatus" class="tool-note" style="margin-top:10px">Ready.</div>
+    </div>
+
+    <div class="card tool-card">
+      <div class="tool-kicker">Planning calculator · ${name}</div>
       <h3>Cost of Entry</h3>
-      <div id="toolCostSummary"></div>
-      <p class="tool-note">A rough planning estimate for a small foreign entrant. Actual costs depend heavily on industry, structure, licensing and operating model.</p>
+      <div class="tool-controls">
+        <label>Entry approach
+          <select id="costModel">
+            <option value="lean">Lean validation</option>
+            <option value="local">Local presence</option>
+            <option value="full">Full market entry</option>
+          </select>
+        </label>
+        <label>First-year team
+          <select id="costTeam">
+            <option value="solo">Solo / founder</option>
+            <option value="small">2–5 people</option>
+            <option value="growth">6–15 people</option>
+          </select>
+        </label>
+      </div>
+      <div id="costCalculatorResult" class="tool-result"></div>
     </div>
   `;
 
+  // Risk breakdown
   riskGrid.innerHTML=[
-    ["Market difficulty",Math.min(95,difficulty*10),"Higher means a more difficult market in the current Pocket Biz dataset."],
-    ["Language / communication",languageRisk,"Preview indicator; not a measure of individual language ability."],
-    ["Bureaucracy",bureaucracy,"Planning indicator; verify current procedures with official sources."],
-    ["Setup complexity",setupComplexity,"Planning indicator for initial market setup."],
-    ["Market opportunity",Math.min(100,opportunity*10),"Higher means stronger opportunity in the current Pocket Biz dataset."],
-    ["Local contacts",Math.min(100,contacts*5),"Based on contacts represented in the current preview."]
+    ["Market difficulty",Math.min(100,difficulty*10),"Existing Pocket Biz difficulty score."],
+    ["Language / communication",languageRisk,"Preview planning indicator, not a measure of language ability."],
+    ["Bureaucracy",bureaucracy,"Planning indicator. Verify current procedures with official sources."],
+    ["Setup complexity",setup,"Planning indicator for market setup."],
+    ["Market opportunity",opportunityScore,"Existing Pocket Biz opportunity score."],
+    ["Contact availability",Math.min(100,contacts*5),"Based on contacts represented in the current dataset."]
   ].map(x=>`<div class="panel"><b>${x[0]}</b><div class="scorebar"><span style="width:${x[1]}%"></span></div><small>${x[2]}</small></div>`).join('');
 
   mistakesGrid.innerHTML=`
     <div class="card">
-      <span class="verified-badge">● Web research</span>
+      <span class="verified-badge">✓ Web research</span>
       <h3>Top mistakes in ${name}</h3>
-      <p id="mistakesPreview">Click “Research current mistakes” above to search the web for country-specific guidance.</p>
+      <p id="mistakesPreview">Run the research tool above to find current, country-specific mistakes.</p>
     </div>
   `;
 
-  // Practical, transparent entry-cost model for the preview.
-  const admin=1200+difficulty*250;
-  const professional=500+difficulty*100;
-  const localization=["JP","DE","FR","IT","ES","CH"].includes(c.code)?450:250;
-  const research=300+opportunity*50;
-  const contingency=350;
-  const low=Math.round(admin+professional+localization+research+contingency);
-  const high=Math.round(low*2.2);
-
-  costGrid.innerHTML=`
-    <div class="card">
-      <div class="tool-kicker">Illustrative planning range</div>
-      <div class="cost-total">€${low.toLocaleString()}–€${high.toLocaleString()}</div>
-      <p class="tool-note">This is a planning screen, not an official fee quotation.</p>
-    </div>
-    <div class="card">
-      <div class="cost-row"><span>Admin & initial setup</span><b>€${admin.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Legal / accounting buffer</span><b>€${professional.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Localization</span><b>€${localization.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Initial research</span><b>€${research.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Contingency</span><b>€${contingency.toLocaleString()}</b></div>
-    </div>
-  `;
-
-
-  if(typeof timelineGrid!=="undefined" && timelineGrid){
-    timelineGrid.innerHTML=`
-      <div class="panel"><b>1. Validate</b><p>Define the target customer, problem and competitive position in ${name}.</p></div>
-      <div class="panel"><b>2. Prepare</b><p>Check entry structure, pricing, taxes, licensing and local operating requirements.</p></div>
-      <div class="panel"><b>3. Test</b><p>Contact potential customers or partners and validate demand before committing major capital.</p></div>
-      <div class="panel"><b>4. Enter</b><p>Launch with a controlled pilot, measure results and expand only after the model works.</p></div>
+  // Cost calculator. Inputs are deliberately estimates, not fake "official" fees.
+  function calculateCost(){
+    const model=document.getElementById("costModel")?.value||"lean";
+    const team=document.getElementById("costTeam")?.value||"solo";
+    const modelBase={lean:1800,local:6500,full:14500}[model];
+    const teamMultiplier={solo:1,small:1.45,growth:2.25}[team];
+    const difficultyMultiplier=0.85+difficulty*.05;
+    const countryAdjustment=1+(10-opportunity)*.025;
+    const estimate=Math.round(modelBase*teamMultiplier*difficultyMultiplier*countryAdjustment);
+    const high=Math.round(estimate*1.8);
+    const r=document.getElementById("costCalculatorResult");
+    if(!r)return;
+    r.innerHTML=`
+      <div class="tool-number">€${estimate.toLocaleString()}–€${high.toLocaleString()}</div>
+      <div class="tool-note">Illustrative first-stage planning range for ${name}.</div>
+      <div class="tool-row"><span>Entry approach</span><b>${model==="lean"?"Lean validation":model==="local"?"Local presence":"Full market entry"}</b></div>
+      <div class="tool-row"><span>Team assumption</span><b>${team==="solo"?"Solo":team==="small"?"2–5 people":"6–15 people"}</b></div>
+      <div class="tool-row"><span>Main drivers</span><b>Setup · professional services · localization · research</b></div>
     `;
   }
+  document.getElementById("costModel")?.addEventListener("change",calculateCost);
+  document.getElementById("costTeam")?.addEventListener("change",calculateCost);
+  calculateCost();
 
-  // Keep the genuinely useful original sections.
+  // A useful 30-day entry roadmap tied to the selected country.
+  timelineGrid.innerHTML=[
+    ["01","Validate","Define the target customer, problem, competitor set and why ${name} is worth entering."],
+    ["02","Prepare","Check structure, taxes, licensing, pricing, localization and the professional support you actually need."],
+    ["03","Test","Speak to potential customers/partners and run a low-cost validation before committing major capital."],
+    ["04","Enter","Start with a controlled launch, measure results, fix weak assumptions and scale only after evidence."]
+  ].map(x=>`<div class="panel timeline-step"><span class="step-number">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join('');
+
+  // Practical checklist with persistent completion state.
+  const checks=[
+    `Define your target customer in ${name}.`,
+    `Research at least 3 local competitors.`,
+    `Verify company, tax and licensing requirements.`,
+    `Prepare a local pricing and cost model.`,
+    `Identify a qualified local legal/accounting contact.`,
+    `Prepare a localized pitch / website / documents.`,
+    `Validate demand with real prospects before scaling.`,
+    `Document your first 30-day launch plan.`
+  ];
+  const key="pbChecklist_"+c.code;
+  let saved={};
+  try{saved=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
   checklistGrid.innerHTML=`
     <div class="panel">
-      <h3>${U('checklistTitle')}</h3>
-      <div class="list">${extraText().check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div>
+      <h3>Market-entry checklist · ${name}</h3>
+      <div class="list">
+        ${checks.map((x,i)=>`<label class="check-live"><input type="checkbox" data-check="${i}" ${saved[i]?"checked":""}><span>${x}</span></label>`).join('')}
+      </div>
+      <small class="tool-note">Progress is saved in this browser.</small>
     </div>
     <div class="panel">
-      <h3>Before entering ${name}</h3>
-      <p>Confirm your target customer, entry model, regulatory requirements, local costs and first potential partners.</p>
+      <span class="verified-badge"><span class="check">✓</span> Verified Provider</span>
+      <h3>Local support</h3>
+      <p>Use Pocket Biz's provider network for legal, accounting, translation and market-entry support. Provider listings should be verified before relying on them.</p>
+      <a class="btn gold" href="#provider">View provider information</a>
     </div>
   `;
+  checklistGrid.querySelectorAll("[data-check]").forEach(box=>{
+    box.addEventListener("change",()=>{
+      saved[box.dataset.check]=box.checked;
+      try{localStorage.setItem(key,JSON.stringify(saved))}catch(e){}
+    });
+  });
 
   contactsIntro.textContent=U('contactsFeatureText');
-  contactGrid.innerHTML=`
+  contactGrid.innerHTML=DATA.countries.slice(0,3).map(c2=>`
     <div class="card">
       <span class="verified-badge"><span class="check">✓</span> Verified Provider</span>
-      <h3>${name} Provider Network</h3>
-      <p>Use verified local providers to support market-entry decisions. Provider verification should be completed before publication.</p>
+      <h3>${L(c2.name)} Partner Desk</h3>
+      <p>${L(c2.summary)}</p>
     </div>
-  `;
+  `).join('');
 
-  providerIntro.textContent=extraText().provider;
+  const e=extraText();
+  providerIntro.textContent=e.provider;
   providerGrid.innerHTML=`
-    <div class="panel"><h3>${U('contactsFeature')}</h3><p>${extraText().provider}</p></div>
+    <div class="panel"><h3>${U('contactsFeature')}</h3><p>${e.provider}</p></div>
     <div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>
   `;
+  shareIntro.textContent=e.share;
+  shareGrid.innerHTML=`<div class="panel"><h3>${U('shareTitle')}</h3><p>${e.share}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>`;
+  briefGrid.innerHTML=`<div class="panel"><h3>${U('briefTitle')}</h3><p>${e.tools[2][1]}</p></div><div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>`;
+  founderPanel.innerHTML=`<p>${e.founder}</p>`;
+  interestGrid.innerHTML=`<div class="panel"><p>${e.share}</p><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${U('interested')}</a></div><div class="panel"><h3>Business model</h3><p>Users / Providers / Premium</p></div>`;
 
-  shareIntro.textContent=extraText().share;
-  shareGrid.innerHTML=`
-    <div class="panel"><h3>${U('shareTitle')}</h3><p>${extraText().share}</p></div>
-    <div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>
-  `;
-
-  briefGrid.innerHTML=`
-    <div class="panel"><h3>${U('briefTitle')}</h3><p>${extraText().tools[2][1]}</p></div>
-    <div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>
-  `;
-
-  founderPanel.innerHTML=`<p>${extraText().founder}</p>`;
-
-  const costSummary=document.getElementById('toolCostSummary');
-  if(costSummary){
-    costSummary.innerHTML=`<div class="cost-total">€${low.toLocaleString()}+</div><div class="tool-note">illustrative starting budget</div>`;
-  }
-
-  document.getElementById('researchMistakes')?.addEventListener('click', researchCountryMistakes);
+  document.getElementById("researchMistakes")?.addEventListener("click",researchCountryMistakes);
 }
 
-function renderAll(){renderStatic();renderRegionFilter();renderPhone();renderCountries();renderProfile();renderSections()}
-languageSelect.onchange=e=>{lang=e.target.value;
-const pbRestoredCountry = pbRestoreSelectedCountry();
-if(pbRestoredCountry){
-  selected = pbRestoredCountry;
-}
 
-renderAll();advisorSetText()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
+/* Pocket Biz v17 Advisor */
+const pbAdvisorState={history:[],busy:false};
 
-
-
-function countryFlag(code, large=false){
+function pbFlag(code,large=false){
   const iso=String(code||'').toLowerCase();
-  if(!/^[a-z]{2}$/.test(iso)) return '';
-  const cls=large?'country-flag country-flag-large':'country-flag';
-  return `<img class="${cls}" src="https://flagcdn.com/w80/${iso}.png" alt="" aria-hidden="true" loading="lazy">`;
+  if(!/^[a-z]{2}$/.test(iso)) return "";
+  return `<img class="${large?'pb-flag pb-flag-lg':'pb-flag'}" src="https://flagcdn.com/w80/${iso}.png" alt="" aria-hidden="true">`;
 }
 
-function pbFlag(name, large=false){
-  const codes = {
-    Japan:"jp", Sweden:"se", Greece:"gr", Germany:"de", UAE:"ae",
-    "United Arab Emirates":"ae", "United Kingdom":"gb", France:"fr",
-    Italy:"it", Spain:"es", Netherlands:"nl", Switzerland:"ch",
-    Singapore:"sg", Canada:"ca"
-  };
-  const code=codes[name] || "";
-  if(!code) return "";
-  const cls=large ? "pb-flag pb-flag-lg" : "pb-flag";
-  return `<img class="${cls}" src="https://flagcdn.com/w80/${code}.png" alt="${name} flag" loading="lazy">`;
+function pbEscape(text){
+  return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
-// Pocket Advisor v11: flag rendering fixed; original site preserved.
-// The original country/questionnaire system above remains intact.
-const ADVISOR_UI = {
-  en: {
-    nav: "Advisor", title: "Pocket Advisor", ready: "Ready",
-    ask: "Ask Advisor", placeholder: "Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?",
-    introTitle: "Ask about a business situation",
-    introText: "Describe what you are trying to do, where you are doing it, and what you are worried about. Pocket Advisor uses the selected country context to give practical guidance.",
-    defaultAnswer: "Tell me what you're trying to do, and I'll help you prepare."
-  },
-  ja: {
-    nav: "アドバイザー", title: "Pocket Advisor", ready: "準備完了",
-    ask: "アドバイザーに質問", placeholder: "例：明日、日本のサプライヤーと会います。何を避けるべきですか？",
-    introTitle: "ビジネスの状況について質問",
-    introText: "何をしようとしているのか、どこで行うのか、何が心配なのかを説明してください。選択した国の情報をもとに実践的なアドバイスを提供します。",
-    defaultAnswer: "何をしようとしているのか教えてください。準備をお手伝いします。"
-  },
-  el: {
-    nav: "Advisor", title: "Pocket Advisor", ready: "Έτοιμο",
-    ask: "Ρώτησε τον Advisor", placeholder: "Παράδειγμα: Είμαι Έλληνας και αύριο συναντώ Ιάπωνα προμηθευτή. Τι πρέπει να αποφύγω;",
-    introTitle: "Ρώτησε για μια επιχειρηματική κατάσταση",
-    introText: "Περιέγραψε τι προσπαθείς να κάνεις, πού το κάνεις και τι σε προβληματίζει. Το Pocket Advisor χρησιμοποιεί το context της επιλεγμένης χώρας για πρακτικές συμβουλές.",
-    defaultAnswer: "Πες μου τι προσπαθείς να κάνεις και θα σε βοηθήσω να προετοιμαστείς."
-  }
-};
-
-const advisorState = { history: [], busy: false };
-
-function advisorEscape(text){
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function pbFormatAdvisor(text){
+  let html=pbEscape(text);
+  html=html.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
+  html=html.replace(/^#{1,3}\s+(.+)$/gm,"<strong>$1</strong>");
+  html=html.replace(/^- (.+)$/gm,"<li>$1</li>");
+  html=html.replace(/(<li>.*?<\/li>\s*)+/g,m=>"<ul>"+m+"</ul>");
+  html=html.replace(/\n\n+/g,"</p><p>").replace(/\n/g,"<br>");
+  return "<p>"+html+"</p>";
 }
 
-function advisorFormat(text){
-  let html = advisorEscape(text);
-
-  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-  html = html.replace(/^[-•]\s+(.*)$/gm, "<li>$1</li>");
-  html = html.replace(/(<li>.*<\/li>\n?)+/g, m => "<ul>" + m + "</ul>");
-  html = html.replace(/\n\n+/g, "</p><p>");
-  html = html.replace(/\n/g, "<br>");
-
-  return "<p>" + html + "</p>";
-}
-
-function advisorAddBubble(text, type){
-  const wrap = document.getElementById("advisorMessages");
-  const div = document.createElement("div");
-  div.className = "advisor-bubble " + type;
-
-  if(type === "answer"){
-    wrap.appendChild(div);
-    return advisorTypeAnswer(div, text);
-  }
-
-  div.textContent = text;
+function pbAddAdvisorBubble(text,type){
+  const wrap=document.getElementById("advisorMessages");
+  const div=document.createElement("div");
+  div.className="advisor-bubble "+type;
   wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
-  return Promise.resolve();
-}
 
-function advisorTypeAnswer(el, text){
-  return new Promise(resolve => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(reduceMotion){
-      el.innerHTML = advisorFormat(text);
-      document.getElementById("advisorMessages").scrollTop = 999999;
+  if(type==="user"){
+    div.textContent=text;
+    wrap.scrollTop=wrap.scrollHeight;
+    return Promise.resolve();
+  }
+
+  return new Promise(resolve=>{
+    const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce){
+      div.innerHTML=pbFormatAdvisor(text);
+      wrap.scrollTop=wrap.scrollHeight;
       resolve();
       return;
     }
-
-    const chars = [...String(text)];
-    let i = 0;
-
-    function tick(){
-      // Slightly faster than one-character-at-a-time, while still looking like live writing.
-      i = Math.min(i + 3, chars.length);
-      el.innerHTML = advisorFormat(chars.slice(0, i).join(""));
-      document.getElementById("advisorMessages").scrollTop = 999999;
-
-      if(i < chars.length) setTimeout(tick, 7);
+    const chars=[...String(text)];
+    let i=0;
+    const tick=()=>{
+      i=Math.min(i+3,chars.length);
+      div.innerHTML=pbFormatAdvisor(chars.slice(0,i).join(""));
+      wrap.scrollTop=wrap.scrollHeight;
+      if(i<chars.length) setTimeout(tick,7);
       else resolve();
-    }
-
+    };
     tick();
   });
 }
 
-function advisorSetText(){
-  const ui = ADVISOR_UI[lang] || ADVISOR_UI.en;
-  const nav = document.getElementById("navAdvisor");
-  if(nav) nav.textContent = ui.nav;
-  document.querySelector("#advisor .section-title").textContent = ui.title;
-  document.querySelector(".advisor-intro h3").textContent = ui.introTitle;
-  document.querySelector(".advisor-intro p").textContent = ui.introText;
-  document.getElementById("advisorAsk").textContent = ui.ask;
-  document.getElementById("advisorInput").placeholder = ui.placeholder;
-  document.getElementById("advisorStatus").textContent = ui.ready;
-}
-
-function advisorContext(){
-  const c = selected;
+function pbAdvisorContext(){
+  const c=selected;
   return {
-    code: c.code,
-    name: L(c.name),
-    region: L(c.region),
-    difficulty: c.difficulty,
-    opportunity: c.opportunity,
-    contacts: c.contacts,
-    summary: L(c.summary),
-    culture: L(c.culture),
-    etiquette: L(c.etiquette),
-    laws: L(c.laws),
-    market: L(c.market),
-    dos: L(c.dos),
-    donts: L(c.donts)
+    code:c.code,
+    name:L(c.name),
+    region:L(c.region),
+    difficulty:c.difficulty,
+    opportunity:c.opportunity,
+    contacts:c.contacts,
+    summary:L(c.summary),
+    culture:L(c.culture),
+    etiquette:L(c.etiquette),
+    laws:L(c.laws),
+    market:L(c.market),
+    dos:L(c.dos),
+    donts:L(c.donts)
   };
 }
 
-async function advisorAskQuestion(question){
-  const input = document.getElementById("advisorInput");
-  const button = document.getElementById("advisorAsk");
-  const status = document.getElementById("advisorStatus");
+async function pbAskAdvisor(question){
+  const input=document.getElementById("advisorInput");
+  const button=document.getElementById("advisorAsk");
+  const status=document.getElementById("advisorStatus");
 
-  question = String(question || input.value || "").trim();
-  if(!question || advisorState.busy) return;
+  question=String(question||input.value||"").trim();
+  if(!question||pbAdvisorState.busy) return;
 
-  advisorState.busy = true;
-  input.value = "";
-  button.disabled = true;
-  status.textContent = "Thinking…";
+  pbAdvisorState.busy=true;
+  button.disabled=true;
+  input.disabled=true;
+  status.textContent="Thinking…";
 
-  await advisorAddBubble(question, "user");
+  await pbAddAdvisorBubble(question,"user");
 
   try{
-    const response = await fetch("/api/advisor", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        country: selected.code,
+    const response=await fetch("/api/advisor",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        country:selected.code,
         question,
-        context: advisorContext(),
-        history: advisorState.history.slice(-6)
+        context:pbAdvisorContext(),
+        history:pbAdvisorState.history.slice(-8)
       })
     });
 
-    const data = await response.json().catch(() => ({}));
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||!data.answer) throw new Error(data.error||"Advisor request failed");
 
-    if(!response.ok || !data.answer){
-      throw new Error(data.error || "Advisor request failed");
-    }
-
-    advisorState.history.push(
-      {role:"user", content:question},
-      {role:"assistant", content:data.answer}
+    pbAdvisorState.history.push(
+      {role:"user",content:question},
+      {role:"assistant",content:data.answer}
     );
 
-    status.textContent = "Ready";
-    await advisorAddBubble(data.answer, "answer");
+    status.textContent="Ready";
+    input.value="";
+    await pbAddAdvisorBubble(data.answer,"answer");
   }catch(error){
-    console.error("Pocket Advisor:", error);
-    status.textContent = "Connection error";
-    await advisorAddBubble(
-      "I couldn't reach the advisor right now. Check that the Pocket Biz API is deployed and its AI key is configured.",
+    console.error("Pocket Advisor:",error);
+    status.textContent="Connection error";
+    await pbAddAdvisorBubble(
+      "I couldn't reach Pocket Advisor. Make sure /api/advisor is deployed and GEMINI_API_KEY is configured in Vercel.",
       "answer"
     );
   }finally{
-    advisorState.busy = false;
-    button.disabled = false;
+    pbAdvisorState.busy=false;
+    button.disabled=false;
+    input.disabled=false;
+    input.focus();
   }
 }
 
-document.getElementById("advisorAsk").addEventListener("click", () => advisorAskQuestion());
-document.getElementById("advisorInput").addEventListener("keydown", e => {
-  if(e.key === "Enter" && !e.shiftKey){
+function pbUpdateAdvisorCountry(){
+  const el=document.getElementById("advisorCountryName");
+  if(el) el.innerHTML=pbFlag(selected.code)+pbEscape(L(selected.name));
+}
+
+async function researchCountryMistakes(){
+  const button=document.getElementById("researchMistakes");
+  const status=document.getElementById("mistakeToolStatus");
+  if(!button) return;
+
+  button.disabled=true;
+  button.textContent="Researching…";
+  if(status) status.textContent="Searching current web sources for "+L(selected.name)+"…";
+
+  try{
+    const response=await fetch("/api/mistakes",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        country:selected.code,
+        countryName:L(selected.name),
+        language:lang
+      })
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||!Array.isArray(data.mistakes)) throw new Error(data.error||"Research failed");
+
+    mistakesGrid.innerHTML=data.mistakes.map(m=>`
+      <div class="card">
+        <span class="verified-badge"><span class="check">✓</span> Web researched</span>
+        <h3>${pbEscape(m.title)}</h3>
+        <p>${pbEscape(m.explanation)}</p>
+        ${m.sourceUrl?`<a class="mistake-source" href="${pbEscape(m.sourceUrl)}" target="_blank" rel="noopener">${pbEscape(m.sourceTitle||"Source")} ↗</a>`:""}
+      </div>
+    `).join("");
+
+    if(status) status.textContent="Research updated for "+L(selected.name)+".";
+  }catch(error){
+    console.error("Top mistakes research:",error);
+    if(status) status.textContent="Research unavailable. Check /api/mistakes deployment.";
+  }finally{
+    button.disabled=false;
+    button.textContent="Research "+L(selected.name);
+  }
+}
+
+document.getElementById("advisorAsk").addEventListener("click",()=>pbAskAdvisor());
+document.getElementById("advisorInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
     e.preventDefault();
-    advisorAskQuestion();
+    pbAskAdvisor();
   }
 });
-document.querySelectorAll(".advisor-example").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.getElementById("advisorInput").value = btn.dataset.question;
-    document.getElementById("advisorInput").focus();
+document.querySelectorAll(".advisor-example").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const input=document.getElementById("advisorInput");
+    input.value=button.dataset.question.replace("this market",L(selected.name)).replace("here",L(selected.name));
+    input.focus();
   });
 });
+pbUpdateAdvisorCountry();
 
-
-advisorSetText();
-
-// Pocket Biz v16: persist the selected country across the preview and Market Entry Tools.
-const PB_SELECTED_COUNTRY_KEY = "pocketBizSelectedCountry";
-
-function pbSaveSelectedCountry(country){
-  try {
-    if(country?.code) localStorage.setItem(PB_SELECTED_COUNTRY_KEY, country.code);
-  } catch(e) {}
-}
-
-function pbRestoreSelectedCountry(){
-  try {
-    const code=localStorage.getItem(PB_SELECTED_COUNTRY_KEY);
-    if(!code) return null;
-    return DATA.countries.find(c=>c.code===code) || null;
-  } catch(e) {
-    return null;
+function renderAll(){renderStatic();renderRegionFilter();renderPhone();renderCountries();renderProfile();renderSections();pbUpdateAdvisorCountry()}
+try{
+  const savedCountry=localStorage.getItem('pbSelectedCountry');
+  if(savedCountry){
+    const restored=DATA.countries.find(c=>c.code===savedCountry);
+    if(restored) selected=restored;
   }
-}
-
+}catch(e){}
+languageSelect.onchange=e=>{lang=e.target.value;renderAll()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
 </script>
 </body></html>
