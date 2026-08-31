@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Biz | v6 MVP</title>
+<title>Pocket Biz | v7 MVP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
 :root{
@@ -230,7 +230,7 @@ select{min-width:180px}
 @media(prefers-reduced-motion:reduce){.advisor-loading i{animation:none}}
 .lang-toggle{min-width:110px;border-radius:999px;padding:8px 28px 8px 12px;font-weight:800}\n</style>
 </head>
-<body data-pocket-biz-version="v6">
+<body data-pocket-biz-version="v7">
 <div class="container">
   <nav class="nav">
     <div class="brand"><div class="mark">PB</div><span>Pocket Biz</span></div>
@@ -778,6 +778,8 @@ function initAdvisor(){
     });
   });
   select.addEventListener("change",()=>{selected=countries.find(x=>x.name===select.value)||countries[0];renderButtons();renderProfile();});
+  const form=document.getElementById("advisorForm");
+  if(form) form.addEventListener("submit", askAdvisor);
 }
 function renderAdvisorLanguage(){
   document.getElementById("advisorCountry").innerHTML=getCountries().map(c=>`<option value="${countryKey(c)}">${c.flag} ${c.name}</option>`).join("");
@@ -889,6 +891,10 @@ function changeLanguage(next){
   renderCompare();
 }
 document.getElementById("languageSelect").addEventListener("change",e=>changeLanguage(e.target.value));
+document.getElementById("advisorForm")?.addEventListener("submit", e=>{
+  e.preventDefault();
+});
+
 
 document.getElementById("searchInput").addEventListener("input", renderButtons);
 document.getElementById("regionFilter").addEventListener("change", renderButtons);
