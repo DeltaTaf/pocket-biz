@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pocket Biz | Market Entry Intelligence | v19</title>
+<title>Pocket Biz | Market Entry Intelligence | v21</title>
 <style>
 :root{--bg:#f7f3ec;--card:#fffdf8;--text:#171615;--muted:#70685f;--line:#e8ddcf;--dark:#11110f;--accent:#b9823b;--soft:#efe2cf;--shadow:0 24px 70px rgba(32,25,18,.12);--radius:28px}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#fff7e9 0,transparent 32%),radial-gradient(circle at 100% 10%,#ead9c0 0,transparent 28%),var(--bg);color:var(--text)}.container{max-width:1180px;margin:auto;padding:26px 20px 80px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:44px;height:44px;border-radius:16px;background:var(--dark);color:#fff;display:grid;place-items:center}.nav-links{display:flex;gap:16px;align-items:center;color:var(--muted);font-size:14px}.nav-links a{text-decoration:none;color:inherit}select,input{border:1px solid var(--line);border-radius:16px;background:#faf7f1;padding:13px 14px;font:inherit;color:var(--text)}.lang-toggle{border-radius:999px;padding:8px 34px 8px 12px;font-weight:800}
@@ -165,13 +165,12 @@ function renderSections(){
   const costHeading=document.getElementById("costTitle");
   const timelineHeading=document.getElementById("timelineTitle");
   const checklistHeading=document.getElementById("checklistTitle");
-  if(riskHeading) riskHeading.textContent=`${dynamicName} Risk Meter`;
+  if(riskHeading) riskHeading.textContent=lang==='el'?`Risk Meter ${dynamicName}`:lang==='ja'?`${dynamicName} リスクメーター`:`${dynamicName} Risk Meter`;
   if(mistakesHeading) mistakesHeading.textContent=`Top Mistakes in ${dynamicName}`;
   if(costHeading) costHeading.textContent=`Market Entry Budget Planner`;
   if(timelineHeading) timelineHeading.textContent=`${dynamicName} Market Entry Timeline`;
   if(checklistHeading) checklistHeading.textContent=`${dynamicName} Market Entry Checklist`;
   const name=dynamicName;
-  const name=L(c.name);
   const difficulty=Number(c.difficulty||5);
   const opportunity=Number(c.opportunity||5);
   const contacts=Number(c.contacts||0);
@@ -618,16 +617,21 @@ async function researchCountryMistakes(){
       })
     });
     const data=await response.json().catch(()=>({}));
-    if(!response.ok||!data.answer) throw new Error(data.error||"Research failed");
+    if(!response.ok||!Array.isArray(data.mistakes)) {
+      throw new Error(data.error||"Research failed");
+    }
 
-    const sourceHtml=(data.sources||[]).map(source=>`<a class="mistake-source" href="${pbEscape(source.url)}" target="_blank" rel="noopener">${pbEscape(source.title||"Web source")} ↗</a>`).join("");
-    mistakesGrid.innerHTML=`
-      <div class="card" style="grid-column:1/-1">
+    mistakesGrid.innerHTML=data.mistakes.map((mistake,index)=>`
+      <div class="card">
         <span class="verified-badge"><span class="check">✓</span> Web researched</span>
-        <div class="advisor-bubble answer" style="margin:14px 0 0">${pbFormatAdvisor(data.answer)}</div>
-        ${sourceHtml?`<div style="margin-top:14px"><div class="tool-kicker">Sources</div>${sourceHtml}</div>`:""}
+        <div class="tool-kicker" style="margin-top:12px">Mistake ${index+1}</div>
+        <h3>${pbEscape(mistake.title||"Business mistake")}</h3>
+        <p>${pbEscape(mistake.explanation||"No explanation available.")}</p>
+        ${mistake.sourceUrl
+          ? `<a class="mistake-source" href="${pbEscape(mistake.sourceUrl)}" target="_blank" rel="noopener">${pbEscape(mistake.sourceTitle||"Supporting source")} ↗</a>`
+          : `<span class="mistake-source">No source URL returned.</span>`}
       </div>
-    `;
+    `).join("");
 
     if(status) status.textContent="Research updated for "+L(selected.name)+".";
   }catch(error){
