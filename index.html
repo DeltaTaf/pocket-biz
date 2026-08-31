@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Biz | v7 MVP</title>
+<title>Pocket Biz | v8 MVP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
 :root{
@@ -230,7 +230,7 @@ select{min-width:180px}
 @media(prefers-reduced-motion:reduce){.advisor-loading i{animation:none}}
 .lang-toggle{min-width:110px;border-radius:999px;padding:8px 28px 8px 12px;font-weight:800}\n</style>
 </head>
-<body data-pocket-biz-version="v7">
+<body data-pocket-biz-version="v8">
 <div class="container">
   <nav class="nav">
     <div class="brand"><div class="mark">PB</div><span>Pocket Biz</span></div>
@@ -773,7 +773,17 @@ function initAdvisor(){
         de:{en:"What should I prepare before entering Germany?",ja:"ドイツ市場に入る前に何を準備すべきですか？",el:"Τι πρέπει να προετοιμάσω πριν μπω στη Γερμανία;"},
         ae:{en:"How should I approach a first meeting in the UAE?",ja:"UAEでの初回ミーティングにはどう臨むべきですか？",el:"Πώς πρέπει να προσεγγίσω ένα πρώτο meeting στα ΗΑΕ;"}
       };
-      document.getElementById("advisorInput").value=examples[btn.dataset.example]?.[lang]||btn.textContent.trim();
+      const question=examples[btn.dataset.example]?.[lang]||btn.textContent.trim();
+      document.getElementById("advisorInput").value=question;
+      const countryMap={jp:"Japan",se:"Sweden",de:"Germany",ae:"United Arab Emirates"};
+      const target=countries.find(c=>c.name===countryMap[btn.dataset.example]);
+      if(target){
+        selected=target;
+        const advisorSelect=document.getElementById("advisorCountry");
+        if(advisorSelect) advisorSelect.value=countryKey(target);
+        renderButtons();
+        renderProfile();
+      }
       document.getElementById("advisorInput").focus();
     });
   });
@@ -793,11 +803,21 @@ function renderAdvisorLanguage(){
   document.getElementById("advisorIntro").textContent=ui("advisorIntro");
 }
 
+function advisorFormat(text){
+  return text
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/^###?\\s*(.+)$/gm,"<strong>$1</strong>")
+    .replace(/^\\*\\*(.+?)\\*\\*$/gm,"<strong>$1</strong>")
+    .replace(/^-\\s+(.+)$/gm,"• $1")
+    .replace(/\\n{2,}/g,"<br><br>")
+    .replace(/\\n/g,"<br>");
+}
 function addAdvisorBubble(text, answer=false){
   const wrap=document.getElementById("advisorMessages");
   const div=document.createElement("div");
   div.className="bubble"+(answer?" answer":"");
-  div.textContent=text;
+  if(answer) div.innerHTML=advisorFormat(text);
+  else div.textContent=text;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
 }
