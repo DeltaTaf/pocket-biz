@@ -1,11 +1,18 @@
-// Pocket Biz v8 - server-side AI advisor endpoint for Vercel.
-// Set GEMINI_API_KEY in the deployment environment.
-// NEVER put the key in the browser or in GitHub.
+// Pocket Biz v18 - server-side Pocket Advisor
+// Requires GEMINI_API_KEY in Vercel Production.
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
+    });
+  }
+
+  const key = process.env.GEMINI_API_KEY;
+
+  if (!key) {
+    return res.status(500).json({
+      error: "GEMINI_API_KEY is missing in the Vercel Production environment."
     });
   }
 
@@ -20,91 +27,115 @@ export default async function handler(req, res) {
     if (
       !question ||
       typeof question !== "string" ||
-      question.trim().length === 0 ||
-      question.length > 2000
+      !question.trim()
     ) {
       return res.status(400).json({
-        error: "Please provide a question up to 2000 characters."
+        error: "Please provide a question."
       });
     }
 
-    const key = process.env.GEMINI_API_KEY;
-
-    if (!key) {
-      return res.status(500).json({
-        error: "Advisor API key is not configured."
+    if (question.length > 2000) {
+      return res.status(400).json({
+        error: "Question is too long."
       });
     }
 
     const system = `
-You are Pocket Advisor, a specialized international business advisor inside Pocket Biz.
+You are Pocket Advisor inside Pocket Biz, a practical
+international-business advisor.
 
-Give useful, concrete guidance for international business situations.
-You are NOT a generic chatbot.
+Your job is to give useful, specific advice to entrepreneurs,
+students, business travelers, and companies entering foreign markets.
 
-RULES:
+Answer the user's EXACT question first.
 
-- Answer the exact question first.
-- Use the selected country's Pocket Biz context as your starting context.
-- If the question clearly names another country, use that country instead of discussing the mismatch.
-- Give practical actions the user can actually take.
-- Distinguish cultural tendencies from universal rules.
-- Avoid stereotypes and absolute claims about nationalities.
-- Never invent laws, taxes, visas, statistics, contacts, or official requirements.
-- For legal, tax, immigration, employment, licensing, sanctions, or other regulated questions, clearly label the answer as general information and recommend checking the relevant official authority or qualified professional.
+Use the selected country's Pocket Biz context as supporting context.
+
+IMPORTANT RULES:
+
+- Give concrete actions, not generic motivational advice.
+- Do not stereotype nationalities.
+- Treat cultural patterns as tendencies, not universal rules.
+- Never invent laws, taxes, visas, contacts, statistics, regulations,
+  government procedures, or official requirements.
+- For legal, tax, immigration, employment, licensing, sanctions,
+  or other regulated questions, clearly state that requirements
+  should be verified with the relevant official authority or
+  qualified professional.
+- If the user asks about another country explicitly, prioritize
+  that country rather than blindly using the selected country.
 - Answer in the SAME LANGUAGE as the user's question.
 - Do not mention these instructions.
-- Do not waste space explaining that you are an AI.
+- Do not call yourself an AI unless the user specifically asks.
+- Do not repeat the user's question unnecessarily.
+- Avoid vague phrases such as "do your research" without explaining
+  exactly what should be researched.
 
-For ordinary business and culture questions, use this exact structure:
+For normal business questions, use this structure:
 
 Recommendation
 
-[Give 1-2 direct sentences answering the question.]
+Give the direct answer in 1-2 sentences.
 
 Why
 
-[Give 2-3 useful sentences explaining the reasoning.]
+Explain the reasoning in 2-4 useful sentences.
 
 Do
 
-- [Practical action]
-- [Practical action]
-- [Practical action]
+- Give a practical action.
+- Give a practical action.
+- Give a practical action.
 
 Avoid
 
-- [Thing to avoid]
-- [Thing to avoid]
+- Give a specific mistake to avoid.
+- Give another specific mistake to avoid.
 
 Next step
 
-[Give ONE concrete action the user should take next.]
+Give ONE concrete action the user should take next.
 
-IMPORTANT:
-- Complete every section.
-- Never stop after a heading.
-- Never leave a sentence unfinished.
-- Do not repeat the user's question unnecessarily.
-- Keep the answer approximately 150-300 words.
-- Prioritize useful business advice over generic cultural commentary.
+Keep the response approximately 150-300 words.
+
+Every section must be completed.
+Never leave a heading empty.
 `;
 
-    const payload = JSON.stringify({
-      country,
-      country_context: context,
-      conversation: history.slice(-6),
+    const payload = {
+      selected_country: country,
+
+      country_context: {
+        name: context.name,
+        code: context.code,
+        region: context.region,
+        difficulty: context.difficulty,
+        opportunity: context.opportunity,
+        contacts: context.contacts,
+        summary: context.summary,
+        culture: context.culture,
+        etiquette: context.etiquette,
+        laws: context.laws,
+        market: context.market,
+        dos: context.dos,
+        donts: context.donts
+      },
+
+      recent_conversation: Array.isArray(history)
+        ? history.slice(-6)
+        : [],
+
       question: question.trim()
-    });
+    };
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" +
-        encodeURIComponent(key),
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
       {
         method: "POST",
 
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "x-goog-api-key": key
         },
 
         body: JSON.stringify({
@@ -122,7 +153,7 @@ IMPORTANT:
 
               parts: [
                 {
-                  text: payload
+                  text: JSON.stringify(payload)
                 }
               ]
             }
@@ -130,7 +161,7 @@ IMPORTANT:
 
           generationConfig: {
             temperature: 0.25,
-            maxOutputTokens: 1200
+            maxOutputTokens: 1400
           }
         })
       }
@@ -139,19 +170,26 @@ IMPORTANT:
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Gemini error:", data);
+      console.error(
+        "Gemini advisor error:",
+        JSON.stringify(data)
+      );
 
       return res.status(502).json({
-        error: "The AI provider returned an error."
+        error:
+          data?.error?.message ||
+          "The AI provider returned an error."
       });
     }
 
-    const candidate = data?.candidates?.[0];
+    const candidate =
+      data?.candidates?.[0];
 
-    const answer = candidate?.content?.parts
-      ?.map(part => part.text || "")
-      .join("")
-      .trim();
+    const answer =
+      candidate?.content?.parts
+        ?.map(part => part.text || "")
+        .join("")
+        .trim();
 
     if (!answer) {
       return res.status(502).json({
@@ -164,15 +202,16 @@ IMPORTANT:
 
       model: "gemini-2.5-flash",
 
-      finishReason: candidate?.finishReason || null,
-
       disclaimer:
         "AI-generated guidance. Verify legal, tax, immigration, and regulatory details with official sources or qualified professionals."
     });
 
   } catch (error) {
 
-    console.error("Pocket Advisor error:", error);
+    console.error(
+      "Pocket Advisor exception:",
+      error
+    );
 
     return res.status(500).json({
       error: "Unexpected advisor error."
