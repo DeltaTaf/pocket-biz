@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pocket Biz | Market Entry Intelligence | v10</title>
+<style>
+:root{--bg:#f7f3ec;--card:#fffdf8;--text:#171615;--muted:#70685f;--line:#e8ddcf;--dark:#11110f;--accent:#b9823b;--soft:#efe2cf;--shadow:0 24px 70px rgba(32,25,18,.12);--radius:28px}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#fff7e9 0,transparent 32%),radial-gradient(circle at 100% 10%,#ead9c0 0,transparent 28%),var(--bg);color:var(--text)}.container{max-width:1180px;margin:auto;padding:26px 20px 80px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:44px;height:44px;border-radius:16px;background:var(--dark);color:#fff;display:grid;place-items:center}.nav-links{display:flex;gap:16px;align-items:center;color:var(--muted);font-size:14px}.nav-links a{text-decoration:none;color:inherit}select,input{border:1px solid var(--line);border-radius:16px;background:#faf7f1;padding:13px 14px;font:inherit;color:var(--text)}.lang-toggle{border-radius:999px;padding:8px 34px 8px 12px;font-weight:800}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;min-height:620px}.kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:13px;margin-bottom:22px}.dot{width:8px;height:8px;background:var(--accent);border-radius:50%}h1{margin:0 0 22px;font-size:clamp(44px,7vw,78px);line-height:.92;letter-spacing:-.08em}.lead{font-size:20px;line-height:1.6;color:var(--muted);max-width:720px;margin:0}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 18px;border-radius:16px;background:var(--dark);color:white;border:1px solid var(--dark);text-decoration:none;font-weight:850}.btn.gold{background:var(--accent);border-color:var(--accent)}.btn.secondary{background:transparent;color:var(--dark)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}.stat,.card,.panel,.phone-card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius)}.stat{padding:16px}.stat strong{display:block;font-size:28px}.stat span,.sub,p{color:var(--muted);line-height:1.55}.phone{max-width:410px;margin-left:auto;background:#111;border-radius:44px;padding:14px;box-shadow:var(--shadow)}.screen{background:#fbfaf7;border-radius:34px;min-height:650px;padding:18px;overflow:hidden}.phone-card{padding:16px;margin:12px 0}.pill,.tag,.badge{display:inline-block;background:#f3eadf;color:#765837;border-radius:999px;padding:6px 9px;font-size:12px;margin-top:8px}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#faf6ef;border-radius:15px;padding:10px;color:var(--muted);font-size:12px}.metric b{display:block;color:var(--text);font-size:17px}
+.section-title{margin:82px 0 18px;font-size:clamp(34px,5vw,48px);line-height:1;letter-spacing:-.065em}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card,.panel{padding:24px}.app-shell{background:var(--card);border:1px solid var(--line);border-radius:34px;box-shadow:var(--shadow);padding:18px;margin-top:24px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}input{flex:1;min-width:230px}.country-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.country-button{cursor:pointer;text-align:left;background:white;border:1px solid var(--line);border-radius:20px;padding:14px}.country-button.active{border-color:var(--accent)}.country-button strong{display:block;margin-top:8px}.country-button span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.profile-grid,.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px}.profile-main,.profile-side{background:white;border:1px solid var(--line);border-radius:28px;padding:24px}.profile-main h2{margin:0 0 8px;font-size:36px}.tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.infobox,.listitem{background:#faf7f1;border-radius:18px;padding:14px}.infobox small{display:block;color:var(--muted)}.list{display:grid;gap:10px;margin-top:14px}.dodont{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.do,.dont{border-radius:18px;padding:14px;line-height:1.45}.do{background:#edf3ee;color:#304d3a}.dont{background:#f5eeee;color:#6d3732}.scorebar{height:10px;background:#eee4d7;border-radius:999px;overflow:hidden;margin-top:8px}.scorebar span{display:block;height:100%;background:var(--accent)}.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.footer{margin-top:80px;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+@media(max-width:980px){.hero,.profile-grid,.two-col{grid-template-columns:1fr}.grid3,.risk-grid,.timeline{grid-template-columns:1fr}.country-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.nav-links a{display:none}}
+
+.advisor-shell{margin-top:24px;background:var(--dark);color:white;border-radius:34px;padding:24px;box-shadow:var(--shadow)}
+.advisor-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
+.advisor-intro,.advisor-chat{border-radius:24px;padding:22px}
+.advisor-intro{background:#fff;color:var(--text)}
+.advisor-chat{background:#171715;display:flex;flex-direction:column;min-height:480px}
+.advisor-examples{display:grid;gap:10px;margin-top:18px}
+.advisor-example{border:1px solid var(--line);background:#faf7f1;color:var(--text);border-radius:16px;padding:13px;text-align:left;cursor:pointer;font:inherit}
+.advisor-example:hover{border-color:var(--accent);transform:translateY(-1px)}
+.advisor-messages{display:grid;gap:10px;flex:1;overflow:auto;max-height:430px;padding-right:4px}
+.advisor-bubble{border-radius:18px;padding:14px 16px;line-height:1.55;white-space:normal}
+.advisor-bubble.user{background:#252523;margin-left:10%;color:white}
+.advisor-bubble.answer{background:#fff;color:var(--text);margin-right:5%;min-height:52px}
+.advisor-bubble.answer p{margin:0 0 10px;color:var(--text)}
+.advisor-bubble.answer p:last-child{margin-bottom:0}
+.advisor-bubble.answer strong{color:var(--text)}
+.advisor-bubble.answer ul{margin:7px 0 10px;padding-left:22px}
+.advisor-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px}
+.advisor-input{width:100%;background:#faf7f1;border-color:#3a3935;color:var(--text)}
+.advisor-status{font-size:12px;color:#bdb8b0;margin-top:8px}
+@media(max-width:980px){.advisor-grid{grid-template-columns:1fr}.advisor-form{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="container">
+<nav class="nav"><div class="brand"><div class="brand-mark">PB</div><span>Pocket Biz</span></div><div class="nav-links"><a href="#app" id="navDemo"></a><a href="#advisor" id="navAdvisor">Advisor</a><a href="#contacts" id="navContacts"></a><a href="#tools" id="navTools"></a><a href="#interest" id="navInterest"></a><select id="languageSelect" class="lang-toggle"><option value="en">English</option><option value="ja">日本語</option><option value="el">Ελληνικά</option></select></div></nav>
+<section class="hero"><div><div class="kicker"><span class="dot"></span><span id="kicker"></span></div><h1 id="heroTitle"></h1><p class="lead" id="heroLead"></p><div class="actions"><a href="#app" class="btn" id="openPreview"></a><a href="#interest" class="btn gold" id="interested"></a><a href="#provider" class="btn secondary" id="listCompany"></a></div><div class="stats"><div class="stat"><strong>8</strong><span id="starter"></span></div><div class="stat"><strong>AI</strong><span id="review"></span></div><div class="stat"><strong>€</strong><span id="listing"></span></div></div></div><div class="phone"><div class="screen" id="phonePreview"></div></div></section>
+<section><h2 class="section-title" id="why"></h2><p class="sub" id="whyText"></p><div class="grid3"><div class="card"><h3 id="cultureMarket"></h3><p id="cultureMarketText"></p></div><div class="card"><h3 id="contactsFeature"></h3><p id="contactsFeatureText"></p></div><div class="card"><h3 id="communityFeature"></h3><p id="communityFeatureText"></p></div></div></section>
+<section class="app-shell" id="app"><div class="toolbar"><input id="searchInput"><select id="regionFilter"></select></div><div id="countryButtons" class="country-grid"></div><div id="countryProfile" class="profile-grid"></div></section>
+
+<section id="advisor">
+  <h2 class="section-title">Pocket Advisor</h2>
+  <p class="sub">Scenario-based guidance for business travelers, students, entrepreneurs, and market entry.</p>
+  <div class="advisor-shell">
+    <div class="advisor-grid">
+      <div class="advisor-intro">
+        <h3>Ask about a business situation</h3>
+        <p>Describe what you are trying to do, where you are doing it, and what you are worried about. Pocket Advisor uses the selected country context to give practical guidance.</p>
+        <div class="advisor-examples">
+          <button class="advisor-example" data-question="What should I avoid in a Japanese supplier meeting?">What should I avoid in a Japanese supplier meeting?</button>
+          <button class="advisor-example" data-question="How direct should I be with Swedish partners?">How direct should I be with Swedish partners?</button>
+          <button class="advisor-example" data-question="What should I prepare before entering Germany?">What should I prepare before entering Germany?</button>
+          <button class="advisor-example" data-question="How should I approach a first meeting in the UAE?">How should I approach a first meeting in the UAE?</button>
+        </div>
+      </div>
+
+      <div class="advisor-chat">
+        <div id="advisorMessages" class="advisor-messages">
+          <div class="advisor-bubble answer">
+            <p><strong>Pocket Advisor</strong></p>
+            <p>Tell me what you're trying to do, and I'll help you prepare.</p>
+          </div>
+        </div>
+
+        <div class="advisor-form">
+          <input id="advisorInput" class="advisor-input" autocomplete="off"
+                 placeholder="Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?">
+          <button id="advisorAsk" class="btn gold" type="button">Ask Advisor</button>
+        </div>
+        <div id="advisorStatus" class="advisor-status">Ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tools"><h2 class="section-title" id="toolsTitle"></h2><p class="sub" id="toolsText"></p><div class="grid3" id="toolsGrid"></div></section>
+<section><h2 class="section-title" id="riskTitle"></h2><div class="risk-grid" id="riskGrid"></div></section>
+<section><h2 class="section-title" id="mistakesTitle"></h2><div class="grid3" id="mistakesGrid"></div></section>
+<section><h2 class="section-title" id="costTitle"></h2><div class="grid3" id="costGrid"></div></section>
+<section><h2 class="section-title" id="timelineTitle"></h2><div class="timeline" id="timelineGrid"></div></section>
+<section><h2 class="section-title" id="checklistTitle"></h2><div class="two-col" id="checklistGrid"></div></section>
+<section id="contacts"><h2 class="section-title" id="contactsTitle"></h2><p class="sub" id="contactsIntro"></p><div class="grid3" id="contactGrid"></div></section>
+<section id="provider"><h2 class="section-title" id="providerTitle"></h2><p class="sub" id="providerIntro"></p><div class="two-col" id="providerGrid"></div></section>
+<section><h2 class="section-title" id="shareTitle"></h2><p class="sub" id="shareIntro"></p><div class="two-col" id="shareGrid"></div></section>
+<section><h2 class="section-title" id="briefTitle"></h2><div class="two-col" id="briefGrid"></div></section>
+<section><h2 class="section-title" id="founderTitle"></h2><div class="panel" id="founderPanel"></div></section>
+<section id="interest"><h2 class="section-title" id="interestTitle"></h2><div class="two-col" id="interestGrid"></div></section>
+<footer class="footer"><span>Pocket Biz Final</span><span id="footer"></span></footer>
+</div>
+<script>
+const DATA = {"countries": [{"code": "JP", "flag": "🇯🇵", "difficulty": 8, "opportunity": 9, "contacts": 12, "region": {"en": "Asia", "ja": "アジア", "el": "Ασία"}, "name": {"en": "Japan", "ja": "日本", "el": "Ιαπωνία"}, "tags": {"en": ["Formal", "Indirect", "Consensus"], "ja": ["フォーマル", "間接的", "合意重視"], "el": ["Τυπική", "Έμμεση", "Συναίνεση"]}, "summary": {"en": "A structured and relationship-sensitive market where trust, patience, respect, and preparation matter.", "ja": "信頼、忍耐、敬意、準備が重要な、構造的で関係性を重視する市場です。", "el": "Μια δομημένη αγορά όπου η εμπιστοσύνη, η υπομονή, ο σεβασμός και η προετοιμασία παίζουν σημαντικό ρόλο."}, "culture": {"en": "Communication is often indirect. Group consensus can be important before final decisions.", "ja": "コミュニケーションは間接的なことが多く、最終決定には合意形成が重要です。", "el": "Η επικοινωνία είναι συχνά έμμεση. Η ομαδική συναίνεση μπορεί να είναι σημαντική πριν από τις τελικές αποφάσεις."}, "etiquette": {"en": "Business cards, polite introductions, punctuality, and careful listening are important.", "ja": "名刺、礼儀正しい挨拶、時間厳守、丁寧に聞く姿勢が重要です。", "el": "Οι επαγγελματικές κάρτες, οι ευγενικές συστάσεις, η συνέπεια στην ώρα και η προσεκτική ακρόαση είναι σημαντικά."}, "laws": {"en": "Company setup and visas require careful preparation.", "ja": "会社設立やビザには慎重な準備が必要です。", "el": "Η ίδρυση εταιρείας και οι βίζες απαιτούν προσεκτική προετοιμασία."}, "market": {"en": "Technology, manufacturing, robotics, gaming, design, food, tourism, and premium consumer products.", "ja": "テクノロジー、製造、ロボット、ゲーム、デザイン、食品、観光、高付加価値消費財。", "el": "Τεχνολογία, μεταποίηση, ρομποτική, gaming, design, τρόφιμα, τουρισμός και premium καταναλωτικά προϊόντα."}, "dos": {"en": ["Bring business cards.", "Be punctual.", "Build trust before pushing decisions."], "ja": ["名刺を持参する。", "時間を守る。", "決定を急がず信頼を築く。"], "el": ["Να έχεις επαγγελματικές κάρτες.", "Να είσαι στην ώρα σου.", "Χτίσε εμπιστοσύνη πριν πιέσεις για αποφάσεις."]}, "donts": {"en": ["Do not publicly embarrass someone.", "Do not rush consensus.", "Do not mistake silence for agreement."], "ja": ["人前で相手に恥をかかせない。", "合意形成を急がない。", "沈黙を同意と決めつけない。"], "el": ["Μην φέρνεις κάποιον σε δύσκολη θέση δημόσια.", "Μην βιάζεις τη συναίνεση.", "Μην θεωρείς ότι η σιωπή σημαίνει συμφωνία."]}}, {"code": "GR", "flag": "🇬🇷", "difficulty": 4, "opportunity": 6, "contacts": 5, "region": {"en": "Europe", "ja": "ヨーロッパ", "el": "Ευρώπη"}, "name": {"en": "Greece", "ja": "ギリシャ", "el": "Ελλάδα"}, "tags": {"en": ["Relationship-led", "Flexible", "Trust-based"], "ja": ["関係重視", "柔軟", "信頼重視"], "el": ["Σχέσεις", "Ευελιξία", "Εμπιστοσύνη"]}, "summary": {"en": "A relationship-oriented market where personal trust, conversation, and networks often matter deeply.", "ja": "個人的な信頼、会話、人脈が大きな意味を持つ関係重視の市場です。", "el": "Μια αγορά όπου οι σχέσεις, η προσωπική εμπιστοσύνη, η συζήτηση και τα δίκτυα παίζουν μεγάλο ρόλο."}, "culture": {"en": "Communication can be expressive and personal.", "ja": "コミュニケーションは表現豊かで個人的です。", "el": "Η επικοινωνία μπορεί να είναι εκφραστική και προσωπική."}, "etiquette": {"en": "Expect conversation before business. Coffee meetings and introductions can help.", "ja": "商談前の会話が重要です。コーヒーでの面談や紹介が役立ちます。", "el": "Περίμενε συζήτηση πριν το καθαρό business. Οι καφέδες και οι συστάσεις συχνά βοηθούν."}, "laws": {"en": "Bureaucracy can be slow. Company setup and tax obligations require attention.", "ja": "手続きに時間がかかる場合があります。会社設立と税務には注意が必要です。", "el": "Η γραφειοκρατία μπορεί να είναι αργή. Η ίδρυση εταιρείας και οι φορολογικές υποχρεώσεις χρειάζονται προσοχή."}, "market": {"en": "Tourism, food, shipping, energy, real estate, hospitality, and local services.", "ja": "観光、食品、海運、エネルギー、不動産、ホスピタリティ、地域サービス。", "el": "Τουρισμός, τρόφιμα, ναυτιλία, ενέργεια, ακίνητα, φιλοξενία και τοπικές υπηρεσίες."}, "dos": {"en": ["Build personal trust.", "Confirm details in writing.", "Be patient with bureaucracy."], "ja": ["信頼を築く。", "詳細を書面で確認する。", "手続きには忍耐を持つ。"], "el": ["Χτίσε προσωπική εμπιστοσύνη.", "Επιβεβαίωσε λεπτομέρειες γραπτώς.", "Να έχεις υπομονή με τη γραφειοκρατία."]}, "donts": {"en": ["Do not rely only on verbal agreements.", "Do not ignore relationships.", "Do not expect everything instantly."], "ja": ["口約束だけに頼らない。", "関係性を軽視しない。", "すべてがすぐ進むと期待しない。"], "el": ["Μη βασίζεσαι μόνο σε προφορικές συμφωνίες.", "Μην αγνοείς τις σχέσεις.", "Μην περιμένεις όλα να γίνουν αμέσως."]}}, {"code": "SE", "flag": "🇸🇪", "difficulty": 5, "opportunity": 7, "contacts": 7, "region": {"en": "Europe", "ja": "ヨーロッパ", "el": "Ευρώπη"}, "name": {"en": "Sweden", "ja": "スウェーデン", "el": "Σουηδία"}, "tags": {"en": ["Flat hierarchy", "Direct", "Consensus"], "ja": ["フラット", "直接的", "合意重視"], "el": ["Χαμηλή ιεραρχία", "Άμεση", "Συναίνεση"]}, "summary": {"en": "A transparent, structured market with low hierarchy, strong planning, and high expectations for reliability.", "ja": "階層が低く、計画性と信頼性が重視される透明性の高い市場です。", "el": "Μια διαφανής και δομημένη αγορά με χαμηλή ιεραρχία, ισχυρό προγραμματισμό και υψηλές απαιτήσεις αξιοπιστίας."}, "culture": {"en": "Communication is direct but calm. Teams value equality, planning, and consensus.", "ja": "コミュニケーションは直接的ですが落ち着いています。平等、計画、合意が重視されます。", "el": "Η επικοινωνία είναι άμεση αλλά ήρεμη. Οι ομάδες δίνουν αξία στην ισότητα, τον προγραμματισμό και τη συναίνεση."}, "etiquette": {"en": "Be on time. Keep meetings focused. Avoid aggressive selling.", "ja": "時間を守り、会議は簡潔に。強引な営業は避けるべきです。", "el": "Να είσαι στην ώρα σου. Κράτα τα meetings συγκεντρωμένα. Απόφυγε το επιθετικό selling."}, "laws": {"en": "Employment protection, tax rules, and registration are structured.", "ja": "雇用保護、税制、事業登録が整備されています。", "el": "Η προστασία εργασίας, οι φορολογικοί κανόνες και οι εγγραφές είναι δομημένα."}, "market": {"en": "Sustainability, tech, gaming, engineering, design, health, and digital services.", "ja": "サステナビリティ、テック、ゲーム、工学、デザイン、医療、デジタルサービス。", "el": "Βιωσιμότητα, τεχνολογία, gaming, engineering, design, υγεία και ψηφιακές υπηρεσίες."}, "dos": {"en": ["Be punctual.", "Use factual communication.", "Respect work-life boundaries."], "ja": ["時間を守る。", "事実ベースで説明する。", "仕事と私生活の境界を尊重する。"], "el": ["Να είσαι συνεπής στην ώρα.", "Χρησιμοποίησε τεκμηριωμένη επικοινωνία.", "Σεβάσου τα όρια εργασίας και προσωπικής ζωής."]}, "donts": {"en": ["Do not oversell aggressively.", "Do not ignore planning.", "Do not act superior because of title."], "ja": ["強引に売り込まない。", "計画を軽視しない。", "肩書きで偉そうにしない。"], "el": ["Μην κάνεις επιθετικό overselling.", "Μην αγνοείς τον προγραμματισμό.", "Μην φέρεσαι ανώτερα λόγω τίτλου."]}}, {"code": "DE", "flag": "🇩🇪", "difficulty": 6, "opportunity": 8, "contacts": 8, "region": {"en": "Europe", "ja": "ヨーロッパ", "el": "Ευρώπη"}, "name": {"en": "Germany", "ja": "ドイツ", "el": "Γερμανία"}, "tags": {"en": ["Structured", "Direct", "Rule-based"], "ja": ["構造的", "直接的", "ルール重視"], "el": ["Δομημένη", "Άμεση", "Κανόνες"]}, "summary": {"en": "Germany is an important market with its own culture, regulations, opportunities, and local business expectations.", "ja": "ドイツは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。", "el": "Η αγορά Γερμανία έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες."}, "culture": {"en": "Understand communication style, hierarchy, trust-building, and meeting expectations before entering.", "ja": "参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。", "el": "Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings."}, "etiquette": {"en": "Prepare for local meeting norms, introductions, punctuality, and negotiation behavior.", "ja": "現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。", "el": "Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις."}, "laws": {"en": "Legal setup, tax, permits, and employment rules should be checked with local professionals.", "ja": "法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。", "el": "Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς."}, "market": {"en": "Market research, local partners, customer behavior, and distribution channels are key.", "ja": "市場調査、現地パートナー、消費者行動、流通チャネルが重要です。", "el": "Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα."}, "dos": {"en": ["Research local rules.", "Find reliable contacts.", "Validate demand before expanding."], "ja": ["現地ルールを調査する。", "信頼できる連絡先を見つける。", "拡大前に需要を検証する。"], "el": ["Έλεγξε τοπικούς κανόνες.", "Βρες αξιόπιστες επαφές.", "Κάνε validation ζήτησης πριν επεκταθείς."]}, "donts": {"en": ["Do not assume your home market rules apply.", "Do not ignore cultural expectations.", "Do not enter without local support."], "ja": ["自国のルールが通用すると考えない。", "文化的期待を無視しない。", "現地支援なしで参入しない。"], "el": ["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.", "Μην αγνοείς πολιτισμικές προσδοκίες.", "Μην μπαίνεις χωρίς τοπική υποστήριξη."]}}, {"code": "AE", "flag": "🇦🇪", "difficulty": 7, "opportunity": 9, "contacts": 9, "region": {"en": "Middle East", "ja": "中東", "el": "Μέση Ανατολή"}, "name": {"en": "UAE", "ja": "UAE", "el": "ΗΑΕ"}, "tags": {"en": ["Formal", "Network-led", "Fast-growing"], "ja": ["フォーマル", "人脈重視", "成長市場"], "el": ["Τυπική", "Δίκτυα", "Ταχεία ανάπτυξη"]}, "summary": {"en": "UAE is an important market with its own culture, regulations, opportunities, and local business expectations.", "ja": "UAEは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。", "el": "Η αγορά ΗΑΕ έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες."}, "culture": {"en": "Understand communication style, hierarchy, trust-building, and meeting expectations before entering.", "ja": "参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。", "el": "Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings."}, "etiquette": {"en": "Prepare for local meeting norms, introductions, punctuality, and negotiation behavior.", "ja": "現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。", "el": "Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις."}, "laws": {"en": "Legal setup, tax, permits, and employment rules should be checked with local professionals.", "ja": "法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。", "el": "Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς."}, "market": {"en": "Market research, local partners, customer behavior, and distribution channels are key.", "ja": "市場調査、現地パートナー、消費者行動、流通チャネルが重要です。", "el": "Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα."}, "dos": {"en": ["Research local rules.", "Find reliable contacts.", "Validate demand before expanding."], "ja": ["現地ルールを調査する。", "信頼できる連絡先を見つける。", "拡大前に需要を検証する。"], "el": ["Έλεγξε τοπικούς κανόνες.", "Βρες αξιόπιστες επαφές.", "Κάνε validation ζήτησης πριν επεκταθείς."]}, "donts": {"en": ["Do not assume your home market rules apply.", "Do not ignore cultural expectations.", "Do not enter without local support."], "ja": ["自国のルールが通用すると考えない。", "文化的期待を無視しない。", "現地支援なしで参入しない。"], "el": ["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.", "Μην αγνοείς πολιτισμικές προσδοκίες.", "Μην μπαίνεις χωρίς τοπική υποστήριξη."]}}, {"code": "US", "flag": "🇺🇸", "difficulty": 5, "opportunity": 9, "contacts": 11, "region": {"en": "North America", "ja": "北米", "el": "Βόρεια Αμερική"}, "name": {"en": "United States", "ja": "アメリカ", "el": "Ηνωμένες Πολιτείες"}, "tags": {"en": ["Direct", "Fast-paced", "Pitch-oriented"], "ja": ["直接的", "スピード重視", "ピッチ重視"], "el": ["Άμεση", "Γρήγορη", "Pitch"]}, "summary": {"en": "United States is an important market with its own culture, regulations, opportunities, and local business expectations.", "ja": "アメリカは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。", "el": "Η αγορά Ηνωμένες Πολιτείες έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες."}, "culture": {"en": "Understand communication style, hierarchy, trust-building, and meeting expectations before entering.", "ja": "参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。", "el": "Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings."}, "etiquette": {"en": "Prepare for local meeting norms, introductions, punctuality, and negotiation behavior.", "ja": "現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。", "el": "Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις."}, "laws": {"en": "Legal setup, tax, permits, and employment rules should be checked with local professionals.", "ja": "法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。", "el": "Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς."}, "market": {"en": "Market research, local partners, customer behavior, and distribution channels are key.", "ja": "市場調査、現地パートナー、消費者行動、流通チャネルが重要です。", "el": "Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα."}, "dos": {"en": ["Research local rules.", "Find reliable contacts.", "Validate demand before expanding."], "ja": ["現地ルールを調査する。", "信頼できる連絡先を見つける。", "拡大前に需要を検証する。"], "el": ["Έλεγξε τοπικούς κανόνες.", "Βρες αξιόπιστες επαφές.", "Κάνε validation ζήτησης πριν επεκταθείς."]}, "donts": {"en": ["Do not assume your home market rules apply.", "Do not ignore cultural expectations.", "Do not enter without local support."], "ja": ["自国のルールが通用すると考えない。", "文化的期待を無視しない。", "現地支援なしで参入しない。"], "el": ["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.", "Μην αγνοείς πολιτισμικές προσδοκίες.", "Μην μπαίνεις χωρίς τοπική υποστήριξη."]}}, {"code": "CN", "flag": "🇨🇳", "difficulty": 8, "opportunity": 9, "contacts": 10, "region": {"en": "Asia", "ja": "アジア", "el": "Ασία"}, "name": {"en": "China", "ja": "中国", "el": "Κίνα"}, "tags": {"en": ["Relationship-based", "Hierarchical", "Scale-driven"], "ja": ["関係重視", "階層的", "規模重視"], "el": ["Σχέσεις", "Ιεραρχία", "Κλίμακα"]}, "summary": {"en": "China is an important market with its own culture, regulations, opportunities, and local business expectations.", "ja": "中国は独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。", "el": "Η αγορά Κίνα έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες."}, "culture": {"en": "Understand communication style, hierarchy, trust-building, and meeting expectations before entering.", "ja": "参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。", "el": "Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings."}, "etiquette": {"en": "Prepare for local meeting norms, introductions, punctuality, and negotiation behavior.", "ja": "現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。", "el": "Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις."}, "laws": {"en": "Legal setup, tax, permits, and employment rules should be checked with local professionals.", "ja": "法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。", "el": "Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς."}, "market": {"en": "Market research, local partners, customer behavior, and distribution channels are key.", "ja": "市場調査、現地パートナー、消費者行動、流通チャネルが重要です。", "el": "Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα."}, "dos": {"en": ["Research local rules.", "Find reliable contacts.", "Validate demand before expanding."], "ja": ["現地ルールを調査する。", "信頼できる連絡先を見つける。", "拡大前に需要を検証する。"], "el": ["Έλεγξε τοπικούς κανόνες.", "Βρες αξιόπιστες επαφές.", "Κάνε validation ζήτησης πριν επεκταθείς."]}, "donts": {"en": ["Do not assume your home market rules apply.", "Do not ignore cultural expectations.", "Do not enter without local support."], "ja": ["自国のルールが通用すると考えない。", "文化的期待を無視しない。", "現地支援なしで参入しない。"], "el": ["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.", "Μην αγνοείς πολιτισμικές προσδοκίες.", "Μην μπαίνεις χωρίς τοπική υποστήριξη."]}}, {"code": "KR", "flag": "🇰🇷", "difficulty": 7, "opportunity": 8, "contacts": 6, "region": {"en": "Asia", "ja": "アジア", "el": "Ασία"}, "name": {"en": "South Korea", "ja": "韓国", "el": "Νότια Κορέα"}, "tags": {"en": ["Fast-paced", "Hierarchical", "Tech-forward"], "ja": ["スピード重視", "階層的", "テック志向"], "el": ["Γρήγορη", "Ιεραρχική", "Τεχνολογία"]}, "summary": {"en": "South Korea is an important market with its own culture, regulations, opportunities, and local business expectations.", "ja": "韓国は独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。", "el": "Η αγορά Νότια Κορέα έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες."}, "culture": {"en": "Understand communication style, hierarchy, trust-building, and meeting expectations before entering.", "ja": "参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。", "el": "Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings."}, "etiquette": {"en": "Prepare for local meeting norms, introductions, punctuality, and negotiation behavior.", "ja": "現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。", "el": "Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις."}, "laws": {"en": "Legal setup, tax, permits, and employment rules should be checked with local professionals.", "ja": "法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。", "el": "Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς."}, "market": {"en": "Market research, local partners, customer behavior, and distribution channels are key.", "ja": "市場調査、現地パートナー、消費者行動、流通チャネルが重要です。", "el": "Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα."}, "dos": {"en": ["Research local rules.", "Find reliable contacts.", "Validate demand before expanding."], "ja": ["現地ルールを調査する。", "信頼できる連絡先を見つける。", "拡大前に需要を検証する。"], "el": ["Έλεγξε τοπικούς κανόνες.", "Βρες αξιόπιστες επαφές.", "Κάνε validation ζήτησης πριν επεκταθείς."]}, "donts": {"en": ["Do not assume your home market rules apply.", "Do not ignore cultural expectations.", "Do not enter without local support."], "ja": ["自国のルールが通用すると考えない。", "文化的期待を無視しない。", "現地支援なしで参入しない。"], "el": ["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.", "Μην αγνοείς πολιτισμικές προσδοκίες.", "Μην μπαίνεις χωρίς τοπική υποστήριξη."]}}], "ui": {"en": {"navDemo": "Demo", "navContacts": "Contacts", "navTools": "Tools", "navInterest": "Interest", "kicker": "International business preparation, made practical", "heroTitle": "Understand a market before you enter it.", "heroLead": "Pocket Biz helps entrepreneurs, professionals, and business travelers understand culture, etiquette, regulations, risks, real experiences, local contacts, costs, timelines, and official resources before entering a foreign market.", "openPreview": "Open Preview", "interested": "I'm Interested", "listCompany": "List Your Company", "starter": "starter countries", "review": "review concept", "listing": "provider listing model", "search": "Search countries or topics...", "allRegions": "All regions", "why": "Why Pocket Biz?", "whyText": "Entering a new market is difficult because essential information is scattered across legal websites, reports, blogs, country guides, and personal experiences. Pocket Biz brings the practical pieces together.", "cultureMarket": "Culture + law + market", "cultureMarketText": "Country profiles explain etiquette, regulations, opportunities, risks, mistakes, costs, and official resources.", "contactsFeature": "Market-entry contacts", "contactsFeatureText": "Local providers can apply to be listed for company setup, tax, law, translation, relocation, and market research.", "communityFeature": "Community + AI review", "communityFeatureText": "Users can submit real experiences, then AI can help filter, summarize, categorize, and flag weak or biased submissions.", "toolsTitle": "Market Entry Tools", "toolsText": "Useful sections for practical market preparation.", "riskTitle": "Example: Japan Risk Meter", "mistakesTitle": "Top Mistakes Foreigners Make", "costTitle": "Cost of Market Entry", "timelineTitle": "Market Entry Timeline", "checklistTitle": "Market Entry Checklist", "contactsTitle": "Market Entry Contacts", "providerTitle": "For Service Providers", "shareTitle": "Share a Country Insight", "briefTitle": "AI Country Brief", "founderTitle": "Founder Story", "interestTitle": "Interested in Pocket Biz?", "difficulty": "Difficulty", "cultureDifficulty": "Culture Difficulty", "opportunity": "Opportunity", "contacts": "Contacts", "bestFor": "Best for", "marketPrep": "Market preparation", "businessGuide": "Business guide", "culture": "Culture", "etiquette": "Etiquette", "law": "Law basics", "market": "Market", "do": "Do", "dont": "Don't", "footer": "Culture • Law • Market • Contacts • AI Review"}, "ja": {"navDemo": "デモ", "navContacts": "連絡先", "navTools": "ツール", "navInterest": "興味あり", "kicker": "国際ビジネス準備を、実用的に", "heroTitle": "市場に参入する前に、その市場を理解する。", "heroLead": "Pocket Bizは、起業家、ビジネスパーソン、出張者が海外市場に入る前に、文化、マナー、規制、リスク、実体験、現地連絡先、費用、タイムライン、公式情報を理解するためのプラットフォームです。", "openPreview": "プレビューを見る", "interested": "興味があります", "listCompany": "会社を掲載する", "starter": "初期対応国", "review": "レビュー構想", "listing": "掲載モデル", "search": "国やトピックを検索...", "allRegions": "すべての地域", "why": "なぜPocket Bizか？", "whyText": "新しい市場への参入は簡単ではありません。重要な情報は法律サイト、レポート、ブログ、国別ガイド、個人の経験に分散しています。Pocket Bizは、それらの実用的な情報を一つにまとめます。", "cultureMarket": "文化・法律・市場", "cultureMarketText": "国別プロフィールでは、マナー、規制、機会、リスク、失敗例、コスト、公式情報を説明します。", "contactsFeature": "市場参入の連絡先", "contactsFeatureText": "会社設立、税務、法律、翻訳、移住、市場調査を支援する現地プロバイダーを掲載できます。", "communityFeature": "コミュニティ + AIレビュー", "communityFeatureText": "ユーザーが実体験を投稿し、AIが内容を確認、要約、分類し、弱い情報や偏った投稿を検出できます。", "toolsTitle": "市場参入ツール", "toolsText": "実用的な市場準備のためのセクションです。", "riskTitle": "例：日本のリスクメーター", "mistakesTitle": "外国人がしやすい失敗", "costTitle": "市場参入コスト", "timelineTitle": "市場参入タイムライン", "checklistTitle": "市場参入チェックリスト", "contactsTitle": "市場参入の連絡先", "providerTitle": "サービス提供者向け", "shareTitle": "国別インサイトを共有", "briefTitle": "AIカントリーブリーフ", "founderTitle": "創業ストーリー", "interestTitle": "Pocket Bizに興味がありますか？", "difficulty": "難易度", "cultureDifficulty": "文化難易度", "opportunity": "機会", "contacts": "連絡先", "bestFor": "用途", "marketPrep": "市場参入準備", "businessGuide": "ビジネスガイド", "culture": "文化", "etiquette": "マナー", "law": "法律の基本", "market": "市場", "do": "すること", "dont": "避けること", "footer": "文化 • 法律 • 市場 • 連絡先 • AIレビュー"}, "el": {"navDemo": "Demo", "navContacts": "Επαφές", "navTools": "Εργαλεία", "navInterest": "Ενδιαφέρον", "kicker": "Πρακτική προετοιμασία για διεθνείς αγορές", "heroTitle": "Κατανόησε μια αγορά πριν μπεις σε αυτή.", "heroLead": "Το Pocket Biz βοηθά επιχειρηματίες, επαγγελματίες και business travelers να κατανοούν κουλτούρα, εθιμοτυπία, κανονισμούς, ρίσκα, πραγματικές εμπειρίες, τοπικές επαφές, κόστη, timelines και επίσημες πηγές πριν μπουν σε μια ξένη αγορά.", "openPreview": "Άνοιγμα Preview", "interested": "Ενδιαφέρομαι", "listCompany": "Καταχώριση εταιρείας", "starter": "αρχικές χώρες", "review": "μοντέλο review", "listing": "μοντέλο καταχώρισης providers", "search": "Αναζήτηση χωρών ή θεμάτων...", "allRegions": "Όλες οι περιοχές", "why": "Γιατί Pocket Biz;", "whyText": "Η είσοδος σε μια νέα αγορά δεν είναι απλή. Οι σημαντικές πληροφορίες είναι σκορπισμένες σε νομικές ιστοσελίδες, reports, blogs, country guides και προσωπικές εμπειρίες. Το Pocket Biz συγκεντρώνει τα πρακτικά στοιχεία σε ένα σημείο.", "cultureMarket": "Κουλτούρα + νόμοι + αγορά", "cultureMarketText": "Τα country profiles εξηγούν εθιμοτυπία, κανονισμούς, ευκαιρίες, ρίσκα, λάθη, κόστη και επίσημες πηγές.", "contactsFeature": "Επαφές εισόδου σε αγορά", "contactsFeatureText": "Τοπικοί providers μπορούν να καταχωρηθούν για ίδρυση εταιρείας, φορολογία, νομικά, μετάφραση, μετεγκατάσταση και έρευνα αγοράς.", "communityFeature": "Κοινότητα + AI review", "communityFeatureText": "Οι χρήστες μπορούν να υποβάλουν πραγματικές εμπειρίες και το AI να βοηθά στο φιλτράρισμα, τη σύνοψη, την κατηγοριοποίηση και τον εντοπισμό αδύναμων ή μεροληπτικών πληροφοριών.", "toolsTitle": "Εργαλεία εισόδου σε αγορά", "toolsText": "Χρήσιμες ενότητες για πρακτική προετοιμασία αγοράς.", "riskTitle": "Παράδειγμα: Risk Meter Ιαπωνίας", "mistakesTitle": "Συχνά λάθη ξένων", "costTitle": "Κόστος εισόδου σε αγορά", "timelineTitle": "Χρονοδιάγραμμα εισόδου σε αγορά", "checklistTitle": "Checklist εισόδου σε αγορά", "contactsTitle": "Επαφές εισόδου σε αγορά", "providerTitle": "Για παρόχους υπηρεσιών", "shareTitle": "Μοιράσου εμπειρία χώρας", "briefTitle": "AI Country Brief", "founderTitle": "Ιστορία ιδρυτή", "interestTitle": "Σε ενδιαφέρει το Pocket Biz;", "difficulty": "Δυσκολία", "cultureDifficulty": "Δυσκολία κουλτούρας", "opportunity": "Ευκαιρία", "contacts": "Επαφές", "bestFor": "Χρήσιμο για", "marketPrep": "Προετοιμασία αγοράς", "businessGuide": "Οδηγός αγοράς", "culture": "Κουλτούρα", "etiquette": "Εθιμοτυπία", "law": "Νομικά βασικά", "market": "Αγορά", "do": "Κάνε", "dont": "Απόφυγε", "footer": "Κουλτούρα • Νόμοι • Αγορά • Επαφές • AI Review"}}};
+let lang='en'; let selected=DATA.countries[0];
+function L(o){return o[lang]||o.en} function U(k){return DATA.ui[lang][k]||DATA.ui.en[k]}
+function set(id,k){document.getElementById(id).textContent=U(k)}
+function renderStatic(){['navDemo','navContacts','navTools','navInterest','kicker','heroTitle','heroLead','openPreview','interested','listCompany','starter','review','listing','why','whyText','cultureMarket','cultureMarketText','contactsFeature','contactsFeatureText','communityFeature','communityFeatureText','toolsTitle','toolsText','riskTitle','mistakesTitle','costTitle','timelineTitle','checklistTitle','contactsTitle','providerTitle','shareTitle','briefTitle','founderTitle','interestTitle','footer'].forEach(id=>set(id,id)); document.getElementById('searchInput').placeholder=U('search');}
+function renderRegionFilter(){let regions=['all','Europe','Asia','Middle East','North America'];let names={en:{Europe:'Europe',Asia:'Asia','Middle East':'Middle East','North America':'North America'},ja:{Europe:'ヨーロッパ',Asia:'アジア','Middle East':'中東','North America':'北米'},el:{Europe:'Ευρώπη',Asia:'Ασία','Middle East':'Μέση Ανατολή','North America':'Βόρεια Αμερική'}};document.getElementById('regionFilter').innerHTML=regions.map(r=>`<option value="${r}">${r==='all'?U('allRegions'):names[lang][r]}</option>`).join('')}
+function renderPhone(){document.getElementById('phonePreview').innerHTML=`<div class="phone-search">${U('search')}</div>`+DATA.countries.slice(0,3).map(c=>`<div class="phone-card"><h3>${L(c.name)}</h3><span class="pill">${L(c.tags).join(' • ')}</span><div class="metrics"><div class="metric">Risk<b>${c.difficulty}/10</b></div><div class="metric">${U('contacts')}<b>${c.contacts}</b></div></div><div class="quick">${L(c.summary)}</div></div>`).join('')}
+function renderCountries(){let q=document.getElementById('searchInput').value.toLowerCase(), r=document.getElementById('regionFilter').value;let filtered=DATA.countries.filter(c=>(r==='all'||c.region.en===r)&&[L(c.name),L(c.region),L(c.summary)].join(' ').toLowerCase().includes(q));document.getElementById('countryButtons').innerHTML=filtered.map(c=>`<button class="country-button ${c.code===selected.code?'active':''}" onclick="selectCountry('${c.code}')"><div class="bigflag">${c.code}</div><strong>${L(c.name)}</strong><span>${L(c.region)} • ${U('difficulty')} ${c.difficulty}/10</span></button>`).join('')}
+function selectCountry(code){selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];renderCountries();renderProfile()}
+function renderProfile(){let c=selected;document.getElementById('countryProfile').innerHTML=`<div class="profile-main"><h2>${c.code} ${L(c.name)}</h2><p class="sub">${L(c.summary)}</p><div class="tags">${L(c.tags).map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="info-grid"><div class="infobox"><small>${U('cultureDifficulty')}</small><strong>${c.difficulty}/10</strong></div><div class="infobox"><small>${U('opportunity')}</small><strong>${c.opportunity}/10</strong></div><div class="infobox"><small>${U('contacts')}</small><strong>${c.contacts}</strong></div><div class="infobox"><small>${U('bestFor')}</small><strong>${U('marketPrep')}</strong></div></div><div class="dodont"><div class="do"><b>${U('do')}</b><br>${L(c.dos).map(x=>'• '+x).join('<br>')}</div><div class="dont"><b>${U('dont')}</b><br>${L(c.donts).map(x=>'• '+x).join('<br>')}</div></div></div><div class="profile-side"><h3>${U('businessGuide')}</h3><div class="list"><div class="listitem"><b>${U('culture')}:</b> ${L(c.culture)}</div><div class="listitem"><b>${U('etiquette')}:</b> ${L(c.etiquette)}</div><div class="listitem"><b>${U('law')}:</b> ${L(c.laws)}</div><div class="listitem"><b>${U('market')}:</b> ${L(c.market)}</div></div></div>`}
+function extraText(){return {
+en:{tools:[['📊 Country Risk Meter','Culture difficulty, bureaucracy, language barrier, setup complexity, market opportunity, and contacts available.'],['❌ Top Mistakes','Common mistakes foreigners make in meetings, negotiations, paperwork, communication, and local expectations.'],['💰 Cost of Entry','Estimated categories: company setup, translation, legal review, accountant, local advisor, workspace, and market research.']],risk:['Culture Difficulty','Language Barrier','Bureaucracy','Setup Complexity','Market Opportunity','Contact Availability'],mistakes:[['🇯🇵 Japan','Rushing decisions, being too direct too early, treating business cards casually, assuming silence means agreement.'],['🇸🇪 Sweden','Overselling aggressively, ignoring planning, being late, or acting superior because of title.'],['🇬🇷 Greece','Ignoring relationships, relying only on verbal agreements, expecting bureaucracy to move instantly.']],cost:[['Basic preparation','Market research, translated documents, cultural preparation, and initial legal consultation.'],['Setup support','Company formation, tax registration, local accountant, workspace, permits, and visa/work support.'],['Growth support','Local partner search, distributor contacts, business development, advertising, and customer research.']],timeline:[['Week 1','Research','Study culture, risks, laws, costs, competitors, and customer behavior.'],['Week 2','Contacts','Find legal, tax, translation, and market-entry providers.'],['Week 3','Preparation','Prepare documents, meetings, pitch material, and market assumptions.'],['Week 4','Entry','Start meetings, validate demand, and adjust strategy with local feedback.']],check:['☐ Understand business culture and negotiation style','☐ Check company setup and tax basics','☐ Identify local legal/accounting support','☐ Review common cultural mistakes'],provider:'Companies that help foreign entrepreneurs enter a market can apply for a listing.',share:'Have you traveled, studied, worked, or done business in another country? Share a practical insight.',founder:'Pocket Biz started while studying International Business and noticing how many factors companies must consider before entering a new market.'},
+ja:{tools:[['📊 国別リスクメーター','文化的難易度、官僚制、言語の壁、設立の複雑さ、市場機会、利用可能な連絡先を確認できます。'],['❌ よくある失敗','外国人が会議、交渉、書類、コミュニケーション、現地の期待でしやすい失敗。'],['💰 参入コスト','会社設立、翻訳、法務確認、会計士、現地アドバイザー、ワークスペース、市場調査などの推定カテゴリ。']],risk:['文化難易度','言語の壁','官僚制','設立の複雑さ','市場機会','連絡先の利用可能性'],mistakes:[['🇯🇵 日本','決定を急ぐ、最初から直接的すぎる、名刺を雑に扱う、沈黙を同意とみなす。'],['🇸🇪 スウェーデン','強引に売り込む、計画を無視する、遅刻する、肩書きで上から目線になる。'],['🇬🇷 ギリシャ','関係性を無視する、口約束だけに頼る、手続きがすぐ進むと期待する。']],cost:[['基本準備','市場調査、翻訳済み書類、文化理解、初期法務相談。'],['設立支援','会社設立、税務登録、現地会計士、ワークスペース、許認可、ビザ・就労支援。'],['成長支援','現地パートナー探し、販売代理店、事業開発、広告、顧客調査。']],timeline:[['1週目','調査','文化、リスク、法律、コスト、競合、消費者行動を調査します。'],['2週目','連絡先','法務、税務、翻訳、市場参入支援のプロバイダーを探します。'],['3週目','準備','書類、会議、ピッチ資料、市場仮説を準備します。'],['4週目','参入','会議を始め、需要を検証し、現地フィードバックで戦略を調整します。']],check:['☐ ビジネス文化と交渉スタイルを理解する','☐ 会社設立と税務の基本を確認する','☐ 現地の法務・会計支援を見つける','☐ よくある文化的な失敗を確認する'],provider:'外国人起業家の市場参入を支援する企業は掲載申請ができます。',share:'海外で旅行、留学、仕事、ビジネスをした経験がありますか？実用的なインサイトを共有できます。',founder:'Pocket Bizは、国際ビジネスを勉強している中で生まれました。'},
+el:{tools:[['📊 Country Risk Meter','Δυσκολία κουλτούρας, γραφειοκρατία, γλωσσικό εμπόδιο, πολυπλοκότητα setup, ευκαιρία αγοράς και διαθέσιμες επαφές.'],['❌ Συχνά λάθη','Συχνά λάθη ξένων σε meetings, διαπραγματεύσεις, χαρτιά, επικοινωνία και τοπικές προσδοκίες.'],['💰 Κόστος εισόδου','Ενδεικτικές κατηγορίες: ίδρυση εταιρείας, μετάφραση, νομικός έλεγχος, λογιστής, τοπικός σύμβουλος, workspace και έρευνα αγοράς.']],risk:['Δυσκολία κουλτούρας','Γλωσσικό εμπόδιο','Γραφειοκρατία','Πολυπλοκότητα setup','Ευκαιρία αγοράς','Διαθεσιμότητα επαφών'],mistakes:[['🇯🇵 Ιαπωνία','Βιασύνη στις αποφάσεις, υπερβολικά άμεση επικοινωνία από την αρχή, πρόχειρη αντιμετώπιση επαγγελματικών καρτών, υπόθεση ότι η σιωπή σημαίνει συμφωνία.'],['🇸🇪 Σουηδία','Επιθετικό overselling, αγνόηση προγραμματισμού, καθυστέρηση ή υπεροπτική στάση λόγω τίτλου.'],['🇬🇷 Ελλάδα','Αγνόηση σχέσεων, εξάρτηση μόνο από προφορικές συμφωνίες, προσδοκία ότι η γραφειοκρατία θα κινηθεί άμεσα.']],cost:[['Βασική προετοιμασία','Έρευνα αγοράς, μεταφρασμένα έγγραφα, πολιτισμική προετοιμασία και αρχική νομική συμβουλή.'],['Υποστήριξη setup','Ίδρυση εταιρείας, φορολογική εγγραφή, τοπικός λογιστής, workspace, άδειες και visa/work support.'],['Υποστήριξη ανάπτυξης','Αναζήτηση τοπικών συνεργατών, distributor contacts, business development, διαφήμιση και έρευνα πελατών.']],timeline:[['Εβδομάδα 1','Έρευνα','Μελέτη κουλτούρας, ρίσκων, νόμων, κόστους, ανταγωνιστών και συμπεριφοράς πελατών.'],['Εβδομάδα 2','Επαφές','Εύρεση νομικών, φορολογικών, μεταφραστικών και market-entry providers.'],['Εβδομάδα 3','Προετοιμασία','Προετοιμασία εγγράφων, meetings, pitch material και market assumptions.'],['Εβδομάδα 4','Είσοδος','Έναρξη meetings, validation ζήτησης και προσαρμογή στρατηγικής με τοπικό feedback.']],check:['☐ Κατανόησε την επιχειρηματική κουλτούρα και το στυλ διαπραγμάτευσης','☐ Έλεγξε βασικά θέματα ίδρυσης εταιρείας και φορολογίας','☐ Βρες τοπική νομική/λογιστική υποστήριξη','☐ Δες συχνά πολιτισμικά λάθη'],provider:'Εταιρείες που βοηθούν ξένους επιχειρηματίες να μπουν σε μια αγορά μπορούν να κάνουν αίτηση καταχώρισης.',share:'Έχεις ταξιδέψει, σπουδάσει, εργαστεί ή κάνει business σε άλλη χώρα; Μοιράσου μια πρακτική εμπειρία.',founder:'Το Pocket Biz ξεκίνησε ενώ μελετούσα International Business.'}
+}[lang]}
+function renderSections(){let e=extraText();toolsGrid.innerHTML=e.tools.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');riskGrid.innerHTML=e.risk.map((x,i)=>`<div class="panel"><b>${x}</b><div class="scorebar"><span style="width:${[80,75,60,65,90,70][i]}%"></span></div></div>`).join('');mistakesGrid.innerHTML=e.mistakes.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');costGrid.innerHTML=e.cost.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');timelineGrid.innerHTML=e.timeline.map(x=>`<div class="panel"><small>${x[0]}</small><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join('');checklistGrid.innerHTML=`<div class="panel"><h3>${U('checklistTitle')}</h3><div class="list">${e.check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div></div><div class="panel"><h3>${U('contactsTitle')}</h3><p>${e.provider}</p></div>`;contactsIntro.textContent=U('contactsFeatureText');contactGrid.innerHTML=DATA.countries.slice(0,3).map(c=>`<div class="card"><span class="badge">Verified Provider</span><h3>${L(c.name)} Partner Desk</h3><p>${L(c.summary)}</p></div>`).join('');providerIntro.textContent=e.provider;providerGrid.innerHTML=`<div class="panel"><h3>${U('contactsFeature')}</h3><p>${e.provider}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>`;shareIntro.textContent=e.share;shareGrid.innerHTML=`<div class="panel"><h3>${U('shareTitle')}</h3><p>${e.share}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>`;briefGrid.innerHTML=`<div class="panel"><h3>${U('briefTitle')}</h3><p>${e.tools[2][1]}</p></div><div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>`;founderPanel.innerHTML=`<p>${e.founder}</p>`;interestGrid.innerHTML=`<div class="panel"><p>${e.share}</p><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${U('interested')}</a></div><div class="panel"><h3>Business model</h3><p>Users / Providers / Premium</p></div>`}
+function renderAll(){renderStatic();renderRegionFilter();renderPhone();renderCountries();renderProfile();renderSections()}
+languageSelect.onchange=e=>{lang=e.target.value;renderAll();advisorSetText()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
+
+// Pocket Advisor v10: added to the original working index.
+// The original country/questionnaire system above remains intact.
+const ADVISOR_UI = {
+  en: {
+    nav: "Advisor", title: "Pocket Advisor", ready: "Ready",
+    ask: "Ask Advisor", placeholder: "Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?",
+    introTitle: "Ask about a business situation",
+    introText: "Describe what you are trying to do, where you are doing it, and what you are worried about. Pocket Advisor uses the selected country context to give practical guidance.",
+    defaultAnswer: "Tell me what you're trying to do, and I'll help you prepare."
+  },
+  ja: {
+    nav: "アドバイザー", title: "Pocket Advisor", ready: "準備完了",
+    ask: "アドバイザーに質問", placeholder: "例：明日、日本のサプライヤーと会います。何を避けるべきですか？",
+    introTitle: "ビジネスの状況について質問",
+    introText: "何をしようとしているのか、どこで行うのか、何が心配なのかを説明してください。選択した国の情報をもとに実践的なアドバイスを提供します。",
+    defaultAnswer: "何をしようとしているのか教えてください。準備をお手伝いします。"
+  },
+  el: {
+    nav: "Advisor", title: "Pocket Advisor", ready: "Έτοιμο",
+    ask: "Ρώτησε τον Advisor", placeholder: "Παράδειγμα: Είμαι Έλληνας και αύριο συναντώ Ιάπωνα προμηθευτή. Τι πρέπει να αποφύγω;",
+    introTitle: "Ρώτησε για μια επιχειρηματική κατάσταση",
+    introText: "Περιέγραψε τι προσπαθείς να κάνεις, πού το κάνεις και τι σε προβληματίζει. Το Pocket Advisor χρησιμοποιεί το context της επιλεγμένης χώρας για πρακτικές συμβουλές.",
+    defaultAnswer: "Πες μου τι προσπαθείς να κάνεις και θα σε βοηθήσω να προετοιμαστείς."
+  }
+};
+
+const advisorState = { history: [], busy: false };
+
+function advisorEscape(text){
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function advisorFormat(text){
+  let html = advisorEscape(text);
+
+  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/^[-•]\s+(.*)$/gm, "<li>$1</li>");
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, m => "<ul>" + m + "</ul>");
+  html = html.replace(/\n\n+/g, "</p><p>");
+  html = html.replace(/\n/g, "<br>");
+
+  return "<p>" + html + "</p>";
+}
+
+function advisorAddBubble(text, type){
+  const wrap = document.getElementById("advisorMessages");
+  const div = document.createElement("div");
+  div.className = "advisor-bubble " + type;
+
+  if(type === "answer"){
+    wrap.appendChild(div);
+    return advisorTypeAnswer(div, text);
+  }
+
+  div.textContent = text;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return Promise.resolve();
+}
+
+function advisorTypeAnswer(el, text){
+  return new Promise(resolve => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduceMotion){
+      el.innerHTML = advisorFormat(text);
+      document.getElementById("advisorMessages").scrollTop = 999999;
+      resolve();
+      return;
+    }
+
+    const chars = [...String(text)];
+    let i = 0;
+
+    function tick(){
+      // Slightly faster than one-character-at-a-time, while still looking like live writing.
+      i = Math.min(i + 3, chars.length);
+      el.innerHTML = advisorFormat(chars.slice(0, i).join(""));
+      document.getElementById("advisorMessages").scrollTop = 999999;
+
+      if(i < chars.length) setTimeout(tick, 7);
+      else resolve();
+    }
+
+    tick();
+  });
+}
+
+function advisorSetText(){
+  const ui = ADVISOR_UI[lang] || ADVISOR_UI.en;
+  const nav = document.getElementById("navAdvisor");
+  if(nav) nav.textContent = ui.nav;
+  document.querySelector("#advisor .section-title").textContent = ui.title;
+  document.querySelector(".advisor-intro h3").textContent = ui.introTitle;
+  document.querySelector(".advisor-intro p").textContent = ui.introText;
+  document.getElementById("advisorAsk").textContent = ui.ask;
+  document.getElementById("advisorInput").placeholder = ui.placeholder;
+  document.getElementById("advisorStatus").textContent = ui.ready;
+}
+
+function advisorContext(){
+  const c = selected;
+  return {
+    code: c.code,
+    name: L(c.name),
+    region: L(c.region),
+    difficulty: c.difficulty,
+    opportunity: c.opportunity,
+    contacts: c.contacts,
+    summary: L(c.summary),
+    culture: L(c.culture),
+    etiquette: L(c.etiquette),
+    laws: L(c.laws),
+    market: L(c.market),
+    dos: L(c.dos),
+    donts: L(c.donts)
+  };
+}
+
+async function advisorAskQuestion(question){
+  const input = document.getElementById("advisorInput");
+  const button = document.getElementById("advisorAsk");
+  const status = document.getElementById("advisorStatus");
+
+  question = String(question || input.value || "").trim();
+  if(!question || advisorState.busy) return;
+
+  advisorState.busy = true;
+  input.value = "";
+  button.disabled = true;
+  status.textContent = "Thinking…";
+
+  await advisorAddBubble(question, "user");
+
+  try{
+    const response = await fetch("/api/advisor", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        country: selected.code,
+        question,
+        context: advisorContext(),
+        history: advisorState.history.slice(-6)
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if(!response.ok || !data.answer){
+      throw new Error(data.error || "Advisor request failed");
+    }
+
+    advisorState.history.push(
+      {role:"user", content:question},
+      {role:"assistant", content:data.answer}
+    );
+
+    status.textContent = "Ready";
+    await advisorAddBubble(data.answer, "answer");
+  }catch(error){
+    console.error("Pocket Advisor:", error);
+    status.textContent = "Connection error";
+    await advisorAddBubble(
+      "I couldn't reach the advisor right now. Check that the Pocket Biz API is deployed and its AI key is configured.",
+      "answer"
+    );
+  }finally{
+    advisorState.busy = false;
+    button.disabled = false;
+  }
+}
+
+document.getElementById("advisorAsk").addEventListener("click", () => advisorAskQuestion());
+document.getElementById("advisorInput").addEventListener("keydown", e => {
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    advisorAskQuestion();
+  }
+});
+document.querySelectorAll(".advisor-example").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("advisorInput").value = btn.dataset.question;
+    document.getElementById("advisorInput").focus();
+  });
+});
+
+
+advisorSetText();
+</script>
+</body></html>
