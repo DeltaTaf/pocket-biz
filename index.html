@@ -74,7 +74,16 @@
           </div>
         </div>
 
-        <div class="advisor-form">
+        <div class="advisor-form" style="grid-template-columns:180px 1fr auto">
+          <select id="advisorSituation" class="advisor-input" aria-label="Advisor situation">
+            <option value="general">General</option>
+            <option value="meeting">Business meeting</option>
+            <option value="negotiation">Negotiation</option>
+            <option value="market-entry">Market entry</option>
+            <option value="partnership">Partnership</option>
+            <option value="travel">Business travel</option>
+            <option value="communication">Communication</option>
+          </select>
           <input id="advisorInput" class="advisor-input" autocomplete="off"
                  placeholder="Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?">
           <button id="advisorAsk" class="btn gold" type="button">Ask Advisor</button>
@@ -286,7 +295,10 @@ async function advisorAskQuestion(question){
       body: JSON.stringify({
         country: selected.code,
         question,
-        context: advisorContext(),
+        context: {
+          ...advisorContext(),
+          situation: document.getElementById("advisorSituation").value
+        },
         history: advisorState.history.slice(-6)
       })
     });
