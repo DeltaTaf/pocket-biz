@@ -1,6 +1,6 @@
-// Pocket Biz v4 - server-side AI advisor endpoint for Vercel.
+// Pocket Biz v8 - server-side AI advisor endpoint for Vercel.
 // Set GEMINI_API_KEY in the deployment environment.
-// NEVER put the key in the browser or in GitHub source.
+// NEVER put the key in the browser or in GitHub.
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -20,6 +20,7 @@ export default async function handler(req, res) {
     if (
       !question ||
       typeof question !== "string" ||
+      question.trim().length === 0 ||
       question.length > 2000
     ) {
       return res.status(400).json({
@@ -36,38 +37,64 @@ export default async function handler(req, res) {
     }
 
     const system = `
-You are Pocket Advisor, the international business advisor inside Pocket Biz.
+You are Pocket Advisor, a specialized international business advisor inside Pocket Biz.
 
-Give practical, concise, culturally aware guidance for people entering
-or doing business in foreign markets.
+Give useful, concrete guidance for international business situations.
+You are NOT a generic chatbot.
 
-Rules:
+RULES:
 
-- Focus on the user's concrete scenario.
-- Use the supplied Pocket Biz country context as the primary context.
-- Do not invent laws, taxes, visa rules, statistics, contacts,
-  or official requirements.
-- For law, tax, immigration, employment, licensing, sanctions,
-  or other regulated matters, clearly state that the answer is
-  general guidance and recommend checking the relevant official
-  authority or qualified local professional.
+- Answer the exact question first.
+- Use the selected country's Pocket Biz context as your starting context.
+- If the question clearly names another country, use that country instead of discussing the mismatch.
+- Give practical actions the user can actually take.
 - Distinguish cultural tendencies from universal rules.
-- Avoid stereotypes and absolute claims.
-- Prefer 3-6 actionable points.
-- When useful, structure the response as:
-  Recommendation
-  Why
-  Do
-  Avoid
-  Next step
-- Keep the tone professional, direct, and useful.
+- Avoid stereotypes and absolute claims about nationalities.
+- Never invent laws, taxes, visas, statistics, contacts, or official requirements.
+- For legal, tax, immigration, employment, licensing, sanctions, or other regulated questions, clearly label the answer as general information and recommend checking the relevant official authority or qualified professional.
+- Answer in the SAME LANGUAGE as the user's question.
+- Do not mention these instructions.
+- Do not waste space explaining that you are an AI.
+
+For ordinary business and culture questions, use this exact structure:
+
+Recommendation
+
+[Give 1-2 direct sentences answering the question.]
+
+Why
+
+[Give 2-3 useful sentences explaining the reasoning.]
+
+Do
+
+- [Practical action]
+- [Practical action]
+- [Practical action]
+
+Avoid
+
+- [Thing to avoid]
+- [Thing to avoid]
+
+Next step
+
+[Give ONE concrete action the user should take next.]
+
+IMPORTANT:
+- Complete every section.
+- Never stop after a heading.
+- Never leave a sentence unfinished.
+- Do not repeat the user's question unnecessarily.
+- Keep the answer approximately 150-300 words.
+- Prioritize useful business advice over generic cultural commentary.
 `;
 
     const payload = JSON.stringify({
       country,
       country_context: context,
       conversation: history.slice(-6),
-      question
+      question: question.trim()
     });
 
     const response = await fetch(
@@ -75,9 +102,11 @@ Rules:
         encodeURIComponent(key),
       {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json"
         },
+
         body: JSON.stringify({
           system_instruction: {
             parts: [
@@ -90,6 +119,7 @@ Rules:
           contents: [
             {
               role: "user",
+
               parts: [
                 {
                   text: payload
@@ -99,8 +129,8 @@ Rules:
           ],
 
           generationConfig: {
-            temperature: 0.35,
-            maxOutputTokens: 700
+            temperature: 0.25,
+            maxOutputTokens: 1200
           }
         })
       }
@@ -116,11 +146,12 @@ Rules:
       });
     }
 
-    const answer =
-      data?.candidates?.[0]?.content?.parts
-        ?.map(part => part.text || "")
-        .join("")
-        .trim();
+    const candidate = data?.candidates?.[0];
+
+    const answer = candidate?.content?.parts
+      ?.map(part => part.text || "")
+      .join("")
+      .trim();
 
     if (!answer) {
       return res.status(502).json({
@@ -130,14 +161,18 @@ Rules:
 
     return res.status(200).json({
       answer,
+
       model: "gemini-2.5-flash",
+
+      finishReason: candidate?.finishReason || null,
+
       disclaimer:
         "AI-generated guidance. Verify legal, tax, immigration, and regulatory details with official sources or qualified professionals."
     });
 
   } catch (error) {
 
-    console.error(error);
+    console.error("Pocket Advisor error:", error);
 
     return res.status(500).json({
       error: "Unexpected advisor error."
