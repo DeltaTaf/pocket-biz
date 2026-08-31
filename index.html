@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Businessman | Full MVP Preview</title>
+<title>Pocket Biz | v6 MVP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
 :root{
@@ -213,30 +213,45 @@ select{min-width:180px}
   .scorebar span{width:var(--target-width)}
 }
 
-</style>
+
+.advisor-example{border:0;width:100%;text-align:left;font:inherit;color:var(--text);cursor:pointer}
+.advisor-example:hover{border-color:var(--accent);transform:translateY(-1px)}
+.advisor-context{margin-top:18px;display:grid;gap:8px}
+.advisor-form{margin-top:18px;display:grid;gap:10px}
+.advisor-form textarea{width:100%;resize:vertical;min-height:90px;border:1px solid #3a3a3a;border-radius:16px;background:#181818;color:white;padding:14px;font:inherit;box-sizing:border-box}
+.advisor-form textarea::placeholder{color:#929292}
+.advisor-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#999;font-size:12px}
+.advisor-actions .btn{cursor:pointer;border:0}
+.advisor-actions .btn:disabled{opacity:.55;cursor:wait}
+.advisor-loading{display:inline-flex;gap:6px;align-items:center}
+.advisor-loading i{width:6px;height:6px;border-radius:50%;background:#999;animation:advisorPulse 1s infinite ease-in-out}
+.advisor-loading i:nth-child(2){animation-delay:.15s}.advisor-loading i:nth-child(3){animation-delay:.3s}
+@keyframes advisorPulse{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.advisor-loading i{animation:none}}
+.lang-toggle{min-width:110px;border-radius:999px;padding:8px 28px 8px 12px;font-weight:800}\n</style>
 </head>
-<body>
+<body data-pocket-biz-version="v6">
 <div class="container">
   <nav class="nav">
-    <div class="brand"><div class="mark">PB</div><span>Pocket Businessman</span></div>
+    <div class="brand"><div class="mark">PB</div><span>Pocket Biz</span></div>
     <div class="navlinks">
-      <a href="#app">Demo</a><a href="#compare">Compare</a><a href="#advisor">Advisor</a><a href="#pricing">Pricing</a>
+      <a href="#app" id="navDemo">Demo</a><a href="#compare" id="navCompare">Compare</a><a href="#advisor" id="navAdvisor">Advisor</a><a href="#pricing" id="navPricing">Pricing</a><select id="languageSelect" class="lang-toggle" aria-label="Language"><option value="en">English</option><option value="ja">日本語</option><option value="el">Ελληνικά</option></select>
     </div>
   </nav>
 
   <section class="hero">
     <div>
-      <div class="kicker"><span class="dot"></span> International business preparation, without the corporate fog machine</div>
-      <h1>Know the market before you enter the room.</h1>
-      <p>Pocket Businessman is a business culture intelligence app for entrepreneurs, students, business travelers, and professionals entering a foreign country.</p>
+      <div class="kicker"><span class="dot"></span> <span id="kickerText">International business preparation, without the corporate fog machine</span></div>
+      <h1><span id="heroTitle">Know the market before you enter the room.</span></h1>
+      <p><span id="heroLead">Pocket Biz is a business culture intelligence app for entrepreneurs, students, business travelers, and professionals entering a foreign country.</span></p>
       <div class="ctas">
-        <a href="#app" class="btn">Open Preview</a>
-        <a href="#pricing" class="btn secondary">Business Model</a>
+        <a href="#app" class="btn" id="openPreview">Open Preview</a>
+        <a href="#pricing" class="btn secondary" id="businessModelBtn">Business Model</a>
       </div>
       <div class="stats">
-        <div class="stat"><strong>13</strong><span>starter countries</span></div>
-        <div class="stat"><strong>7</strong><span>business sections</span></div>
-        <div class="stat"><strong>1</strong><span>advisor concept</span></div>
+        <div class="stat"><strong>13</strong><span id="starterLabel">starter countries</span></div>
+        <div class="stat"><strong>7</strong><span id="sectionsLabel">business sections</span></div>
+        <div class="stat"><strong>1</strong><span id="advisorConceptLabel">advisor concept</span></div>
       </div>
     </div>
 
@@ -264,12 +279,12 @@ select{min-width:180px}
     </div>
   </section>
 
-  <h2 class="section-title">The product idea</h2>
-  <p class="sub">A compact guide that explains culture, etiquette, legal basics, market conditions, and common mistakes before someone works, studies, negotiates, or starts a business in another country.</p>
+  <h2 class="section-title" id="productTitle">The product idea</h2>
+  <p class="sub" id="productText">A compact guide that explains culture, etiquette, legal basics, market conditions, and common mistakes before someone works, studies, negotiates, or starts a business in another country.</p>
   <div class="grid3">
-    <div class="card"><h3>Culture intelligence</h3><p>Communication style, hierarchy, negotiation habits, decision-making, time expectations, and trust building.</p></div>
-    <div class="card"><h3>Practical business guide</h3><p>Company setup basics, visas, work permits, employment rules, tax overview, risks, and industries.</p></div>
-    <div class="card"><h3>Pocket Advisor</h3><p>An AI-style assistant that answers scenario-based questions, like what to avoid before a Japanese supplier meeting.</p></div>
+    <div class="card"><h3 id="cultureCardTitle">Culture intelligence</h3><p id="cultureCardText">Communication style, hierarchy, negotiation habits, decision-making, time expectations, and trust building.</p></div>
+    <div class="card"><h3 id="guideCardTitle">Practical business guide</h3><p id="guideCardText">Company setup basics, visas, work permits, employment rules, tax overview, risks, and industries.</p></div>
+    <div class="card"><h3 id="advisorCardTitle">Pocket Advisor</h3><p id="advisorCardText">An AI-style assistant that answers scenario-based questions, like what to avoid before a Japanese supplier meeting.</p></div>
   </div>
 
   <section class="app-shell" id="app">
@@ -288,7 +303,7 @@ select{min-width:180px}
   </section>
 
   <h2 class="section-title" id="compare">Country comparison</h2>
-  <p class="sub">Compare two markets before entering them. Because apparently guessing based on vibes is not a strategy, despite what half the internet thinks.</p>
+  <p class="sub" id="compareText">Compare two markets before entering them. Because apparently guessing based on vibes is not a strategy, despite what half the internet thinks.</p>
 <p class="sub" style="font-size:13px">Pocket Biz scores are editorial MVP indicators for comparison, not official government or economic ratings.</p>
   <div class="toolbar">
     <select id="compareA"></select>
@@ -296,32 +311,42 @@ select{min-width:180px}
   </div>
   <div id="compareOutput" class="compare"></div>
 
-  <h2 class="section-title" id="advisor">Pocket Advisor preview</h2>
-  <p class="sub">This is a fake advisor for the preview. In a real app, this would connect to a vetted knowledge base and AI model with citations.</p>
+  <h2 class="section-title" id="advisor">Pocket Advisor</h2>
+  <p class="sub" id="advisorIntro">Your AI business advisor for international markets. Choose a country, describe your situation, and get practical, scenario-specific guidance.</p>
   <div class="advisor-box">
     <div class="card">
-      <h3>Example questions</h3>
-      <div class="list">
-        <div class="listitem">What should I avoid in a Japanese business meeting?</div>
-        <div class="listitem">How direct should I be with Swedish partners?</div>
-        <div class="listitem">What matters most before doing business in the UAE?</div>
-        <div class="listitem">Is Greece relationship-based in business?</div>
+      <h3 id="askAboutTitle">Ask about</h3>
+      <div class="list" id="advisorExamples">
+        <button class="listitem advisor-example" type="button" data-example="jp">What should I avoid in a Japanese supplier meeting?</button>
+        <button class="listitem advisor-example" type="button" data-example="se">How direct should I be with Swedish partners?</button>
+        <button class="listitem advisor-example" type="button" data-example="de">What should I prepare before entering Germany?</button>
+        <button class="listitem advisor-example" type="button" data-example="ae">How should I approach a first meeting in the UAE?</button>
+      </div>
+      <div class="advisor-context">
+        <label for="advisorCountry"><b id="advisorCountryLabel">Country</b></label>
+        <select id="advisorCountry"></select>
       </div>
     </div>
-    <div class="chat">
-      <h3>Advisor Chat</h3>
-      <p>Scenario-based advice for business travelers and new market entry.</p>
-      <div class="bubble">I am Greek and meeting a Japanese supplier. What should I avoid?</div>
-      <div class="bubble answer">Avoid rushing decisions, interrupting, openly criticizing someone, handling business cards casually, or assuming silence means agreement. Start with respect, preparation, and patience.</div>
-      <div class="bubble">Can I be direct in Sweden?</div>
-      <div class="bubble answer">Yes, but stay calm and factual. Swedish business culture often values clarity, punctuality, equality, and consensus over aggressive persuasion.</div>
+    <div class="chat" id="advisorChat">
+      <h3>Pocket Advisor</h3>
+      <p id="advisorChatIntro">Scenario-based advice for business travelers, students, and market entry.</p>
+      <div id="advisorMessages" aria-live="polite">
+        <div class="bubble answer" id="advisorWelcome">Tell me what you're trying to do, and I'll help you prepare.</div>
+      </div>
+      <form id="advisorForm" class="advisor-form">
+        <textarea id="advisorInput" rows="3" maxlength="2000" placeholder="Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?"></textarea>
+        <div class="advisor-actions">
+          <span id="advisorStatus">Ready</span>
+          <button class="btn gold" type="submit" id="advisorSend">Ask Advisor</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <h2 class="section-title" id="pricing">Business model preview</h2>
   <div class="pricing">
     <div class="price">
-      <h3>Free</h3>
+      <h3 id="freeTitle">Free</h3>
       <div class="money">€0</div>
       <ul>
         <li>Basic country guides</li>
@@ -330,7 +355,7 @@ select{min-width:180px}
       </ul>
     </div>
     <div class="price featured">
-      <h3>Pro</h3>
+      <h3 id="proTitle">Pro</h3>
       <div class="money">€6/mo</div>
       <ul>
         <li>Detailed legal and tax summaries</li>
@@ -340,7 +365,7 @@ select{min-width:180px}
       </ul>
     </div>
     <div class="price">
-      <h3>Business</h3>
+      <h3 id="businessTitle">Business</h3>
       <div class="money">Custom</div>
       <ul>
         <li>Team onboarding</li>
@@ -350,10 +375,10 @@ select{min-width:180px}
     </div>
   </div>
 
-  <h2 class="section-title">Validation plan</h2>
+  <h2 class="section-title" id="validationTitle">Validation plan</h2>
   <div class="feedback">
     <div class="card">
-      <h3>Who to test it with</h3>
+      <h3 id="validationAudienceTitle">Who to test it with</h3>
       <div class="list">
         <div class="listitem"><b>Erasmus students:</b> need cultural preparation before moving.</div>
         <div class="listitem"><b>Small entrepreneurs:</b> need quick market-entry knowledge.</div>
@@ -362,7 +387,7 @@ select{min-width:180px}
       </div>
     </div>
     <div class="form">
-      <h3>Feedback form preview</h3>
+      <h3 id="feedbackTitle">Feedback form preview</h3>
       <input placeholder="Name">
       <input placeholder="Country you want to enter">
       <textarea rows="5" placeholder="What information would help you most before moving or doing business abroad?"></textarea>
@@ -371,8 +396,8 @@ select{min-width:180px}
   </div>
 
   <footer class="footer">
-    <span>Pocket Businessman MVP Preview</span>
-    <span>Culture • Law • Market • Etiquette • AI Advisor</span>
+    <span id="footerBrand">Pocket Biz MVP Preview</span>
+    <span id="footerText">Culture • Law • Market • Etiquette • AI Advisor</span>
   </footer>
 </div>
 
@@ -523,6 +548,105 @@ const countries = [
   }
 ];
 
+
+const UI = {
+  en:{
+    navDemo:"Demo",navCompare:"Compare",navAdvisor:"Advisor",navPricing:"Pricing",
+    kicker:"International business preparation, made practical",
+    heroTitle:"Understand a market before you enter it.",
+    heroLead:"Pocket Biz helps entrepreneurs, professionals, and business travelers understand culture, etiquette, regulations, risks, real experiences, local contacts, costs, timelines, and official resources before entering a foreign market.",
+    openPreview:"Open Preview",businessModel:"Business Model",
+    starter:"starter countries",sections:"business sections",advisorConcept:"AI advisor",
+    productTitle:"The product idea",productText:"A compact guide that explains culture, etiquette, legal basics, market conditions, and common mistakes before someone works, studies, negotiates, or starts a business in another country.",
+    cultureCardTitle:"Culture intelligence",cultureCardText:"Communication style, hierarchy, negotiation habits, decision-making, time expectations, and trust building.",
+    guideCardTitle:"Practical business guide",guideCardText:"Company setup basics, visas, work permits, employment rules, tax overview, risks, and industries.",
+    advisorCardTitle:"Pocket Advisor",advisorCardText:"An AI assistant that answers scenario-based questions, like what to avoid before a Japanese supplier meeting.",
+    search:"Search countries or topics...",allRegions:"All regions",compareText:"Compare two markets before entering them. Because apparently guessing based on vibes is not a strategy.",
+    advisorIntro:"Your AI business advisor for international markets. Choose a country, describe your situation, and get practical, scenario-specific guidance.",
+    askAbout:"Ask about",country:"Country",advisorChatIntro:"Scenario-based advice for business travelers, students, and market entry.",
+    advisorWelcome:"Tell me what you're trying to do, and I'll help you prepare.",ready:"Ready",thinking:"Thinking",askAdvisor:"Ask Advisor",
+    pricing:"Business model preview",free:"Free",pro:"Pro",business:"Business",
+    validation:"Validation plan",validationAudience:"Who to test it with",feedback:"Feedback form preview",
+    footerBrand:"Pocket Biz MVP Preview",footer:"Culture • Law • Market • Etiquette • AI Advisor",
+    difficulty:"Difficulty",cultureDifficulty:"Culture Difficulty",opportunity:"Opportunity",region:"Region",bestFor:"Best for",marketPrep:"Market preparation",
+    businessGuide:"Business guide",culture:"Culture",etiquette:"Etiquette",law:"Law basics",market:"Market",do:"Do",dont:"Don't"
+  },
+  ja:{
+    navDemo:"デモ",navCompare:"比較",navAdvisor:"アドバイザー",navPricing:"料金",
+    kicker:"国際ビジネスの準備を、実用的に",
+    heroTitle:"市場に入る前に、その市場を理解する。",
+    heroLead:"Pocket Bizは、起業家、専門家、ビジネス旅行者が海外市場に入る前に、文化、マナー、規制、リスク、現地の実体験、連絡先、費用、タイムライン、公式情報を理解するためのプラットフォームです。",
+    openPreview:"プレビューを見る",businessModel:"ビジネスモデル",
+    starter:"対応国",sections:"ビジネスセクション",advisorConcept:"AIアドバイザー",
+    productTitle:"プロダクトの考え方",productText:"海外で働く、学ぶ、交渉する、起業する前に、文化、マナー、法律の基本、市場環境、よくある失敗を確認できるコンパクトなガイドです。",
+    cultureCardTitle:"文化インテリジェンス",cultureCardText:"コミュニケーション、階層、交渉、意思決定、時間感覚、信頼構築を理解します。",
+    guideCardTitle:"実用的なビジネスガイド",guideCardText:"会社設立、ビザ、就労許可、雇用、税務、リスク、主要産業の基本を確認します。",
+    advisorCardTitle:"Pocket Advisor",advisorCardText:"日本の取引先との会議で何を避けるべきかなど、状況に応じた質問にAIが回答します。",
+    search:"国やトピックを検索...",allRegions:"すべての地域",compareText:"参入前に2つの市場を比較しましょう。雰囲気だけで判断するのは、どうやら戦略ではありません。",
+    advisorIntro:"海外市場のためのAIビジネスアドバイザーです。国を選び、状況を説明すると、実践的なアドバイスを提供します。",
+    askAbout:"質問例",country:"国",advisorChatIntro:"出張、留学、市場参入のための状況別アドバイスです。",
+    advisorWelcome:"何をしようとしているのか教えてください。準備を手伝います。",ready:"準備完了",thinking:"考え中",askAdvisor:"アドバイザーに聞く",
+    pricing:"ビジネスモデル",free:"無料",pro:"Pro",business:"Business",
+    validation:"検証プラン",validationAudience:"テストする相手",feedback:"フィードバックフォーム",
+    footerBrand:"Pocket Biz MVP Preview",footer:"文化 • 法律 • 市場 • エチケット • AIアドバイザー",
+    difficulty:"難易度",cultureDifficulty:"文化難易度",opportunity:"機会",region:"地域",bestFor:"用途",marketPrep:"市場参入準備",
+    businessGuide:"ビジネスガイド",culture:"文化",etiquette:"マナー",law:"法律の基本",market:"市場",do:"すること",dont:"避けること"
+  },
+  el:{
+    navDemo:"Demo",navCompare:"Σύγκριση",navAdvisor:"Advisor",navPricing:"Τιμές",
+    kicker:"Πρακτική προετοιμασία για διεθνές business",
+    heroTitle:"Κατανόησε μια αγορά πριν μπεις σε αυτή.",
+    heroLead:"Το Pocket Biz βοηθά επιχειρηματίες, επαγγελματίες και business travelers να κατανοούν κουλτούρα, εθιμοτυπία, κανονισμούς, ρίσκα, πραγματικές εμπειρίες, τοπικές επαφές, κόστη, timelines και επίσημες πηγές πριν μπουν σε μια ξένη αγορά.",
+    openPreview:"Άνοιγμα Preview",businessModel:"Business Model",
+    starter:"αρχικές χώρες",sections:"business sections",advisorConcept:"AI advisor",
+    productTitle:"Η ιδέα του προϊόντος",productText:"Ένας compact οδηγός που εξηγεί κουλτούρα, εθιμοτυπία, βασικά νομικά θέματα, συνθήκες αγοράς και συχνά λάθη πριν κάποιος εργαστεί, σπουδάσει, διαπραγματευτεί ή ξεκινήσει business σε άλλη χώρα.",
+    cultureCardTitle:"Culture intelligence",cultureCardText:"Τρόπος επικοινωνίας, ιεραρχία, διαπραγμάτευση, λήψη αποφάσεων, χρόνος και χτίσιμο εμπιστοσύνης.",
+    guideCardTitle:"Πρακτικός business οδηγός",guideCardText:"Βασικά για setup εταιρείας, visa, work permits, employment, φορολογία, ρίσκα και κλάδους.",
+    advisorCardTitle:"Pocket Advisor",advisorCardText:"Ένα AI εργαλείο που απαντά σε ερωτήσεις με βάση το συγκεκριμένο σενάριο, όπως τι να αποφύγεις σε meeting με Ιάπωνα supplier.",
+    search:"Αναζήτηση χωρών ή θεμάτων...",allRegions:"Όλες οι περιοχές",compareText:"Σύγκρινε δύο αγορές πριν μπεις σε αυτές. Το να αποφασίζεις από vibes δεν είναι στρατηγική.",
+    advisorIntro:"Ο AI business advisor για διεθνείς αγορές. Διάλεξε χώρα, περιέγραψε την κατάσταση και πάρε πρακτική, συγκεκριμένη καθοδήγηση.",
+    askAbout:"Ρώτησε για",country:"Χώρα",advisorChatIntro:"Συμβουλές βάσει σεναρίου για business travelers, φοιτητές και market entry.",
+    advisorWelcome:"Πες μου τι προσπαθείς να κάνεις και θα σε βοηθήσω να προετοιμαστείς.",ready:"Έτοιμο",thinking:"Σκέφτομαι",askAdvisor:"Ρώτα τον Advisor",
+    pricing:"Business model",free:"Free",pro:"Pro",business:"Business",
+    validation:"Validation plan",validationAudience:"Με ποιους να το δοκιμάσουμε",feedback:"Preview feedback form",
+    footerBrand:"Pocket Biz MVP Preview",footer:"Κουλτούρα • Νόμοι • Αγορά • Εθιμοτυπία • AI Advisor",
+    difficulty:"Δυσκολία",cultureDifficulty:"Δυσκολία κουλτούρας",opportunity:"Ευκαιρία",region:"Περιοχή",bestFor:"Χρήσιμο για",marketPrep:"Προετοιμασία αγοράς",
+    businessGuide:"Οδηγός αγοράς",culture:"Κουλτούρα",etiquette:"Εθιμοτυπία",law:"Νομικά βασικά",market:"Αγορά",do:"Κάνε",dont:"Απόφυγε"
+  }
+};
+let lang="en";
+const REGION_LABELS={
+  en:{Europe:"Europe",Asia:"Asia","Middle East":"Middle East","North America":"North America"},
+  ja:{Europe:"ヨーロッパ",Asia:"アジア","Middle East":"中東","North America":"北米"},
+  el:{Europe:"Ευρώπη",Asia:"Ασία","Middle East":"Μέση Ανατολή","North America":"Βόρεια Αμερική"}
+};
+const COUNTRY_LOCALIZED={
+  Japan:{ja:{name:"日本",region:"アジア",tags:["フォーマル","間接的","合意重視"],summary:"信頼、忍耐、敬意、準備が重要な、構造的で関係性を重視する市場です。",culture:"コミュニケーションは間接的なことが多く、最終決定には合意形成が重要です。",etiquette:"名刺、礼儀正しい挨拶、時間厳守、丁寧に聞く姿勢が重要です。",laws:"会社設立やビザには慎重な準備が必要です。",market:"テクノロジー、製造、ロボット、ゲーム、デザイン、食品、観光、高付加価値消費財。",dos:["名刺を持参する。","時間を守る。","決定を急がず信頼を築く。"],donts:["人前で相手に恥をかかせない。","合意形成を急がない。","沈黙を同意と決めつけない。"],},
+          el:{name:"Ιαπωνία",region:"Ασία",tags:["Τυπική","Έμμεση","Συναίνεση"],summary:"Μια δομημένη αγορά όπου η εμπιστοσύνη, η υπομονή, ο σεβασμός και η προετοιμασία παίζουν σημαντικό ρόλο.",culture:"Η επικοινωνία είναι συχνά έμμεση. Η ομαδική συναίνεση μπορεί να είναι σημαντική πριν από τις τελικές αποφάσεις.",etiquette:"Οι επαγγελματικές κάρτες, οι ευγενικές συστάσεις, η συνέπεια στην ώρα και η προσεκτική ακρόαση είναι σημαντικά.",laws:"Η ίδρυση εταιρείας και οι βίζες απαιτούν προσεκτική προετοιμασία.",market:"Τεχνολογία, μεταποίηση, ρομποτική, gaming, design, τρόφιμα, τουρισμός και premium καταναλωτικά προϊόντα.",dos:["Να έχεις επαγγελματικές κάρτες.","Να είσαι στην ώρα σου.","Χτίσε εμπιστοσύνη πριν πιέσεις για αποφάσεις."],donts:["Μην φέρνεις κάποιον σε δύσκολη θέση δημόσια.","Μην βιάζεις τη συναίνεση.","Μην θεωρείς ότι η σιωπή σημαίνει συμφωνία."]}},
+  Greece:{ja:{name:"ギリシャ",region:"ヨーロッパ",tags:["関係重視","柔軟","信頼重視"],summary:"個人的な信頼、会話、人脈が大きな意味を持つ関係重視の市場です。",culture:"コミュニケーションは表現豊かで個人的です。",etiquette:"商談前の会話が重要です。紹介やカジュアルな面談が役立つことがあります。",laws:"手続きに時間がかかる場合があります。会社設立と税務には注意が必要です。",market:"観光、食品、海運、エネルギー、不動産、ホスピタリティ、地域サービス。",dos:["信頼を築く。","詳細を書面で確認する。","手続きには忍耐を持つ。"],donts:["口約束だけに頼らない。","関係性を軽視しない。","すべてがすぐ進むと期待しない。"]},el:{name:"Ελλάδα",region:"Ευρώπη",tags:["Σχέσεις","Ευελιξία","Εμπιστοσύνη"],summary:"Μια αγορά όπου οι σχέσεις, η προσωπική εμπιστοσύνη, η συζήτηση και τα δίκτυα παίζουν μεγάλο ρόλο.",culture:"Η επικοινωνία μπορεί να είναι εκφραστική και προσωπική.",etiquette:"Περίμενε συζήτηση πριν το καθαρό business. Οι καφέδες και οι συστάσεις συχνά βοηθούν.",laws:"Η γραφειοκρατία μπορεί να είναι αργή. Η ίδρυση εταιρείας και οι φορολογικές υποχρεώσεις χρειάζονται προσοχή.",market:"Τουρισμός, τρόφιμα, ναυτιλία, ενέργεια, ακίνητα, φιλοξενία και τοπικές υπηρεσίες.",dos:["Χτίσε προσωπική εμπιστοσύνη.","Επιβεβαίωσε λεπτομέρειες γραπτώς.","Να έχεις υπομονή με τη γραφειοκρατία."],donts:["Μη βασίζεσαι μόνο σε προφορικές συμφωνίες.","Μην αγνοείς τις σχέσεις.","Μην περιμένεις όλα να γίνουν αμέσως."]}},
+  Sweden:{ja:{name:"スウェーデン",region:"ヨーロッパ",tags:["フラット","直接的","合意重視"],summary:"階層が低く、計画性と信頼性が重視される透明性の高い市場です。",culture:"コミュニケーションは直接的ですが落ち着いています。平等、計画、合意が重視されます。",etiquette:"時間を守り、会議は簡潔に。強引な営業は避けるべきです。",laws:"雇用保護、税制、事業登録が整備されています。",market:"サステナビリティ、テック、ゲーム、工学、デザイン、医療、デジタルサービス。",dos:["時間を守る。","事実ベースで説明する。","仕事と私生活の境界を尊重する。"],donts:["強引に売り込まない。","計画を軽視しない。","肩書きで偉そうにしない。"]},el:{name:"Σουηδία",region:"Ευρώπη",tags:["Χαμηλή ιεραρχία","Άμεση","Συναίνεση"],summary:"Μια διαφανής και δομημένη αγορά με χαμηλή ιεραρχία, ισχυρό προγραμματισμό και υψηλές απαιτήσεις αξιοπιστίας.",culture:"Η επικοινωνία είναι άμεση αλλά ήρεμη. Οι ομάδες δίνουν αξία στην ισότητα, τον προγραμματισμό και τη συναίνεση.",etiquette:"Να είσαι στην ώρα σου. Κράτα τα meetings συγκεντρωμένα. Απόφυγε το επιθετικό selling.",laws:"Η προστασία εργασίας, οι φορολογικοί κανόνες και οι εγγραφές είναι δομημένα.",market:"Βιωσιμότητα, τεχνολογία, gaming, engineering, design, υγεία και ψηφιακές υπηρεσίες.",dos:["Να είσαι συνεπής στην ώρα.","Χρησιμοποίησε τεκμηριωμένη επικοινωνία.","Σεβάσου τα όρια εργασίας και προσωπικής ζωής."],donts:["Μην κάνεις επιθετικό overselling.","Μην αγνοείς τον προγραμματισμό.","Μην φέρεσαι ανώτερα λόγω τίτλου."]}},
+  Germany:{ja:{name:"ドイツ",region:"ヨーロッパ",tags:["構造的","直接的","ルール重視"],summary:"ドイツは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。",culture:"参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。",etiquette:"現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。",laws:"法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。",market:"市場調査、現地パートナー、消費者行動、流通チャネルが重要です。",dos:["現地ルールを調査する。","信頼できる連絡先を見つける。","拡大前に需要を検証する。"],donts:["自国のルールが通用すると考えない。","文化的期待を無視しない。","現地支援なしで参入しない。"]},el:{name:"Γερμανία",region:"Ευρώπη",tags:["Δομημένη","Άμεση","Κανόνες"],summary:"Η αγορά Γερμανία έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες.",culture:"Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings.",etiquette:"Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις.",laws:"Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς.",market:"Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα.",dos:["Έλεγξε τοπικούς κανόνες.","Βρες αξιόπιστες επαφές.","Κάνε validation ζήτησης πριν επεκταθείς."],donts:["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.","Μην αγνοείς πολιτισμικές προσδοκίες.","Μην μπαίνεις χωρίς τοπική υποστήριξη."]}},
+  "United Arab Emirates":{ja:{name:"UAE",region:"中東",tags:["フォーマル","人脈重視","成長市場"],summary:"UAEは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。",culture:"参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。",etiquette:"現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。",laws:"法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。",market:"市場調査、現地パートナー、消費者行動、流通チャネルが重要です。",dos:["現地ルールを調査する。","信頼できる連絡先を見つける。","拡大前に需要を検証する。"],donts:["自国のルールが通用すると考えない。","文化的期待を無視しない。","現地支援なしで参入しない。"]},el:{name:"ΗΑΕ",region:"Μέση Ανατολή",tags:["Τυπική","Δίκτυα","Ταχεία ανάπτυξη"],summary:"Η αγορά ΗΑΕ έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες.",culture:"Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings.",etiquette:"Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις.",laws:"Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς.",market:"Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα.",dos:["Έλεγξε τοπικούς κανόνες.","Βρες αξιόπιστες επαφές.","Κάνε validation ζήτησης πριν επεκταθείς."],donts:["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.","Μην αγνοείς πολιτισμικές προσδοκίες.","Μην μπαίνεις χωρίς τοπική υποστήριξη."]}},
+  "United States":{ja:{name:"アメリカ",region:"北米",tags:["直接的","スピード重視","ピッチ重視"],summary:"アメリカは独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。",culture:"参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。",etiquette:"現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。",laws:"法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。",market:"市場調査、現地パートナー、消費者行動、流通チャネルが重要です。",dos:["現地ルールを調査する。","信頼できる連絡先を見つける。","拡大前に需要を検証する。"],donts:["自国のルールが通用すると考えない。","文化的期待を無視しない。","現地支援なしで参入しない。"]},el:{name:"Ηνωμένες Πολιτείες",region:"Βόρεια Αμερική",tags:["Άμεση","Γρήγορη","Pitch"],summary:"Η αγορά Ηνωμένες Πολιτείες έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες.",culture:"Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings.",etiquette:"Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις.",laws:"Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς.",market:"Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα.",dos:["Έλεγξε τοπικούς κανόνες.","Βρες αξιόπιστες επαφές.","Κάνε validation ζήτησης πριν επεκταθείς."],donts:["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.","Μην αγνοείς πολιτισμικές προσδοκίες.","Μην μπαίνεις χωρίς τοπική υποστήριξη."]}},
+  China:{ja:{name:"中国",region:"アジア",tags:["関係重視","階層的","規模重視"],summary:"中国は独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。",culture:"参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。",etiquette:"現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。",laws:"法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。",market:"市場調査、現地パートナー、消費者行動、流通チャネルが重要です。",dos:["現地ルールを調査する。","信頼できる連絡先を見つける。","拡大前に需要を検証する。"],donts:["自国のルールが通用すると考えない。","文化的期待を無視しない。","現地支援なしで参入しない。"]},el:{name:"Κίνα",region:"Ασία",tags:["Σχέσεις","Ιεραρχία","Κλίμακα"],summary:"Η αγορά Κίνα έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες.",culture:"Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings.",etiquette:"Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις.",laws:"Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς.",market:"Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα.",dos:["Έλεγξε τοπικούς κανόνες.","Βρες αξιόπιστες επαφές.","Κάνε validation ζήτησης πριν επεκταθείς."],donts:["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.","Μην αγνοείς πολιτισμικές προσδοκίες.","Μην μπαίνεις χωρίς τοπική υποστήριξη."]}},
+  "South Korea":{ja:{name:"韓国",region:"アジア",tags:["スピード重視","階層的","テック志向"],summary:"韓国は独自の文化、規制、機会、現地ビジネス慣習を持つ重要な市場です。",culture:"参入前に、コミュニケーションスタイル、階層、信頼構築、会議の期待を理解する必要があります。",etiquette:"現地の会議マナー、紹介、時間感覚、交渉行動に備えましょう。",laws:"法務セットアップ、税務、許認可、雇用ルールは現地専門家に確認するべきです。",market:"市場調査、現地パートナー、消費者行動、流通チャネルが重要です。",dos:["現地ルールを調査する。","信頼できる連絡先を見つける。","拡大前に需要を検証する。"],donts:["自国のルールが通用すると考えない。","文化的期待を無視しない。","現地支援なしで参入しない。"]},el:{name:"Νότια Κορέα",region:"Ασία",tags:["Γρήγορη","Ιεραρχική","Τεχνολογία"],summary:"Η αγορά Νότια Κορέα έχει δική της κουλτούρα, κανονισμούς, ευκαιρίες και τοπικές επιχειρηματικές προσδοκίες.",culture:"Πριν την είσοδο, χρειάζεται κατανόηση επικοινωνίας, ιεραρχίας, εμπιστοσύνης και προσδοκιών στα meetings.",etiquette:"Προετοιμάσου για τοπικά meeting norms, συστάσεις, συνέπεια στην ώρα και διαπραγματεύσεις.",laws:"Νομικό setup, φορολογία, άδειες και εργατικοί κανόνες πρέπει να ελεγχθούν με τοπικούς ειδικούς.",market:"Έρευνα αγοράς, τοπικοί συνεργάτες, συμπεριφορά πελατών και κανάλια διανομής είναι κρίσιμα.",dos:["Έλεγξε τοπικούς κανόνες.","Βρες αξιόπιστες επαφές.","Κάνε validation ζήτησης πριν επεκταθείς."],donts:["Μην θεωρείς ότι ισχύουν οι κανόνες της δικής σου αγοράς.","Μην αγνοείς πολιτισμικές προσδοκίες.","Μην μπαίνεις χωρίς τοπική υποστήριξη."]}},
+  "United Kingdom":{ja:{name:"イギリス",region:"ヨーロッパ",tags:["フォーマル","慎重","プロフェッショナル"]},el:{name:"Ηνωμένο Βασίλειο",region:"Ευρώπη",tags:["Τυπική","Συγκρατημένη","Επαγγελματική"]}},
+  France:{ja:{name:"フランス",region:"ヨーロッパ",tags:["フォーマル","構造的","関係構築"]},el:{name:"Γαλλία",region:"Ευρώπη",tags:["Τυπική","Δομημένη","Σχέσεις"]}},
+  Italy:{ja:{name:"イタリア",region:"ヨーロッパ",tags:["関係重視","フォーマル","品質重視"]},el:{name:"Ιταλία",region:"Ευρώπη",tags:["Σχέσεις","Τυπική","Ποιότητα"]}},
+  Spain:{ja:{name:"スペイン",region:"ヨーロッパ",tags:["関係重視","対面","信頼構築"]},el:{name:"Ισπανία",region:"Ευρώπη",tags:["Σχέσεις","Face-to-face","Εμπιστοσύνη"]}},
+  Netherlands:{ja:{name:"オランダ",region:"ヨーロッパ",tags:["直接的","効率的","時間厳守"]},el:{name:"Ολλανδία",region:"Ευρώπη",tags:["Άμεση","Αποτελεσματική","Συνέπεια"]}},
+  Switzerland:{ja:{name:"スイス",region:"ヨーロッパ",tags:["フォーマル","正確","時間厳守"]},el:{name:"Ελβετία",region:"Ευρώπη",tags:["Τυπική","Ακριβής","Συνέπεια"]}},
+  Singapore:{ja:{name:"シンガポール",region:"アジア",tags:["直接的","多文化","プロフェッショナル"]},el:{name:"Σιγκαπούρη",region:"Ασία",tags:["Άμεση","Πολυπολιτισμική","Επαγγελματική"]}},
+  Canada:{ja:{name:"カナダ",region:"北米",tags:["プロフェッショナル","直接的","信頼重視"]},el:{name:"Καναδάς",region:"Βόρεια Αμερική",tags:["Επαγγελματική","Άμεση","Αξιοπιστία"]}}
+};
+function ui(k){return (UI[lang]||UI.en)[k]||(UI.en[k]||k)}
+function localizedCountry(c){
+  const x=COUNTRY_LOCALIZED[c.name]?.[lang];
+  if(!x) return c;
+  return {...c,...x, tags:x.tags||c.tags, name:x.name||c.name, region:x.region||c.region, summary:x.summary||c.summary, culture:x.culture||c.culture, etiquette:x.etiquette||c.etiquette, laws:x.laws||c.laws, market:x.market||c.market, dos:x.dos||c.dos, donts:x.donts||c.donts};
+}
+function countryKey(c){ return c.name; }
+function getCountries(){ return countries.map(localizedCountry); }
 let selected = countries[0];
 
 function animateNumber(el, target, duration=850){
@@ -543,15 +667,15 @@ function animateNumber(el, target, duration=850){
 function renderButtons(){
   const q = document.getElementById("searchInput").value.toLowerCase();
   const region = document.getElementById("regionFilter").value;
-  const filtered = countries.filter(c => 
-    (region === "all" || c.region === region) &&
+  const filtered = getCountries().filter(c =>
+    (region === "all" || countries.find(x=>x.name===selected.name)?.region === region || countries.find(x=>x.name===c.name)?.region === region) &&
     (c.name.toLowerCase().includes(q) || c.tags.join(" ").toLowerCase().includes(q) || c.summary.toLowerCase().includes(q))
   );
   document.getElementById("countryButtons").innerHTML = filtered.map((c,i) => `
-    <button class="country-button motion-item ${c.name===selected.name?'active':''}" style="animation-delay:${Math.min(i,8)*.045}s" onclick="selectCountry('${c.name}')">
+    <button class="country-button motion-item ${c.name===localizedCountry(selected).name?'active':''}" style="animation-delay:${Math.min(i,8)*.045}s" onclick="selectCountry('${countryKey(c)}')">
       <div class="bigflag">${c.flag}</div>
       <strong>${c.name}</strong>
-      <span>${c.region} • Difficulty ${c.difficulty}/10</span>
+      <span>${c.region} • ${ui("difficulty")||"Difficulty"} ${c.difficulty}/10</span>
     </button>
   `).join("");
 }
@@ -560,6 +684,8 @@ function selectCountry(name){
   selected = countries.find(c => c.name === name) || countries[0];
   renderButtons();
   renderProfile();
+  const ac=document.getElementById("advisorCountry");
+  if(ac) ac.value=selected.name;
 }
 
 function ringMarkup(value){
@@ -576,92 +702,205 @@ function ringMarkup(value){
 }
 
 function renderProfile(){
-  const c = selected;
+  const c = localizedCountry(selected);
   document.getElementById("countryProfile").innerHTML = `
     <div class="profile-main">
       <h2>${c.flag} ${c.name}</h2>
       <p class="sub motion-item" style="animation-delay:.05s">${c.summary}</p>
       <div class="tags motion-item" style="animation-delay:.10s">${c.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
       <div class="info-grid">
-        <div class="infobox metric-card motion-item" style="animation-delay:.15s">
-          ${ringMarkup(c.difficulty)}
-          <div class="metric-copy"><small>Culture Difficulty</small><strong>${c.difficulty}/10</strong></div>
-        </div>
-        <div class="infobox metric-card motion-item" style="animation-delay:.21s">
-          ${ringMarkup(c.opportunity)}
-          <div class="metric-copy"><small>Opportunity Score</small><strong>${c.opportunity}/10</strong></div>
-        </div>
-        <div class="infobox motion-item" style="animation-delay:.27s"><small>Region</small><strong>${c.region}</strong></div>
-        <div class="infobox motion-item" style="animation-delay:.33s"><small>Best for</small><strong>Market preparation</strong></div>
+        <div class="infobox metric-card motion-item" style="animation-delay:.15s">${ringMarkup(c.difficulty)}<div class="metric-copy"><small>${ui("cultureDifficulty")||"Culture Difficulty"}</small><strong>${c.difficulty}/10</strong></div></div>
+        <div class="infobox metric-card motion-item" style="animation-delay:.21s">${ringMarkup(c.opportunity)}<div class="metric-copy"><small>${ui("opportunity")||"Opportunity"}</small><strong>${c.opportunity}/10</strong></div></div>
+        <div class="infobox motion-item" style="animation-delay:.27s"><small>${ui("region")||"Region"}</small><strong>${c.region}</strong></div>
+        <div class="infobox motion-item" style="animation-delay:.33s"><small>${ui("bestFor")||"Best for"}</small><strong>${ui("marketPrep")||"Market preparation"}</strong></div>
       </div>
       <div class="dodont">
-        <div class="do motion-item" style="animation-delay:.39s"><b>Do</b><br>${c.dos.map(x=>"• "+x).join("<br>")}</div>
-        <div class="dont motion-item" style="animation-delay:.45s"><b>Don't</b><br>${c.donts.map(x=>"• "+x).join("<br>")}</div>
+        <div class="do motion-item" style="animation-delay:.39s"><b>${ui("do")||"Do"}</b><br>${c.dos.map(x=>"• "+x).join("<br>")}</div>
+        <div class="dont motion-item" style="animation-delay:.45s"><b>${ui("dont")||"Don't"}</b><br>${c.donts.map(x=>"• "+x).join("<br>")}</div>
       </div>
     </div>
     <div class="profile-side">
-      <h3 class="motion-item" style="animation-delay:.12s">Business guide</h3>
+      <h3 class="motion-item" style="animation-delay:.12s">${ui("businessGuide")||"Business guide"}</h3>
       <div class="list">
-        <div class="listitem motion-item" style="animation-delay:.18s"><b>Culture:</b> ${c.culture}</div>
-        <div class="listitem motion-item" style="animation-delay:.24s"><b>Etiquette:</b> ${c.etiquette}</div>
-        <div class="listitem motion-item" style="animation-delay:.30s"><b>Law basics:</b> ${c.laws}</div>
-        <div class="listitem motion-item" style="animation-delay:.36s"><b>Market:</b> ${c.market}</div>
+        <div class="listitem motion-item" style="animation-delay:.18s"><b>${ui("culture")||"Culture"}:</b> ${c.culture}</div>
+        <div class="listitem motion-item" style="animation-delay:.24s"><b>${ui("etiquette")||"Etiquette"}:</b> ${c.etiquette}</div>
+        <div class="listitem motion-item" style="animation-delay:.30s"><b>${ui("law")||"Law basics"}:</b> ${c.laws}</div>
+        <div class="listitem motion-item" style="animation-delay:.36s"><b>${ui("market")||"Market"}:</b> ${c.market}</div>
       </div>
     </div>
   `;
-  requestAnimationFrame(() => {
-    document.querySelectorAll("#countryProfile .animated-number").forEach(el=>{
-      animateNumber(el, Number(el.dataset.target));
-    });
-  });
+  requestAnimationFrame(() => document.querySelectorAll("#countryProfile .animated-number").forEach(el=>animateNumber(el, Number(el.dataset.target))));
 }
 
 function fillCompareSelects(){
-  const opts = countries.map(c => `<option>${c.name}</option>`).join("");
+  const opts = getCountries().map(c => `<option value="${countryKey(c)}">${c.flag} ${c.name}</option>`).join("");
   document.getElementById("compareA").innerHTML = opts;
   document.getElementById("compareB").innerHTML = opts;
   document.getElementById("compareB").value = "Japan";
   document.getElementById("compareA").value = "Sweden";
 }
-
 function renderCompare(){
-  const a = countries.find(c => c.name === document.getElementById("compareA").value);
-  const b = countries.find(c => c.name === document.getElementById("compareB").value);
+  const a = localizedCountry(countries.find(c => c.name === document.getElementById("compareA").value) || countries[0]);
+  const b = localizedCountry(countries.find(c => c.name === document.getElementById("compareB").value) || countries[1]);
   document.getElementById("compareOutput").innerHTML = [a,b].map(c => `
     <div class="panel">
-      <h3>${c.flag} ${c.name}</h3>
-      <p>${c.summary}</p>
-      <div class="list">
-        <div class="listitem"><b>Communication:</b> ${c.culture}</div>
-        <div class="listitem"><b>Market:</b> ${c.market}</div>
-      </div>
-      <p><b>Culture difficulty</b></p>
+      <h3>${c.flag} ${c.name}</h3><p>${c.summary}</p>
+      <div class="list"><div class="listitem"><b>${ui("culture")||"Culture"}:</b> ${c.culture}</div><div class="listitem"><b>${ui("market")||"Market"}:</b> ${c.market}</div></div>
+      <p><b>${ui("cultureDifficulty")||"Culture Difficulty"}</b></p>
       <div class="scorebar"><span class="compare-bar" data-target="${c.difficulty*10}" style="--target-width:${c.difficulty*10}%"></span></div>
-      <p><b>Opportunity</b></p>
+      <p><b>${ui("opportunity")||"Opportunity"}</b></p>
       <div class="scorebar"><span class="compare-bar" data-target="${c.opportunity*10}" style="--target-width:${c.opportunity*10}%"></span></div>
     </div>
   `).join("");
-  requestAnimationFrame(() => {
-    document.querySelectorAll("#compareOutput .compare-bar").forEach(bar => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        bar.style.width = bar.dataset.target + "%";
-      } else {
-        bar.style.width = "0%";
-        requestAnimationFrame(() => { bar.style.width = bar.dataset.target + "%"; });
-      }
+  requestAnimationFrame(() => document.querySelectorAll("#compareOutput .compare-bar").forEach(bar=>{
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) bar.style.width=bar.dataset.target+"%";
+    else {bar.style.width="0%"; requestAnimationFrame(()=>bar.style.width=bar.dataset.target+"%");}
+  }));
+}
+
+const advisorState = { history: [] };
+
+function initAdvisor(){
+  const select=document.getElementById("advisorCountry");
+  if(!select) return;
+  select.innerHTML=getCountries().map(c=>`<option value="${countryKey(c)}">${c.flag} ${c.name}</option>`).join("");
+  select.value=selected.name;
+  document.querySelectorAll(".advisor-example").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const examples={
+        jp:{en:"What should I avoid in a Japanese supplier meeting?",ja:"日本のサプライヤーとの会議で何を避けるべきですか？",el:"Τι πρέπει να αποφύγω σε meeting με Ιάπωνα supplier;"},
+        se:{en:"How direct should I be with Swedish partners?",ja:"スウェーデンのパートナーにはどの程度直接的に話すべきですか？",el:"Πόσο άμεσος πρέπει να είμαι με Σουηδούς συνεργάτες;"},
+        de:{en:"What should I prepare before entering Germany?",ja:"ドイツ市場に入る前に何を準備すべきですか？",el:"Τι πρέπει να προετοιμάσω πριν μπω στη Γερμανία;"},
+        ae:{en:"How should I approach a first meeting in the UAE?",ja:"UAEでの初回ミーティングにはどう臨むべきですか？",el:"Πώς πρέπει να προσεγγίσω ένα πρώτο meeting στα ΗΑΕ;"}
+      };
+      document.getElementById("advisorInput").value=examples[btn.dataset.example]?.[lang]||btn.textContent.trim();
+      document.getElementById("advisorInput").focus();
     });
   });
+  select.addEventListener("change",()=>{selected=countries.find(x=>x.name===select.value)||countries[0];renderButtons();renderProfile();});
 }
+function renderAdvisorLanguage(){
+  document.getElementById("advisorCountry").innerHTML=getCountries().map(c=>`<option value="${countryKey(c)}">${c.flag} ${c.name}</option>`).join("");
+  document.getElementById("advisorCountry").value=selected.name;
+  document.getElementById("advisorWelcome").textContent=ui("advisorWelcome");
+  document.getElementById("advisorChatIntro").textContent=ui("advisorChatIntro");
+  document.getElementById("advisorStatus").textContent=ui("ready");
+  document.getElementById("advisorSend").textContent=ui("askAdvisor");
+  document.getElementById("advisorCountryLabel").textContent=ui("country");
+  document.getElementById("askAboutTitle").textContent=ui("askAbout");
+  document.getElementById("advisorIntro").textContent=ui("advisorIntro");
+}
+
+function addAdvisorBubble(text, answer=false){
+  const wrap=document.getElementById("advisorMessages");
+  const div=document.createElement("div");
+  div.className="bubble"+(answer?" answer":"");
+  div.textContent=text;
+  wrap.appendChild(div);
+  wrap.scrollTop=wrap.scrollHeight;
+}
+
+function addAdvisorLoading(){
+  const wrap=document.getElementById("advisorMessages");
+  const div=document.createElement("div");
+  div.className="bubble answer";
+  div.id="advisorLoading";
+  div.innerHTML='<span class="advisor-loading"><i></i><i></i><i></i> Thinking</span>';
+  wrap.appendChild(div);
+  wrap.scrollTop=wrap.scrollHeight;
+}
+
+async function askAdvisor(event){
+  event.preventDefault();
+  const input=document.getElementById("advisorInput");
+  const button=document.getElementById("advisorSend");
+  const status=document.getElementById("advisorStatus");
+  const country=document.getElementById("advisorCountry").value;
+  const question=input.value.trim();
+  if(!question) return;
+
+  addAdvisorBubble(question,false);
+  input.value="";
+  button.disabled=true;
+  status.innerHTML='<span class="advisor-loading"><i></i><i></i><i></i> Thinking</span>';
+  addAdvisorLoading();
+
+  const c=localizedCountry(countries.find(x=>x.name===country)||countries[0]);
+  try{
+    const response=await fetch("/api/advisor",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        country,
+        question,
+        context:{
+          region:c?.region||"",
+          summary:c?.summary||"",
+          culture:c?.culture||"",
+          etiquette:c?.etiquette||"",
+          laws:c?.laws||"",
+          market:c?.market||"",
+          dos:c?.dos||[],
+          donts:c?.donts||[]
+        },
+        history:advisorState.history.slice(-6)
+      })
+    });
+    const data=await response.json();
+    document.getElementById("advisorLoading")?.remove();
+    if(!response.ok) throw new Error(data.error||"Advisor request failed.");
+    addAdvisorBubble(data.answer,true);
+    advisorState.history.push({role:"user",content:question},{role:"assistant",content:data.answer});
+    status.textContent="Ready";
+  }catch(error){
+    document.getElementById("advisorLoading")?.remove();
+    addAdvisorBubble("I couldn't reach the advisor right now. Check that the Pocket Biz API is deployed and its AI key is configured.",true);
+    status.textContent="Connection error";
+    console.error(error);
+  }finally{
+    button.disabled=false;
+  }
+}
+
+
+function renderLanguage(){
+  const ids={
+    navDemo:"navDemo",navCompare:"navCompare",navAdvisor:"navAdvisor",navPricing:"navPricing",
+    kickerText:"kicker",heroTitle:"heroTitle",heroLead:"heroLead",openPreview:"openPreview",
+    businessModelBtn:"businessModel",starterLabel:"starter",sectionsLabel:"sections",advisorConceptLabel:"advisorConcept",
+    productTitle:"productTitle",productText:"productText",cultureCardTitle:"cultureCardTitle",cultureCardText:"cultureCardText",
+    guideCardTitle:"guideCardTitle",guideCardText:"guideCardText",advisorCardTitle:"advisorCardTitle",advisorCardText:"advisorCardText",
+    compareText:"compareText",pricing:"pricing",freeTitle:"free",proTitle:"pro",businessTitle:"business",
+    validationTitle:"validation",validationAudienceTitle:"validationAudience",feedbackTitle:"feedback",
+    footerBrand:"footerBrand",footerText:"footer"
+  };
+  Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.textContent=ui(key);});
+  const input=document.getElementById("searchInput"); if(input) input.placeholder=ui("search");
+  const region=document.getElementById("regionFilter");
+  if(region) region.innerHTML=["all","Europe","Asia","Middle East","North America"].map(r=>`<option value="${r}">${r==="all"?ui("allRegions"):REGION_LABELS[lang][r]}</option>`).join("");
+  renderAdvisorLanguage();
+}
+function changeLanguage(next){
+  lang=next;
+  renderLanguage();
+  renderButtons();
+  renderProfile();
+  fillCompareSelects();
+  renderCompare();
+}
+document.getElementById("languageSelect").addEventListener("change",e=>changeLanguage(e.target.value));
 
 document.getElementById("searchInput").addEventListener("input", renderButtons);
 document.getElementById("regionFilter").addEventListener("change", renderButtons);
 document.getElementById("compareA").addEventListener("change", renderCompare);
 document.getElementById("compareB").addEventListener("change", renderCompare);
 
+renderLanguage();
 renderButtons();
 renderProfile();
 fillCompareSelects();
 renderCompare();
+initAdvisor();
 </script>
 </body>
 </html>
