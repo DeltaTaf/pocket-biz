@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pocket Biz | Market Entry Intelligence | v18</title>
+<title>Pocket Biz | Market Entry Intelligence | v19</title>
 <style>
 :root{--bg:#f7f3ec;--card:#fffdf8;--text:#171615;--muted:#70685f;--line:#e8ddcf;--dark:#11110f;--accent:#b9823b;--soft:#efe2cf;--shadow:0 24px 70px rgba(32,25,18,.12);--radius:28px}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#fff7e9 0,transparent 32%),radial-gradient(circle at 100% 10%,#ead9c0 0,transparent 28%),var(--bg);color:var(--text)}.container{max-width:1180px;margin:auto;padding:26px 20px 80px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:44px;height:44px;border-radius:16px;background:var(--dark);color:#fff;display:grid;place-items:center}.nav-links{display:flex;gap:16px;align-items:center;color:var(--muted);font-size:14px}.nav-links a{text-decoration:none;color:inherit}select,input{border:1px solid var(--line);border-radius:16px;background:#faf7f1;padding:13px 14px;font:inherit;color:var(--text)}.lang-toggle{border-radius:999px;padding:8px 34px 8px 12px;font-weight:800}
@@ -55,6 +55,19 @@
 .advisor-status{font-size:12px;color:#bdb8b0;margin-top:8px}
 .advisor-country{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#d6d0c8;font-size:13px}
 @media(max-width:980px){.advisor-grid{grid-template-columns:1fr}.advisor-form{grid-template-columns:1fr}}
+
+
+/* Pocket Biz v19 */
+.pb-local-note{font-size:12px;color:var(--muted);line-height:1.5}
+.pb-cost-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.pb-cost-grid label{display:grid;gap:6px;font-size:12px;font-weight:800;color:var(--muted)}
+.pb-cost-grid input{width:100%}
+.pb-cost-total{font-size:38px;font-weight:950;letter-spacing:-.05em;margin:4px 0}
+.pb-cost-total span{font-size:14px;font-weight:700;letter-spacing:0;color:var(--muted)}
+.pb-cost-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.pb-source-note{padding:12px 14px;background:#f8f3eb;border:1px solid var(--line);border-radius:14px;margin-top:12px}
+.pb-advisor-disclaimer{font-size:11px;color:#8f8a82;margin-top:10px;line-height:1.45}
+@media(max-width:700px){.pb-cost-grid{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -212,51 +225,88 @@ function renderSections(){
     </div>
   `;
 
-  // Cost calculator. Inputs are deliberately estimates, not fake "official" fees.
-  function calculateCost(){
-    const model=document.getElementById("costModel")?.value||"lean";
-    const team=document.getElementById("costTeam")?.value||"solo";
-    const modelBase={lean:1800,local:6500,full:14500}[model];
-    const teamMultiplier={solo:1,small:1.45,growth:2.25}[team];
-    const difficultyMultiplier=0.85+difficulty*.05;
-    const countryAdjustment=1+(10-opportunity)*.025;
-    const estimate=Math.round(modelBase*teamMultiplier*difficultyMultiplier*countryAdjustment);
-    const high=Math.round(estimate*1.8);
-    const r=document.getElementById("costCalculatorResult");
-    if(!r)return;
-    r.innerHTML=`
-      <div class="tool-number">€${estimate.toLocaleString()}–€${high.toLocaleString()}</div>
-      <div class="tool-note">Illustrative first-stage planning range for ${name}.</div>
-      <div class="tool-row"><span>Entry approach</span><b>${model==="lean"?"Lean validation":model==="local"?"Local presence":"Full market entry"}</b></div>
-      <div class="tool-row"><span>Team assumption</span><b>${team==="solo"?"Solo":team==="small"?"2–5 people":"6–15 people"}</b></div>
-      <div class="tool-row"><span>Main drivers</span><b>Setup · professional services · localization · research</b></div>
-    `;
-  }
-  document.getElementById("costModel")?.addEventListener("change",calculateCost);
-  document.getElementById("costTeam")?.addEventListener("change",calculateCost);
-  calculateCost();
+  // v19 Cost Planner: no invented country-level prices.
+  // Users enter verified fees/quotes or their own planning assumptions.
+  const costKey="pbCostPlanner_"+c.code;
+  let savedCosts={};
+  try{savedCosts=JSON.parse(localStorage.getItem(costKey)||"{}")}catch(e){}
+  const moneyFields=[
+    ["registration","Company registration / formation"],
+    ["legal","Legal / compliance"],
+    ["accounting","Accounting / tax setup"],
+    ["licensing","Licensing / permits"],
+    ["workspace","Workspace / office"],
+    ["localization","Translation / localization"],
+    ["research","Market research"],
+    ["travel","Travel / meetings"],
+    ["other","Other verified costs"]
+  ];
 
-  // Keep the section headings synchronized with the selected country.
-  const riskTitleEl=document.getElementById("riskTitle");
-  const mistakesTitleEl=document.getElementById("mistakesTitle");
-  const costTitleEl=document.getElementById("costTitle");
-  const timelineTitleEl=document.getElementById("timelineTitle");
-  if(riskTitleEl) riskTitleEl.textContent=`${name} Risk Meter`;
-  if(mistakesTitleEl) mistakesTitleEl.textContent=`Top Mistakes in ${name}`;
-  if(costTitleEl) costTitleEl.textContent=`Cost of Market Entry · ${name}`;
-  if(timelineTitleEl) timelineTitleEl.textContent=`Market Entry Roadmap · ${name}`;
-
-  const modelNow=document.getElementById("costModel")?.value||"lean";
-  const teamNow=document.getElementById("costTeam")?.value||"solo";
-  const baseNow={lean:1800,local:6500,full:14500}[modelNow];
-  const multNow={solo:1,small:1.45,growth:2.25}[teamNow];
-  const entryNow=Math.round(baseNow*multNow*(0.85+difficulty*.05)*(1+(10-opportunity)*.025));
-  const entryHigh=Math.round(entryNow*1.8);
+  const savedMode=savedCosts.mode||"lean";
   costGrid.innerHTML=`
-    <div class="card"><div class="tool-kicker">Planning estimate</div><div class="tool-number">€${entryNow.toLocaleString()}–€${entryHigh.toLocaleString()}</div><p class="tool-note">Illustrative planning range. Actual costs depend on sector, legal structure, licensing and operating model.</p></div>
-    <div class="card"><div class="tool-row"><span>Setup & administration</span><b>Included</b></div><div class="tool-row"><span>Professional services</span><b>Included</b></div><div class="tool-row"><span>Localization & research</span><b>Included</b></div><div class="tool-row"><span>Contingency</span><b>Built into range</b></div></div>
-    <div class="card"><div class="tool-kicker">Best use</div><h3>${modelNow==="lean"?"Validate before spending":modelNow==="local"?"Prepare a local presence":"Plan a full launch"}</h3><p class="tool-note">Use this as a planning checkpoint, then replace estimates with official fees and supplier quotes.</p></div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="tool-kicker">Transparent planner · ${name}</div>
+      <h3>Build your own market-entry budget</h3>
+      <p class="tool-note">Pocket Biz does not invent a country-wide "cost of entry". Enter official fees, supplier quotes, or your own planning assumptions and the calculator will add them transparently.</p>
+      <div class="tool-controls">
+        <label>Planning stage
+          <select id="costMode">
+            <option value="lean" ${savedMode==="lean"?"selected":""}>Lean validation</option>
+            <option value="local" ${savedMode==="local"?"selected":""}>Local presence</option>
+            <option value="full" ${savedMode==="full"?"selected":""}>Full launch planning</option>
+          </select>
+        </label>
+      </div>
+      <div class="pb-cost-grid">
+        ${moneyFields.map(([key,label])=>`
+          <label>${label}
+            <input class="pb-cost-input" data-cost="${key}" type="number" min="0" step="50" inputmode="decimal" placeholder="0" value="${Number(savedCosts[key]||0)||""}">
+          </label>
+        `).join("")}
+      </div>
+      <div class="pb-source-note">
+        <b>How to use this</b><br>
+        Put official government fees in the relevant field, supplier/accountant/legal quotes in service fields, and your own assumptions in operating fields. Keep a source or quote for each number.
+      </div>
+      <div class="tool-result" id="costPlannerResult"></div>
+      <div class="pb-cost-actions">
+        <button class="btn gold" id="saveCostPlan" type="button">Save budget</button>
+        <button class="btn" id="resetCostPlan" type="button">Clear</button>
+      </div>
+    </div>
   `;
+
+  function updateCostPlanner(){
+    let total=0;
+    document.querySelectorAll(".pb-cost-input").forEach(input=>{total+=Number(input.value)||0});
+    const mode=document.getElementById("costMode")?.value||"lean";
+    const modeLabel=mode==="lean"?"Lean validation":mode==="local"?"Local presence":"Full launch planning";
+    const result=document.getElementById("costPlannerResult");
+    if(result){
+      result.innerHTML=`
+        <div class="pb-cost-total">€${Math.round(total).toLocaleString()} <span>current entered total</span></div>
+        <div class="tool-row"><span>Planning stage</span><b>${modeLabel}</b></div>
+        <div class="tool-row"><span>Country</span><b>${name}</b></div>
+        <div class="tool-row"><span>Source status</span><b>${total>0?"Based on your entered figures":"Waiting for your figures"}</b></div>
+        <div class="pb-local-note">This total is arithmetic only. It is not an official fee schedule and does not claim to represent the full cost of entering ${name}.</div>
+      `;
+    }
+  }
+  document.querySelectorAll(".pb-cost-input").forEach(input=>input.addEventListener("input",updateCostPlanner));
+  document.getElementById("costMode")?.addEventListener("change",updateCostPlanner);
+  document.getElementById("saveCostPlan")?.addEventListener("click",()=>{
+    const obj={mode:document.getElementById("costMode")?.value||"lean"};
+    document.querySelectorAll(".pb-cost-input").forEach(input=>obj[input.dataset.cost]=Number(input.value)||0);
+    try{localStorage.setItem(costKey,JSON.stringify(obj))}catch(e){}
+    const btn=document.getElementById("saveCostPlan");
+    if(btn){const old=btn.textContent;btn.textContent="Saved ✓";setTimeout(()=>btn.textContent=old,1100);}
+  });
+  document.getElementById("resetCostPlan")?.addEventListener("click",()=>{
+    document.querySelectorAll(".pb-cost-input").forEach(input=>input.value="");
+    try{localStorage.removeItem(costKey)}catch(e){}
+    updateCostPlanner();
+  });
+  updateCostPlanner();
 
   // A useful 30-day entry roadmap tied to the selected country.
   timelineGrid.innerHTML=[
@@ -328,6 +378,11 @@ function renderSections(){
 
 
 /* Pocket Biz v17 Advisor */
+
+/* Pocket Biz v19: deterministic Pocket Advisor.
+   No API calls, no quota, no key. Answers are editorially authored
+   for the countries in the Pocket Biz dataset. */
+
 const pbAdvisorState={history:[],busy:false};
 
 function pbFlag(code,large=false){
@@ -374,33 +429,99 @@ function pbAddAdvisorBubble(text,type){
     const chars=[...String(text)];
     let i=0;
     const tick=()=>{
-      i=Math.min(i+3,chars.length);
+      i=Math.min(i+2,chars.length);
       div.innerHTML=pbFormatAdvisor(chars.slice(0,i).join(""));
       wrap.scrollTop=wrap.scrollHeight;
-      if(i<chars.length) setTimeout(tick,7);
+      if(i<chars.length) setTimeout(tick,8);
       else resolve();
     };
     tick();
   });
 }
 
-function pbAdvisorContext(){
+function pbQuestionType(question){
+  const q=question.toLowerCase();
+  if(/avoid|mistake|wrong|don't|do not|shouldn't/.test(q)) return "avoid";
+  if(/meeting|supplier|partner|client|negotiat|introduc|business card|first meeting/.test(q)) return "meeting";
+  if(/enter|market entry|prepare|launch|start|setup|open|expand/.test(q)) return "entry";
+  if(/communicat|direct|silence|hierarchy|culture|etiquette|formal/.test(q)) return "communication";
+  if(/price|pricing|sell|sales|deal|contract/.test(q)) return "commercial";
+  return "general";
+}
+
+const PB_ADVISOR={
+  JP:{
+    general:`Japan rewards preparation, patience, and trust-building. Keep your communication respectful and avoid forcing an immediate answer. A strong approach is to prepare thoroughly, listen carefully, and give the other side room to consider the proposal.`,
+    meeting:`For a first meeting in Japan, arrive early, bring business cards, introduce yourself politely, and avoid pushing for an immediate decision. Listen closely and leave room for the other side to discuss the proposal internally before expecting a final answer.`,
+    avoid:`Avoid rushing decisions, being overly direct too early, publicly correcting or embarrassing someone, and treating silence as agreement. Business cards should be handled respectfully and meetings should feel prepared rather than improvised.`,
+    entry:`Before entering Japan, validate demand carefully, identify a credible local contact or partner, localize your materials, and understand the relevant company, tax, licensing, and immigration requirements. Build relationships before assuming a first meeting will produce a deal.`,
+    communication:`Use a respectful and measured communication style. Directness should be balanced with context and tact. Silence can mean that more consideration is needed, so confirm understanding rather than assuming agreement.`,
+    commercial:`Lead with credibility and preparation rather than pressure. Explain the value clearly, support claims with evidence, and give the counterpart time to evaluate the proposal. Do not confuse politeness with commitment.`,
+  },
+  SE:{
+    general:`In Sweden, be clear, calm, prepared, and reliable. Meetings tend to work best when people can discuss the facts openly without aggressive selling or unnecessary hierarchy.`,
+    meeting:`For a first Swedish business meeting, arrive on time, keep the agenda focused, and be ready to discuss the substance. A collaborative tone usually works better than a hard-sell approach.`,
+    avoid:`Avoid aggressive overselling, exaggerated claims, lateness, and using your job title to dominate the conversation. Do not mistake a calm discussion for lack of interest.`,
+    entry:`Before entering Sweden, validate the market, understand the relevant regulations, prepare a clear cost model, and identify local customers or partners. Reliability and transparent communication should be part of the entry strategy.`,
+    communication:`You can be direct in Sweden, but keep it factual and calm. People may expect an open discussion rather than a dramatic sales pitch. Equality and consensus can matter in decision-making.`,
+    commercial:`Use evidence, transparent pricing, and a straightforward value proposition. Give people room to evaluate the proposal and avoid artificial urgency unless there is a genuine deadline.`,
+  },
+  GR:{
+    general:`Greece is relationship-oriented, so trust and personal interaction can matter alongside the formal business case. Be professional, but allow some conversation and relationship-building before pushing the transaction.`,
+    meeting:`In a Greek business meeting, start professionally but do not treat the interaction as purely transactional. Build rapport, understand who actually influences the decision, and follow important agreements up in writing.`,
+    avoid:`Avoid ignoring relationships, relying entirely on verbal promises, or assuming every administrative step will move immediately. Keep your documentation and follow-up organized.`,
+    entry:`Before entering Greece, validate the market, understand the relevant tax and company requirements, identify reliable local professional support, and build a network of credible contacts. Do not confuse flexibility with the absence of formal obligations.`,
+    communication:`Communication can be expressive and personal. Be clear about the business objective while leaving room for conversation. If something is important, confirm it in writing after the discussion.`,
+    commercial:`Combine a strong relationship with a clear commercial proposal. Discuss value, price, responsibilities, and deadlines explicitly, then document the agreed points so informal conversation does not create ambiguity.`,
+  },
+  DE:{
+    general:`Germany generally rewards preparation, precision, reliability, and clear responsibilities. A credible proposal should explain the facts, assumptions, process, and obligations rather than relying on enthusiasm alone.`,
+    meeting:`For a first meeting in Germany, arrive on time, bring a well-prepared agenda and supporting information, and answer questions precisely. Avoid improvising facts you cannot support.`,
+    avoid:`Avoid lateness, vague commitments, exaggerated claims, and treating a preliminary conversation as a final agreement. Contracts, responsibilities, and documentation matter.`,
+    entry:`Before entering Germany, define your target segment, competitors, pricing, legal structure, tax obligations, and operational responsibilities. Check current requirements with German or EU official sources and qualified professionals.`,
+    communication:`Direct and detailed communication is usually appropriate, especially when the facts are clear. Be respectful but do not hide important information behind vague language.`,
+    commercial:`Lead with evidence, specifications, pricing logic, implementation details, and clear contractual responsibilities. Reliability after the sale is as important as the initial pitch.`,
+  },
+  AE:{
+    general:`In the UAE, preparation and relationships both matter. Be professional, respectful, and clear about who you are, what you offer, and why the relationship could be valuable.`,
+    meeting:`For a first meeting in the UAE, use a professional introduction, respect titles and seniority, and avoid rushing the relationship. Understand who has authority to make the decision and follow up professionally.`,
+    avoid:`Avoid disrespectful behavior around religion or local customs, aggressive pressure, and assuming the first contact is automatically the final decision-maker. Confirm responsibilities and next steps clearly.`,
+    entry:`Before entering the UAE, define the exact emirate and business activity, then verify current licensing, ownership, tax, immigration, and sector requirements with official sources or qualified local professionals. Build credible local relationships as part of the market-entry plan.`,
+    communication:`Keep communication professional and respectful. Adapt formality to the people involved and pay attention to seniority and relationship-building. Do not assume informality is appropriate simply because the conversation feels friendly.`,
+    commercial:`Combine a strong relationship with a clear commercial case. Explain the value, responsibilities, timeline, and commercial terms carefully, and confirm the next step with the appropriate decision-maker.`,
+  },
+  US:{
+    general:`The U.S. market often rewards clarity, speed, evidence, and a strong value proposition. Be ready to explain what problem you solve, for whom, and why the customer should act.`,
+    meeting:`For a first U.S. business meeting, be concise, prepared, and clear about the purpose. Bring evidence, know your numbers, and make the requested next step easy to understand.`,
+    avoid:`Avoid long unfocused presentations, unsupported claims, vague pricing, and waiting indefinitely for someone else to define the next step. Confirm what happens next and who owns it.`,
+    entry:`Before entering the U.S., choose the specific state and customer segment, research competitors, understand applicable federal and state requirements, and test demand before committing to a large fixed-cost operation.`,
+    communication:`Direct, concise communication is generally useful. State the point early, support it with evidence, and make the requested action clear.`,
+    commercial:`Lead with customer value and measurable outcomes. Know your pricing, margins, sales process, and competitive position. A clear call to action is usually more effective than excessive formality.`,
+  },
+  CN:{
+    general:`China requires careful preparation around relationships, hierarchy, local market conditions, and regulatory requirements. Treat the market as its own operating environment rather than assuming your home-market model transfers unchanged.`,
+    meeting:`For an initial Chinese business meeting, prepare carefully, understand who is in the room, show respect for senior participants, and avoid forcing a decision before the relationship and internal process are ready.`,
+    avoid:`Avoid assuming your home-market rules apply, ignoring hierarchy or relationship-building, rushing a decision, or treating a polite response as a firm commitment. Verify important terms in writing.`,
+    entry:`Before entering China, validate the specific sector and city, assess regulatory and operational requirements, protect your commercial information appropriately, and identify credible local professional support and partners.`,
+    communication:`Use a respectful, patient style and pay attention to hierarchy and relationship context. Do not assume that an indirect response is equivalent to a firm commitment.`,
+    commercial:`Build credibility and local understanding before pushing the commercial close. Define responsibilities, pricing, IP or data considerations, and next steps carefully and have important terms documented.`,
+  },
+  KR:{
+    general:`South Korea can reward preparation, respect, responsiveness, and awareness of hierarchy. Enter with a clear proposal but pay attention to the relationship and the people involved in the decision.`,
+    meeting:`For a first Korean business meeting, be punctual, prepared, respectful toward senior participants, and responsive. Understand who is involved in the decision before pushing for a commitment.`,
+    avoid:`Avoid casual disrespect toward senior participants, excessive pressure for an immediate decision, and assuming a friendly conversation equals a final commitment. Confirm important points clearly.`,
+    entry:`Before entering South Korea, research the specific customer segment, competitors, regulations, distribution channels, and local partners. Prepare localized materials and establish a credible local network.`,
+    communication:`Be clear but attentive to hierarchy and relationship context. Professional respect matters, especially when senior people are present. Confirm important decisions rather than relying on assumptions.`,
+    commercial:`Use a well-prepared commercial case, respond quickly to legitimate questions, and make responsibilities clear. Relationship-building and reliable execution should support the sales process.`,
+  }
+};
+
+function pbGetAdvisorAnswer(question){
   const c=selected;
-  return {
-    code:c.code,
-    name:L(c.name),
-    region:L(c.region),
-    difficulty:c.difficulty,
-    opportunity:c.opportunity,
-    contacts:c.contacts,
-    summary:L(c.summary),
-    culture:L(c.culture),
-    etiquette:L(c.etiquette),
-    laws:L(c.laws),
-    market:L(c.market),
-    dos:L(c.dos),
-    donts:L(c.donts)
-  };
+  const code=c.code;
+  const type=pbQuestionType(question);
+  const bank=PB_ADVISOR[code]||PB_ADVISOR.GR;
+  return bank[type]||bank.general;
 }
 
 async function pbAskAdvisor(question){
@@ -414,48 +535,30 @@ async function pbAskAdvisor(question){
   pbAdvisorState.busy=true;
   button.disabled=true;
   input.disabled=true;
-  status.textContent="Thinking…";
+  status.textContent="Preparing guidance…";
 
   await pbAddAdvisorBubble(question,"user");
 
-  try{
-    const response=await fetch("/api/advisor",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        country:selected.code,
-        question,
-        context:pbAdvisorContext(),
-        history:pbAdvisorState.history.slice(-8)
-      })
-    });
+  const answer=pbGetAdvisorAnswer(question);
 
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok||!data.answer) throw new Error(data.error||"Advisor request failed");
+  pbAdvisorState.history.push(
+    {role:"user",content:question},
+    {role:"assistant",content:answer}
+  );
 
-    pbAdvisorState.history.push(
-      {role:"user",content:question},
-      {role:"assistant",content:data.answer}
-    );
+  input.value="";
+  status.textContent="Pocket Biz guidance";
+  await pbAddAdvisorBubble(answer,"answer");
 
-    status.textContent="Ready";
-    input.value="";
-    await pbAddAdvisorBubble(data.answer,"answer");
-  }catch(error){
-    console.error("Pocket Advisor:",error);
-    status.textContent="Connection error";
-    await pbAddAdvisorBubble(
-      error.message && error.message !== "Advisor request failed"
-        ? "Pocket Advisor error: " + error.message
-        : "I couldn't reach Pocket Advisor. Check that /api/advisor is deployed and GEMINI_API_KEY is configured in Vercel.",
-      "answer"
-    );
-  }finally{
-    pbAdvisorState.busy=false;
-    button.disabled=false;
-    input.disabled=false;
-    input.focus();
-  }
+  const disclaimer=document.createElement("div");
+  disclaimer.className="pb-advisor-disclaimer";
+  disclaimer.textContent="Editorial Pocket Biz guidance. Legal, tax, immigration and regulatory requirements should be verified with current official sources or qualified professionals.";
+  document.getElementById("advisorMessages").appendChild(disclaimer);
+
+  pbAdvisorState.busy=false;
+  button.disabled=false;
+  input.disabled=false;
+  input.focus();
 }
 
 function pbUpdateAdvisorCountry(){
