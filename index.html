@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Biz | v8 MVP</title>
+<title>Pocket Biz | v9 MVP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
 :root{
@@ -230,7 +230,7 @@ select{min-width:180px}
 @media(prefers-reduced-motion:reduce){.advisor-loading i{animation:none}}
 .lang-toggle{min-width:110px;border-radius:999px;padding:8px 28px 8px 12px;font-weight:800}\n</style>
 </head>
-<body data-pocket-biz-version="v8">
+<body data-pocket-biz-version="v9">
 <div class="container">
   <nav class="nav">
     <div class="brand"><div class="mark">PB</div><span>Pocket Biz</span></div>
@@ -816,10 +816,42 @@ function addAdvisorBubble(text, answer=false){
   const wrap=document.getElementById("advisorMessages");
   const div=document.createElement("div");
   div.className="bubble"+(answer?" answer":"");
-  if(answer) div.innerHTML=advisorFormat(text);
-  else div.textContent=text;
   wrap.appendChild(div);
-  wrap.scrollTop=wrap.scrollHeight;
+
+  if(!answer){
+    div.textContent=text;
+    wrap.scrollTop=wrap.scrollHeight;
+    return Promise.resolve();
+  }
+
+  return typeAdvisorAnswer(div, text);
+}
+
+function typeAdvisorAnswer(el, text){
+  return new Promise(resolve=>{
+    const chars=[...text];
+    let i=0;
+    const speed=7;
+    const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if(reduceMotion){
+      el.innerHTML=advisorFormat(text);
+      resolve();
+      return;
+    }
+
+    const tick=()=>{
+      i=Math.min(i+3, chars.length);
+      el.innerHTML=advisorFormat(chars.slice(0,i).join(""));
+      const wrap=document.getElementById("advisorMessages");
+      wrap.scrollTop=wrap.scrollHeight;
+
+      if(i<chars.length) setTimeout(tick,speed);
+      else resolve();
+    };
+
+    tick();
+  });
 }
 
 function addAdvisorLoading(){
@@ -871,7 +903,7 @@ async function askAdvisor(event){
     const data=await response.json();
     document.getElementById("advisorLoading")?.remove();
     if(!response.ok) throw new Error(data.error||"Advisor request failed.");
-    addAdvisorBubble(data.answer,true);
+    await addAdvisorBubble(data.answer,true);
     advisorState.history.push({role:"user",content:question},{role:"assistant",content:data.answer});
     status.textContent="Ready";
   }catch(error){
