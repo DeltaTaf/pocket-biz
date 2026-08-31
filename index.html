@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pocket Biz | Market Entry Intelligence | v17</title>
+<title>Pocket Biz | Market Entry Intelligence | v18</title>
 <style>
 :root{--bg:#f7f3ec;--card:#fffdf8;--text:#171615;--muted:#70685f;--line:#e8ddcf;--dark:#11110f;--accent:#b9823b;--soft:#efe2cf;--shadow:0 24px 70px rgba(32,25,18,.12);--radius:28px}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#fff7e9 0,transparent 32%),radial-gradient(circle at 100% 10%,#ead9c0 0,transparent 28%),var(--bg);color:var(--text)}.container{max-width:1180px;margin:auto;padding:26px 20px 80px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:44px;height:44px;border-radius:16px;background:var(--dark);color:#fff;display:grid;place-items:center}.nav-links{display:flex;gap:16px;align-items:center;color:var(--muted);font-size:14px}.nav-links a{text-decoration:none;color:inherit}select,input{border:1px solid var(--line);border-radius:16px;background:#faf7f1;padding:13px 14px;font:inherit;color:var(--text)}.lang-toggle{border-radius:999px;padding:8px 34px 8px 12px;font-weight:800}
@@ -121,7 +121,7 @@ function renderStatic(){['navDemo','navContacts','navTools','navInterest','kicke
 function renderRegionFilter(){let regions=['all','Europe','Asia','Middle East','North America'];let names={en:{Europe:'Europe',Asia:'Asia','Middle East':'Middle East','North America':'North America'},ja:{Europe:'ヨーロッパ',Asia:'アジア','Middle East':'中東','North America':'北米'},el:{Europe:'Ευρώπη',Asia:'Ασία','Middle East':'Μέση Ανατολή','North America':'Βόρεια Αμερική'}};document.getElementById('regionFilter').innerHTML=regions.map(r=>`<option value="${r}">${r==='all'?U('allRegions'):names[lang][r]}</option>`).join('')}
 function renderPhone(){document.getElementById('phonePreview').innerHTML=`<div class="phone-search">${U('search')}</div>`+DATA.countries.slice(0,3).map(c=>`<div class="phone-card"><h3>${L(c.name)}</h3><span class="pill">${L(c.tags).join(' • ')}</span><div class="metrics"><div class="metric">Risk<b>${c.difficulty}/10</b></div><div class="metric">${U('contacts')}<b>${c.contacts}</b></div></div><div class="quick">${L(c.summary)}</div></div>`).join('')}
 function renderCountries(){let q=document.getElementById('searchInput').value.toLowerCase(), r=document.getElementById('regionFilter').value;let filtered=DATA.countries.filter(c=>(r==='all'||c.region.en===r)&&[L(c.name),L(c.region),L(c.summary)].join(' ').toLowerCase().includes(q));document.getElementById('countryButtons').innerHTML=filtered.map(c=>`<button class="country-button ${c.code===selected.code?'active':''}" onclick="selectCountry('${c.code}')"><div class="bigflag">${pbFlag(c.code)}</div><strong>${L(c.name)}</strong><span>${L(c.region)} • ${U('difficulty')} ${c.difficulty}/10</span></button>`).join('')}
-function selectCountry(code){selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];try{localStorage.setItem('pbSelectedCountry',selected.code)}catch(e){};renderCountries();renderProfile();renderSections();pbUpdateAdvisorCountry();}
+function selectCountry(code){selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];try{localStorage.setItem('pbSelectedCountry',selected.code)}catch(e){};renderCountries();renderProfile();renderSections();if(typeof pbUpdateAdvisorCountry==="function")pbUpdateAdvisorCountry();}
 function renderProfile(){let c=selected;document.getElementById('countryProfile').innerHTML=`<div class="profile-main"><h2 class="profile-country-title">${pbFlag(c.code,true)}<span>${L(c.name)}</span></h2><p class="sub">${L(c.summary)}</p><div class="tags">${L(c.tags).map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="info-grid"><div class="infobox"><small>${U('cultureDifficulty')}</small><strong>${c.difficulty}/10</strong></div><div class="infobox"><small>${U('opportunity')}</small><strong>${c.opportunity}/10</strong></div><div class="infobox"><small>${U('contacts')}</small><strong>${c.contacts}</strong></div><div class="infobox"><small>${U('bestFor')}</small><strong>${U('marketPrep')}</strong></div></div><div class="dodont"><div class="do"><b>${U('do')}</b><br>${L(c.dos).map(x=>'• '+x).join('<br>')}</div><div class="dont"><b>${U('dont')}</b><br>${L(c.donts).map(x=>'• '+x).join('<br>')}</div></div></div><div class="profile-side"><h3>${U('businessGuide')}</h3><div class="list"><div class="listitem"><b>${U('culture')}:</b> ${L(c.culture)}</div><div class="listitem"><b>${U('etiquette')}:</b> ${L(c.etiquette)}</div><div class="listitem"><b>${U('law')}:</b> ${L(c.laws)}</div><div class="listitem"><b>${U('market')}:</b> ${L(c.market)}</div></div></div>`}
 function extraText(){return {
 en:{tools:[['📊 Country Risk Meter','Culture difficulty, bureaucracy, language barrier, setup complexity, market opportunity, and contacts available.'],['❌ Top Mistakes','Common mistakes foreigners make in meetings, negotiations, paperwork, communication, and local expectations.'],['💰 Cost of Entry','Estimated categories: company setup, translation, legal review, accountant, local advisor, workspace, and market research.']],risk:['Culture Difficulty','Language Barrier','Bureaucracy','Setup Complexity','Market Opportunity','Contact Availability'],mistakes:[['🇯🇵 Japan','Rushing decisions, being too direct too early, treating business cards casually, assuming silence means agreement.'],['🇸🇪 Sweden','Overselling aggressively, ignoring planning, being late, or acting superior because of title.'],['🇬🇷 Greece','Ignoring relationships, relying only on verbal agreements, expecting bureaucracy to move instantly.']],cost:[['Basic preparation','Market research, translated documents, cultural preparation, and initial legal consultation.'],['Setup support','Company formation, tax registration, local accountant, workspace, permits, and visa/work support.'],['Growth support','Local partner search, distributor contacts, business development, advertising, and customer research.']],timeline:[['Week 1','Research','Study culture, risks, laws, costs, competitors, and customer behavior.'],['Week 2','Contacts','Find legal, tax, translation, and market-entry providers.'],['Week 3','Preparation','Prepare documents, meetings, pitch material, and market assumptions.'],['Week 4','Entry','Start meetings, validate demand, and adjust strategy with local feedback.']],check:['☐ Understand business culture and negotiation style','☐ Check company setup and tax basics','☐ Identify local legal/accounting support','☐ Review common cultural mistakes'],provider:'Companies that help foreign entrepreneurs enter a market can apply for a listing.',share:'Have you traveled, studied, worked, or done business in another country? Share a practical insight.',founder:'Pocket Biz started while studying International Business and noticing how many factors companies must consider before entering a new market.'},
@@ -236,12 +236,34 @@ function renderSections(){
   document.getElementById("costTeam")?.addEventListener("change",calculateCost);
   calculateCost();
 
+  // Keep the section headings synchronized with the selected country.
+  const riskTitleEl=document.getElementById("riskTitle");
+  const mistakesTitleEl=document.getElementById("mistakesTitle");
+  const costTitleEl=document.getElementById("costTitle");
+  const timelineTitleEl=document.getElementById("timelineTitle");
+  if(riskTitleEl) riskTitleEl.textContent=`${name} Risk Meter`;
+  if(mistakesTitleEl) mistakesTitleEl.textContent=`Top Mistakes in ${name}`;
+  if(costTitleEl) costTitleEl.textContent=`Cost of Market Entry · ${name}`;
+  if(timelineTitleEl) timelineTitleEl.textContent=`Market Entry Roadmap · ${name}`;
+
+  const modelNow=document.getElementById("costModel")?.value||"lean";
+  const teamNow=document.getElementById("costTeam")?.value||"solo";
+  const baseNow={lean:1800,local:6500,full:14500}[modelNow];
+  const multNow={solo:1,small:1.45,growth:2.25}[teamNow];
+  const entryNow=Math.round(baseNow*multNow*(0.85+difficulty*.05)*(1+(10-opportunity)*.025));
+  const entryHigh=Math.round(entryNow*1.8);
+  costGrid.innerHTML=`
+    <div class="card"><div class="tool-kicker">Planning estimate</div><div class="tool-number">€${entryNow.toLocaleString()}–€${entryHigh.toLocaleString()}</div><p class="tool-note">Illustrative planning range. Actual costs depend on sector, legal structure, licensing and operating model.</p></div>
+    <div class="card"><div class="tool-row"><span>Setup & administration</span><b>Included</b></div><div class="tool-row"><span>Professional services</span><b>Included</b></div><div class="tool-row"><span>Localization & research</span><b>Included</b></div><div class="tool-row"><span>Contingency</span><b>Built into range</b></div></div>
+    <div class="card"><div class="tool-kicker">Best use</div><h3>${modelNow==="lean"?"Validate before spending":modelNow==="local"?"Prepare a local presence":"Plan a full launch"}</h3><p class="tool-note">Use this as a planning checkpoint, then replace estimates with official fees and supplier quotes.</p></div>
+  `;
+
   // A useful 30-day entry roadmap tied to the selected country.
   timelineGrid.innerHTML=[
-    ["01","Validate","Define the target customer, problem, competitor set and why ${name} is worth entering."],
-    ["02","Prepare","Check structure, taxes, licensing, pricing, localization and the professional support you actually need."],
-    ["03","Test","Speak to potential customers/partners and run a low-cost validation before committing major capital."],
-    ["04","Enter","Start with a controlled launch, measure results, fix weak assumptions and scale only after evidence."]
+    ["01","Validate",`Define the target customer, problem, competitor set and why ${name} is worth entering.`],
+    ["02","Prepare",`Check structure, taxes, licensing, pricing, localization and the professional support you actually need in ${name}.`],
+    ["03","Test",`Speak to potential customers/partners and run a low-cost validation before committing major capital in ${name}.`],
+    ["04","Enter",`Start with a controlled launch in ${name}, measure results, fix weak assumptions and scale only after evidence.`]
   ].map(x=>`<div class="panel timeline-step"><span class="step-number">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join('');
 
   // Practical checklist with persistent completion state.
@@ -423,7 +445,9 @@ async function pbAskAdvisor(question){
     console.error("Pocket Advisor:",error);
     status.textContent="Connection error";
     await pbAddAdvisorBubble(
-      "I couldn't reach Pocket Advisor. Make sure /api/advisor is deployed and GEMINI_API_KEY is configured in Vercel.",
+      error.message && error.message !== "Advisor request failed"
+        ? "Pocket Advisor error: " + error.message
+        : "I couldn't reach Pocket Advisor. Check that /api/advisor is deployed and GEMINI_API_KEY is configured in Vercel.",
       "answer"
     );
   }finally{
@@ -459,21 +483,21 @@ async function researchCountryMistakes(){
       })
     });
     const data=await response.json().catch(()=>({}));
-    if(!response.ok||!Array.isArray(data.mistakes)) throw new Error(data.error||"Research failed");
+    if(!response.ok||!data.answer) throw new Error(data.error||"Research failed");
 
-    mistakesGrid.innerHTML=data.mistakes.map(m=>`
-      <div class="card">
+    const sourceHtml=(data.sources||[]).map(source=>`<a class="mistake-source" href="${pbEscape(source.url)}" target="_blank" rel="noopener">${pbEscape(source.title||"Web source")} ↗</a>`).join("");
+    mistakesGrid.innerHTML=`
+      <div class="card" style="grid-column:1/-1">
         <span class="verified-badge"><span class="check">✓</span> Web researched</span>
-        <h3>${pbEscape(m.title)}</h3>
-        <p>${pbEscape(m.explanation)}</p>
-        ${m.sourceUrl?`<a class="mistake-source" href="${pbEscape(m.sourceUrl)}" target="_blank" rel="noopener">${pbEscape(m.sourceTitle||"Source")} ↗</a>`:""}
+        <div class="advisor-bubble answer" style="margin:14px 0 0">${pbFormatAdvisor(data.answer)}</div>
+        ${sourceHtml?`<div style="margin-top:14px"><div class="tool-kicker">Sources</div>${sourceHtml}</div>`:""}
       </div>
-    `).join("");
+    `;
 
     if(status) status.textContent="Research updated for "+L(selected.name)+".";
   }catch(error){
     console.error("Top mistakes research:",error);
-    if(status) status.textContent="Research unavailable. Check /api/mistakes deployment.";
+    if(status) status.textContent=error.message||"Research unavailable.";
   }finally{
     button.disabled=false;
     button.textContent="Research "+L(selected.name);
