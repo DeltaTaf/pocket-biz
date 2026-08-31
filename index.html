@@ -41,6 +41,24 @@
 .bigflag{height:auto;font-size:0;line-height:0;margin-bottom:8px}
 .profile-country-title{display:flex;align-items:center;gap:0}
 
+
+.tool-live{position:relative;overflow:hidden}
+.tool-live .tool-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;margin-bottom:8px}
+.tool-live .tool-value{font-size:34px;font-weight:900;letter-spacing:-.05em}
+.tool-live .tool-note{color:var(--muted);font-size:14px;margin-top:8px}
+.tool-live .tool-action{margin-top:16px}
+.tool-live .tool-action button{cursor:pointer}
+.tool-risk-meter{height:12px;background:#eee6da;border-radius:99px;overflow:hidden;margin-top:12px}
+.tool-risk-meter span{display:block;height:100%;border-radius:99px;background:#b8792f;transition:width .7s cubic-bezier(.22,1,.36,1)}
+.verified-badge{display:inline-flex;align-items:center;gap:6px;background:#e8f5ea;color:#236b31;border:1px solid #b9dfbf;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:850}
+.verified-badge .check{width:16px;height:16px;border-radius:50%;background:#2f9b43;color:#fff;display:inline-grid;place-items:center;font-size:10px}
+.mistake-source{display:block;margin-top:12px;font-size:12px;color:var(--muted);text-decoration:none}
+.mistake-source:hover{text-decoration:underline}
+.mistake-loading{color:var(--muted);font-size:14px}
+.cost-total{font-size:30px;font-weight:900;letter-spacing:-.04em}
+.cost-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.cost-row:last-child{border-bottom:0}
+
 </style>
 </head>
 <body>
@@ -74,16 +92,7 @@
           </div>
         </div>
 
-        <div class="advisor-form" style="grid-template-columns:180px 1fr auto">
-          <select id="advisorSituation" class="advisor-input" aria-label="Advisor situation">
-            <option value="general">General</option>
-            <option value="meeting">Business meeting</option>
-            <option value="negotiation">Negotiation</option>
-            <option value="market-entry">Market entry</option>
-            <option value="partnership">Partnership</option>
-            <option value="travel">Business travel</option>
-            <option value="communication">Communication</option>
-          </select>
+        <div class="advisor-form">
           <input id="advisorInput" class="advisor-input" autocomplete="off"
                  placeholder="Example: I'm Greek and meeting a Japanese supplier tomorrow. What should I avoid?">
           <button id="advisorAsk" class="btn gold" type="button">Ask Advisor</button>
@@ -124,7 +133,124 @@ en:{tools:[['📊 Country Risk Meter','Culture difficulty, bureaucracy, language
 ja:{tools:[['📊 国別リスクメーター','文化的難易度、官僚制、言語の壁、設立の複雑さ、市場機会、利用可能な連絡先を確認できます。'],['❌ よくある失敗','外国人が会議、交渉、書類、コミュニケーション、現地の期待でしやすい失敗。'],['💰 参入コスト','会社設立、翻訳、法務確認、会計士、現地アドバイザー、ワークスペース、市場調査などの推定カテゴリ。']],risk:['文化難易度','言語の壁','官僚制','設立の複雑さ','市場機会','連絡先の利用可能性'],mistakes:[['🇯🇵 日本','決定を急ぐ、最初から直接的すぎる、名刺を雑に扱う、沈黙を同意とみなす。'],['🇸🇪 スウェーデン','強引に売り込む、計画を無視する、遅刻する、肩書きで上から目線になる。'],['🇬🇷 ギリシャ','関係性を無視する、口約束だけに頼る、手続きがすぐ進むと期待する。']],cost:[['基本準備','市場調査、翻訳済み書類、文化理解、初期法務相談。'],['設立支援','会社設立、税務登録、現地会計士、ワークスペース、許認可、ビザ・就労支援。'],['成長支援','現地パートナー探し、販売代理店、事業開発、広告、顧客調査。']],timeline:[['1週目','調査','文化、リスク、法律、コスト、競合、消費者行動を調査します。'],['2週目','連絡先','法務、税務、翻訳、市場参入支援のプロバイダーを探します。'],['3週目','準備','書類、会議、ピッチ資料、市場仮説を準備します。'],['4週目','参入','会議を始め、需要を検証し、現地フィードバックで戦略を調整します。']],check:['☐ ビジネス文化と交渉スタイルを理解する','☐ 会社設立と税務の基本を確認する','☐ 現地の法務・会計支援を見つける','☐ よくある文化的な失敗を確認する'],provider:'外国人起業家の市場参入を支援する企業は掲載申請ができます。',share:'海外で旅行、留学、仕事、ビジネスをした経験がありますか？実用的なインサイトを共有できます。',founder:'Pocket Bizは、国際ビジネスを勉強している中で生まれました。'},
 el:{tools:[['📊 Country Risk Meter','Δυσκολία κουλτούρας, γραφειοκρατία, γλωσσικό εμπόδιο, πολυπλοκότητα setup, ευκαιρία αγοράς και διαθέσιμες επαφές.'],['❌ Συχνά λάθη','Συχνά λάθη ξένων σε meetings, διαπραγματεύσεις, χαρτιά, επικοινωνία και τοπικές προσδοκίες.'],['💰 Κόστος εισόδου','Ενδεικτικές κατηγορίες: ίδρυση εταιρείας, μετάφραση, νομικός έλεγχος, λογιστής, τοπικός σύμβουλος, workspace και έρευνα αγοράς.']],risk:['Δυσκολία κουλτούρας','Γλωσσικό εμπόδιο','Γραφειοκρατία','Πολυπλοκότητα setup','Ευκαιρία αγοράς','Διαθεσιμότητα επαφών'],mistakes:[['🇯🇵 Ιαπωνία','Βιασύνη στις αποφάσεις, υπερβολικά άμεση επικοινωνία από την αρχή, πρόχειρη αντιμετώπιση επαγγελματικών καρτών, υπόθεση ότι η σιωπή σημαίνει συμφωνία.'],['🇸🇪 Σουηδία','Επιθετικό overselling, αγνόηση προγραμματισμού, καθυστέρηση ή υπεροπτική στάση λόγω τίτλου.'],['🇬🇷 Ελλάδα','Αγνόηση σχέσεων, εξάρτηση μόνο από προφορικές συμφωνίες, προσδοκία ότι η γραφειοκρατία θα κινηθεί άμεσα.']],cost:[['Βασική προετοιμασία','Έρευνα αγοράς, μεταφρασμένα έγγραφα, πολιτισμική προετοιμασία και αρχική νομική συμβουλή.'],['Υποστήριξη setup','Ίδρυση εταιρείας, φορολογική εγγραφή, τοπικός λογιστής, workspace, άδειες και visa/work support.'],['Υποστήριξη ανάπτυξης','Αναζήτηση τοπικών συνεργατών, distributor contacts, business development, διαφήμιση και έρευνα πελατών.']],timeline:[['Εβδομάδα 1','Έρευνα','Μελέτη κουλτούρας, ρίσκων, νόμων, κόστους, ανταγωνιστών και συμπεριφοράς πελατών.'],['Εβδομάδα 2','Επαφές','Εύρεση νομικών, φορολογικών, μεταφραστικών και market-entry providers.'],['Εβδομάδα 3','Προετοιμασία','Προετοιμασία εγγράφων, meetings, pitch material και market assumptions.'],['Εβδομάδα 4','Είσοδος','Έναρξη meetings, validation ζήτησης και προσαρμογή στρατηγικής με τοπικό feedback.']],check:['☐ Κατανόησε την επιχειρηματική κουλτούρα και το στυλ διαπραγμάτευσης','☐ Έλεγξε βασικά θέματα ίδρυσης εταιρείας και φορολογίας','☐ Βρες τοπική νομική/λογιστική υποστήριξη','☐ Δες συχνά πολιτισμικά λάθη'],provider:'Εταιρείες που βοηθούν ξένους επιχειρηματίες να μπουν σε μια αγορά μπορούν να κάνουν αίτηση καταχώρισης.',share:'Έχεις ταξιδέψει, σπουδάσει, εργαστεί ή κάνει business σε άλλη χώρα; Μοιράσου μια πρακτική εμπειρία.',founder:'Το Pocket Biz ξεκίνησε ενώ μελετούσα International Business.'}
 }[lang]}
-function renderSections(){let e=extraText();toolsGrid.innerHTML=e.tools.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');riskGrid.innerHTML=e.risk.map((x,i)=>`<div class="panel"><b>${x}</b><div class="scorebar"><span style="width:${[80,75,60,65,90,70][i]}%"></span></div></div>`).join('');mistakesGrid.innerHTML=e.mistakes.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');costGrid.innerHTML=e.cost.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('');timelineGrid.innerHTML=e.timeline.map(x=>`<div class="panel"><small>${x[0]}</small><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join('');checklistGrid.innerHTML=`<div class="panel"><h3>${U('checklistTitle')}</h3><div class="list">${e.check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div></div><div class="panel"><h3>${U('contactsTitle')}</h3><p>${e.provider}</p></div>`;contactsIntro.textContent=U('contactsFeatureText');contactGrid.innerHTML=DATA.countries.slice(0,3).map(c=>`<div class="card"><span class="badge">Verified Provider</span><h3>${L(c.name)} Partner Desk</h3><p>${L(c.summary)}</p></div>`).join('');providerIntro.textContent=e.provider;providerGrid.innerHTML=`<div class="panel"><h3>${U('contactsFeature')}</h3><p>${e.provider}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>`;shareIntro.textContent=e.share;shareGrid.innerHTML=`<div class="panel"><h3>${U('shareTitle')}</h3><p>${e.share}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>`;briefGrid.innerHTML=`<div class="panel"><h3>${U('briefTitle')}</h3><p>${e.tools[2][1]}</p></div><div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>`;founderPanel.innerHTML=`<p>${e.founder}</p>`;interestGrid.innerHTML=`<div class="panel"><p>${e.share}</p><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${U('interested')}</a></div><div class="panel"><h3>Business model</h3><p>Users / Providers / Premium</p></div>`}
+function renderSections(){
+  let e=extraText();
+
+  // LIVE MARKET-ENTRY TOOLS
+  const c=selected;
+  const difficulty=Number(c.difficulty||5);
+  const opportunity=Number(c.opportunity||5);
+  const contacts=Number(c.contacts||0);
+
+  // Preview risk model: transparent, derived from the existing country data.
+  const languageRisk = ["JP","AE","FR","IT","ES","DE"].includes(c.code) ? 55 : 35;
+  const bureaucracy = Math.min(95, Math.round(35 + difficulty*6));
+  const setupComplexity = Math.min(95, Math.round(30 + difficulty*6));
+  const overallRisk = Math.round(
+    difficulty*0.30 + languageRisk*0.15 + bureaucracy*0.20 +
+    setupComplexity*0.20 + (100-opportunity*10)*0.15
+  );
+
+  toolsGrid.innerHTML=`
+    <div class="card tool-live">
+      <div class="tool-kicker">Live tool · ${L(c.name)}</div>
+      <h3>📊 Country Risk Meter</h3>
+      <div class="tool-value">${overallRisk}/100</div>
+      <div class="tool-risk-meter"><span style="width:${overallRisk}%"></span></div>
+      <p class="tool-note">Combines the current Pocket Biz country difficulty, opportunity, language, bureaucracy and setup-complexity indicators.</p>
+      <div class="tool-action"><a class="btn" href="#riskTitle">Open full risk breakdown</a></div>
+    </div>
+
+    <div class="card tool-live">
+      <div class="tool-kicker">Live web research · ${L(c.name)}</div>
+      <h3>❌ Top Mistakes</h3>
+      <p class="tool-note">Research current, country-specific mistakes using web-grounded AI instead of a static list.</p>
+      <div class="tool-action"><button class="btn gold" id="researchMistakes" type="button">Research mistakes</button></div>
+      <div id="mistakeToolStatus" class="tool-note">Not researched yet.</div>
+    </div>
+
+    <div class="card tool-live">
+      <div class="tool-kicker">Planning estimate · ${L(c.name)}</div>
+      <h3>💰 Cost of Entry</h3>
+      <div id="toolCostSummary"></div>
+      <div class="tool-action"><a class="btn" href="#costTitle">See estimate</a></div>
+    </div>
+  `;
+
+  riskGrid.innerHTML=[
+    ["Culture & communication", Math.min(95, difficulty*10), "Higher means more adaptation is likely needed."],
+    ["Language barrier", languageRisk, "Preview indicator based on the current country profile."],
+    ["Bureaucracy", bureaucracy, "Preview indicator. Verify current requirements before acting."],
+    ["Setup complexity", setupComplexity, "Preview indicator, not a legal assessment."],
+    ["Market opportunity", opportunity*10, "Higher means stronger opportunity in the Pocket Biz preview model."],
+    ["Local contacts", Math.min(100, contacts*5), "Based on the number of contacts currently represented in the preview."]
+  ].map(x=>`<div class="panel"><b>${x[0]}</b><div class="scorebar"><span style="width:${x[1]}%"></span></div><small>${x[2]}</small></div>`).join('');
+
+  mistakesGrid.innerHTML=`
+    <div class="card">
+      <span class="verified-badge">● Web-grounded research</span>
+      <h3>Current country-specific mistakes</h3>
+      <p id="mistakesPreview">Select a country and run the research tool above to get current mistakes backed by web sources.</p>
+    </div>
+  `;
+
+  const base=350;
+  const setup=1200 + difficulty*250;
+  const legal=500 + difficulty*100;
+  const translation=["JP","DE","FR","IT","ES","CH"].includes(c.code)?450:250;
+  const research=300 + opportunity*50;
+  const low=base+setup+legal+translation+research;
+  const high=Math.round(low*2.2);
+
+  costGrid.innerHTML=`
+    <div class="card">
+      <div class="tool-kicker">Planning range</div>
+      <div class="cost-total">€${low.toLocaleString()}–€${high.toLocaleString()}</div>
+      <p class="tool-note">Illustrative MVP planning range for a small foreign entrant. It is not a government fee quote.</p>
+    </div>
+    <div class="card">
+      <div class="cost-row"><span>Initial admin & setup</span><b>€${setup.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Legal/accounting buffer</span><b>€${legal.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Translation/localization</span><b>€${translation.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Initial market research</span><b>€${research.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Contingency</span><b>€${base.toLocaleString()}</b></div>
+    </div>
+    <div class="card">
+      <h3>What changes the number?</h3>
+      <p>Company structure, licensing, industry regulation, local professional fees, hiring, premises, inventory, translation, and the chosen entry model can move the real cost substantially.</p>
+      <p><b>Use this as a planning screen, not a quotation.</b></p>
+    </div>
+  `;
+
+  checklistGrid.innerHTML=`<div class="panel"><h3>${U('checklistTitle')}</h3><div class="list">${e.check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div></div><div class="panel"><h3>${U('contactsTitle')}</h3><p>${e.provider}</p></div>`;
+
+  contactsIntro.textContent=U('contactsFeatureText');
+  contactGrid.innerHTML=DATA.countries.slice(0,3).map(c=>`
+    <div class="card">
+      <span class="verified-badge"><span class="check">✓</span> Verified Provider</span>
+      <h3>${L(c.name)} Partner Desk</h3>
+      <p>${L(c.summary)}</p>
+    </div>`).join('');
+
+  providerIntro.textContent=e.provider;
+  providerGrid.innerHTML=`<div class="panel"><h3>${U('contactsFeature')}</h3><p>${e.provider}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>`;
+
+  shareIntro.textContent=e.share;
+  shareGrid.innerHTML=`<div class="panel"><h3>${U('shareTitle')}</h3><p>${e.share}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>`;
+
+  briefGrid.innerHTML=`<div class="panel"><h3>${U('briefTitle')}</h3><p>${e.tools[2][1]}</p></div><div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>`;
+
+  founderPanel.innerHTML=`<p>${e.founder}</p>`;
+
+  // Cost summary in the live tool card.
+  const costSummary=document.getElementById('toolCostSummary');
+  if(costSummary){
+    costSummary.innerHTML=`<div class="cost-total">€${low.toLocaleString()}+</div><div class="tool-note">illustrative starting budget</div>`;
+  }
+
+  document.getElementById('researchMistakes')?.addEventListener('click', researchCountryMistakes);
+}
+
 function renderAll(){renderStatic();renderRegionFilter();renderPhone();renderCountries();renderProfile();renderSections()}
 languageSelect.onchange=e=>{lang=e.target.value;renderAll();advisorSetText()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
 
@@ -295,10 +421,7 @@ async function advisorAskQuestion(question){
       body: JSON.stringify({
         country: selected.code,
         question,
-        context: {
-          ...advisorContext(),
-          situation: document.getElementById("advisorSituation").value
-        },
+        context: advisorContext(),
         history: advisorState.history.slice(-6)
       })
     });
