@@ -126,7 +126,8 @@ function renderStatic(){['navDemo','navContacts','navTools','navInterest','kicke
 function renderRegionFilter(){let regions=['all','Europe','Asia','Middle East','North America'];let names={en:{Europe:'Europe',Asia:'Asia','Middle East':'Middle East','North America':'North America'},ja:{Europe:'ヨーロッパ',Asia:'アジア','Middle East':'中東','North America':'北米'},el:{Europe:'Ευρώπη',Asia:'Ασία','Middle East':'Μέση Ανατολή','North America':'Βόρεια Αμερική'}};document.getElementById('regionFilter').innerHTML=regions.map(r=>`<option value="${r}">${r==='all'?U('allRegions'):names[lang][r]}</option>`).join('')}
 function renderPhone(){document.getElementById('phonePreview').innerHTML=`<div class="phone-search">${U('search')}</div>`+DATA.countries.slice(0,3).map(c=>`<div class="phone-card"><h3>${countryFlag(c.code)}${L(c.name)}</h3><span class="pill">${L(c.tags).join(' • ')}</span><div class="metrics"><div class="metric">Risk<b>${c.difficulty}/10</b></div><div class="metric">${U('contacts')}<b>${c.contacts}</b></div></div><div class="quick">${L(c.summary)}</div></div>`).join('')}
 function renderCountries(){let q=document.getElementById('searchInput').value.toLowerCase(), r=document.getElementById('regionFilter').value;let filtered=DATA.countries.filter(c=>(r==='all'||c.region.en===r)&&[L(c.name),L(c.region),L(c.summary)].join(' ').toLowerCase().includes(q));document.getElementById('countryButtons').innerHTML=filtered.map(c=>`<button class="country-button ${c.code===selected.code?'active':''}" onclick="selectCountry('${c.code}')"><div class="bigflag">${countryFlag(c.code)}</div><strong>${L(c.name)}</strong><span>${L(c.region)} • ${U('difficulty')} ${c.difficulty}/10</span></button>`).join('')}
-function selectCountry(code){selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];renderCountries();renderProfile()}
+function selectCountry(code){
+  pbSaveSelectedCountry(selected);selected=DATA.countries.find(c=>c.code===code)||DATA.countries[0];renderCountries();renderProfile()}
 function renderProfile(){let c=selected;document.getElementById('countryProfile').innerHTML=`<div class="profile-main"><h2 class="profile-country-title">${countryFlag(c.code,true)}<span>${L(c.name)}</span></h2><p class="sub">${L(c.summary)}</p><div class="tags">${L(c.tags).map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="info-grid"><div class="infobox"><small>${U('cultureDifficulty')}</small><strong>${c.difficulty}/10</strong></div><div class="infobox"><small>${U('opportunity')}</small><strong>${c.opportunity}/10</strong></div><div class="infobox"><small>${U('contacts')}</small><strong>${c.contacts}</strong></div><div class="infobox"><small>${U('bestFor')}</small><strong>${U('marketPrep')}</strong></div></div><div class="dodont"><div class="do"><b>${U('do')}</b><br>${L(c.dos).map(x=>'• '+x).join('<br>')}</div><div class="dont"><b>${U('dont')}</b><br>${L(c.donts).map(x=>'• '+x).join('<br>')}</div></div></div><div class="profile-side"><h3>${U('businessGuide')}</h3><div class="list"><div class="listitem"><b>${U('culture')}:</b> ${L(c.culture)}</div><div class="listitem"><b>${U('etiquette')}:</b> ${L(c.etiquette)}</div><div class="listitem"><b>${U('law')}:</b> ${L(c.laws)}</div><div class="listitem"><b>${U('market')}:</b> ${L(c.market)}</div></div></div>`}
 function extraText(){return {
 en:{tools:[['📊 Country Risk Meter','Culture difficulty, bureaucracy, language barrier, setup complexity, market opportunity, and contacts available.'],['❌ Top Mistakes','Common mistakes foreigners make in meetings, negotiations, paperwork, communication, and local expectations.'],['💰 Cost of Entry','Estimated categories: company setup, translation, legal review, accountant, local advisor, workspace, and market research.']],risk:['Culture Difficulty','Language Barrier','Bureaucracy','Setup Complexity','Market Opportunity','Contact Availability'],mistakes:[['🇯🇵 Japan','Rushing decisions, being too direct too early, treating business cards casually, assuming silence means agreement.'],['🇸🇪 Sweden','Overselling aggressively, ignoring planning, being late, or acting superior because of title.'],['🇬🇷 Greece','Ignoring relationships, relying only on verbal agreements, expecting bureaucracy to move instantly.']],cost:[['Basic preparation','Market research, translated documents, cultural preparation, and initial legal consultation.'],['Setup support','Company formation, tax registration, local accountant, workspace, permits, and visa/work support.'],['Growth support','Local partner search, distributor contacts, business development, advertising, and customer research.']],timeline:[['Week 1','Research','Study culture, risks, laws, costs, competitors, and customer behavior.'],['Week 2','Contacts','Find legal, tax, translation, and market-entry providers.'],['Week 3','Preparation','Prepare documents, meetings, pitch material, and market assumptions.'],['Week 4','Entry','Start meetings, validate demand, and adjust strategy with local feedback.']],check:['☐ Understand business culture and negotiation style','☐ Check company setup and tax basics','☐ Identify local legal/accounting support','☐ Review common cultural mistakes'],provider:'Companies that help foreign entrepreneurs enter a market can apply for a listing.',share:'Have you traveled, studied, worked, or done business in another country? Share a practical insight.',founder:'Pocket Biz started while studying International Business and noticing how many factors companies must consider before entering a new market.'},
@@ -134,115 +135,143 @@ ja:{tools:[['📊 国別リスクメーター','文化的難易度、官僚制�
 el:{tools:[['📊 Country Risk Meter','Δυσκολία κουλτούρας, γραφειοκρατία, γλωσσικό εμπόδιο, πολυπλοκότητα setup, ευκαιρία αγοράς και διαθέσιμες επαφές.'],['❌ Συχνά λάθη','Συχνά λάθη ξένων σε meetings, διαπραγματεύσεις, χαρτιά, επικοινωνία και τοπικές προσδοκίες.'],['💰 Κόστος εισόδου','Ενδεικτικές κατηγορίες: ίδρυση εταιρείας, μετάφραση, νομικός έλεγχος, λογιστής, τοπικός σύμβουλος, workspace και έρευνα αγοράς.']],risk:['Δυσκολία κουλτούρας','Γλωσσικό εμπόδιο','Γραφειοκρατία','Πολυπλοκότητα setup','Ευκαιρία αγοράς','Διαθεσιμότητα επαφών'],mistakes:[['🇯🇵 Ιαπωνία','Βιασύνη στις αποφάσεις, υπερβολικά άμεση επικοινωνία από την αρχή, πρόχειρη αντιμετώπιση επαγγελματικών καρτών, υπόθεση ότι η σιωπή σημαίνει συμφωνία.'],['🇸🇪 Σουηδία','Επιθετικό overselling, αγνόηση προγραμματισμού, καθυστέρηση ή υπεροπτική στάση λόγω τίτλου.'],['🇬🇷 Ελλάδα','Αγνόηση σχέσεων, εξάρτηση μόνο από προφορικές συμφωνίες, προσδοκία ότι η γραφειοκρατία θα κινηθεί άμεσα.']],cost:[['Βασική προετοιμασία','Έρευνα αγοράς, μεταφρασμένα έγγραφα, πολιτισμική προετοιμασία και αρχική νομική συμβουλή.'],['Υποστήριξη setup','Ίδρυση εταιρείας, φορολογική εγγραφή, τοπικός λογιστής, workspace, άδειες και visa/work support.'],['Υποστήριξη ανάπτυξης','Αναζήτηση τοπικών συνεργατών, distributor contacts, business development, διαφήμιση και έρευνα πελατών.']],timeline:[['Εβδομάδα 1','Έρευνα','Μελέτη κουλτούρας, ρίσκων, νόμων, κόστους, ανταγωνιστών και συμπεριφοράς πελατών.'],['Εβδομάδα 2','Επαφές','Εύρεση νομικών, φορολογικών, μεταφραστικών και market-entry providers.'],['Εβδομάδα 3','Προετοιμασία','Προετοιμασία εγγράφων, meetings, pitch material και market assumptions.'],['Εβδομάδα 4','Είσοδος','Έναρξη meetings, validation ζήτησης και προσαρμογή στρατηγικής με τοπικό feedback.']],check:['☐ Κατανόησε την επιχειρηματική κουλτούρα και το στυλ διαπραγμάτευσης','☐ Έλεγξε βασικά θέματα ίδρυσης εταιρείας και φορολογίας','☐ Βρες τοπική νομική/λογιστική υποστήριξη','☐ Δες συχνά πολιτισμικά λάθη'],provider:'Εταιρείες που βοηθούν ξένους επιχειρηματίες να μπουν σε μια αγορά μπορούν να κάνουν αίτηση καταχώρισης.',share:'Έχεις ταξιδέψει, σπουδάσει, εργαστεί ή κάνει business σε άλλη χώρα; Μοιράσου μια πρακτική εμπειρία.',founder:'Το Pocket Biz ξεκίνησε ενώ μελετούσα International Business.'}
 }[lang]}
 function renderSections(){
-  let e=extraText();
-
-  // LIVE MARKET-ENTRY TOOLS
   const c=selected;
+  const name=L(c.name);
   const difficulty=Number(c.difficulty||5);
   const opportunity=Number(c.opportunity||5);
   const contacts=Number(c.contacts||0);
 
-  // Preview risk model: transparent, derived from the existing country data.
-  const languageRisk = ["JP","AE","FR","IT","ES","DE"].includes(c.code) ? 55 : 35;
-  const bureaucracy = Math.min(95, Math.round(35 + difficulty*6));
-  const setupComplexity = Math.min(95, Math.round(30 + difficulty*6));
-  const overallRisk = Math.round(
-    difficulty*0.30 + languageRisk*0.15 + bureaucracy*0.20 +
-    setupComplexity*0.20 + (100-opportunity*10)*0.15
+  // Keep the preview risk score transparent and tied to the existing country data.
+  const languageRisk=["JP","AE","FR","IT","ES","DE"].includes(c.code)?55:35;
+  const bureaucracy=Math.min(95,Math.round(35+difficulty*6));
+  const setupComplexity=Math.min(95,Math.round(30+difficulty*6));
+  const risk=Math.round(
+    difficulty*3 +
+    languageRisk*.15 +
+    bureaucracy*.20 +
+    setupComplexity*.20 +
+    (100-opportunity*10)*.15
   );
 
+  // Only useful tools remain here.
   toolsGrid.innerHTML=`
     <div class="card tool-live">
-      <div class="tool-kicker">Live tool · ${L(c.name)}</div>
-      <h3>📊 Country Risk Meter</h3>
-      <div class="tool-value">${overallRisk}/100</div>
-      <div class="tool-risk-meter"><span style="width:${overallRisk}%"></span></div>
-      <p class="tool-note">Combines the current Pocket Biz country difficulty, opportunity, language, bureaucracy and setup-complexity indicators.</p>
-      <div class="tool-action"><a class="btn" href="#riskTitle">Open full risk breakdown</a></div>
+      <div class="tool-kicker">Selected country · ${name}</div>
+      <h3>Country Risk</h3>
+      <div class="tool-value">${risk}/100</div>
+      <div class="tool-risk-meter"><span style="width:${Math.min(100,risk)}%"></span></div>
+      <p class="tool-note">A preview screening score based on the country's Pocket Biz difficulty, opportunity and setup indicators. It is not a legal or investment risk rating.</p>
     </div>
 
     <div class="card tool-live">
-      <div class="tool-kicker">Live web research · ${L(c.name)}</div>
-      <h3>❌ Top Mistakes</h3>
-      <p class="tool-note">Research current, country-specific mistakes using web-grounded AI instead of a static list.</p>
-      <div class="tool-action"><button class="btn gold" id="researchMistakes" type="button">Research mistakes</button></div>
-      <div id="mistakeToolStatus" class="tool-note">Not researched yet.</div>
+      <div class="tool-kicker">Current web research · ${name}</div>
+      <h3>Top Mistakes</h3>
+      <p class="tool-note">Research practical mistakes foreign businesses should know before entering this market.</p>
+      <div class="tool-action">
+        <button class="btn gold" id="researchMistakes" type="button">Research current mistakes</button>
+      </div>
+      <div id="mistakeToolStatus" class="tool-note">Ready to research ${name}.</div>
     </div>
 
     <div class="card tool-live">
-      <div class="tool-kicker">Planning estimate · ${L(c.name)}</div>
-      <h3>💰 Cost of Entry</h3>
+      <div class="tool-kicker">Planning estimate · ${name}</div>
+      <h3>Cost of Entry</h3>
       <div id="toolCostSummary"></div>
-      <div class="tool-action"><a class="btn" href="#costTitle">See estimate</a></div>
+      <p class="tool-note">A rough planning estimate for a small foreign entrant. Actual costs depend heavily on industry, structure, licensing and operating model.</p>
     </div>
   `;
 
   riskGrid.innerHTML=[
-    ["Culture & communication", Math.min(95, difficulty*10), "Higher means more adaptation is likely needed."],
-    ["Language barrier", languageRisk, "Preview indicator based on the current country profile."],
-    ["Bureaucracy", bureaucracy, "Preview indicator. Verify current requirements before acting."],
-    ["Setup complexity", setupComplexity, "Preview indicator, not a legal assessment."],
-    ["Market opportunity", opportunity*10, "Higher means stronger opportunity in the Pocket Biz preview model."],
-    ["Local contacts", Math.min(100, contacts*5), "Based on the number of contacts currently represented in the preview."]
+    ["Market difficulty",Math.min(95,difficulty*10),"Higher means a more difficult market in the current Pocket Biz dataset."],
+    ["Language / communication",languageRisk,"Preview indicator; not a measure of individual language ability."],
+    ["Bureaucracy",bureaucracy,"Planning indicator; verify current procedures with official sources."],
+    ["Setup complexity",setupComplexity,"Planning indicator for initial market setup."],
+    ["Market opportunity",Math.min(100,opportunity*10),"Higher means stronger opportunity in the current Pocket Biz dataset."],
+    ["Local contacts",Math.min(100,contacts*5),"Based on contacts represented in the current preview."]
   ].map(x=>`<div class="panel"><b>${x[0]}</b><div class="scorebar"><span style="width:${x[1]}%"></span></div><small>${x[2]}</small></div>`).join('');
 
   mistakesGrid.innerHTML=`
     <div class="card">
-      <span class="verified-badge">● Web-grounded research</span>
-      <h3>Current country-specific mistakes</h3>
-      <p id="mistakesPreview">Select a country and run the research tool above to get current mistakes backed by web sources.</p>
+      <span class="verified-badge">● Web research</span>
+      <h3>Top mistakes in ${name}</h3>
+      <p id="mistakesPreview">Click “Research current mistakes” above to search the web for country-specific guidance.</p>
     </div>
   `;
 
-  const base=350;
-  const setup=1200 + difficulty*250;
-  const legal=500 + difficulty*100;
-  const translation=["JP","DE","FR","IT","ES","CH"].includes(c.code)?450:250;
-  const research=300 + opportunity*50;
-  const low=base+setup+legal+translation+research;
+  // Practical, transparent entry-cost model for the preview.
+  const admin=1200+difficulty*250;
+  const professional=500+difficulty*100;
+  const localization=["JP","DE","FR","IT","ES","CH"].includes(c.code)?450:250;
+  const research=300+opportunity*50;
+  const contingency=350;
+  const low=Math.round(admin+professional+localization+research+contingency);
   const high=Math.round(low*2.2);
 
   costGrid.innerHTML=`
     <div class="card">
-      <div class="tool-kicker">Planning range</div>
+      <div class="tool-kicker">Illustrative planning range</div>
       <div class="cost-total">€${low.toLocaleString()}–€${high.toLocaleString()}</div>
-      <p class="tool-note">Illustrative MVP planning range for a small foreign entrant. It is not a government fee quote.</p>
+      <p class="tool-note">This is a planning screen, not an official fee quotation.</p>
     </div>
     <div class="card">
-      <div class="cost-row"><span>Initial admin & setup</span><b>€${setup.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Legal/accounting buffer</span><b>€${legal.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Translation/localization</span><b>€${translation.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Initial market research</span><b>€${research.toLocaleString()}</b></div>
-      <div class="cost-row"><span>Contingency</span><b>€${base.toLocaleString()}</b></div>
-    </div>
-    <div class="card">
-      <h3>What changes the number?</h3>
-      <p>Company structure, licensing, industry regulation, local professional fees, hiring, premises, inventory, translation, and the chosen entry model can move the real cost substantially.</p>
-      <p><b>Use this as a planning screen, not a quotation.</b></p>
+      <div class="cost-row"><span>Admin & initial setup</span><b>€${admin.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Legal / accounting buffer</span><b>€${professional.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Localization</span><b>€${localization.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Initial research</span><b>€${research.toLocaleString()}</b></div>
+      <div class="cost-row"><span>Contingency</span><b>€${contingency.toLocaleString()}</b></div>
     </div>
   `;
 
-  checklistGrid.innerHTML=`<div class="panel"><h3>${U('checklistTitle')}</h3><div class="list">${e.check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div></div><div class="panel"><h3>${U('contactsTitle')}</h3><p>${e.provider}</p></div>`;
+
+  if(typeof timelineGrid!=="undefined" && timelineGrid){
+    timelineGrid.innerHTML=`
+      <div class="panel"><b>1. Validate</b><p>Define the target customer, problem and competitive position in ${name}.</p></div>
+      <div class="panel"><b>2. Prepare</b><p>Check entry structure, pricing, taxes, licensing and local operating requirements.</p></div>
+      <div class="panel"><b>3. Test</b><p>Contact potential customers or partners and validate demand before committing major capital.</p></div>
+      <div class="panel"><b>4. Enter</b><p>Launch with a controlled pilot, measure results and expand only after the model works.</p></div>
+    `;
+  }
+
+  // Keep the genuinely useful original sections.
+  checklistGrid.innerHTML=`
+    <div class="panel">
+      <h3>${U('checklistTitle')}</h3>
+      <div class="list">${extraText().check.map(x=>`<div class="listitem">${x}</div>`).join('')}</div>
+    </div>
+    <div class="panel">
+      <h3>Before entering ${name}</h3>
+      <p>Confirm your target customer, entry model, regulatory requirements, local costs and first potential partners.</p>
+    </div>
+  `;
 
   contactsIntro.textContent=U('contactsFeatureText');
-  contactGrid.innerHTML=DATA.countries.slice(0,3).map(c=>`
+  contactGrid.innerHTML=`
     <div class="card">
       <span class="verified-badge"><span class="check">✓</span> Verified Provider</span>
-      <h3>${L(c.name)} Partner Desk</h3>
-      <p>${L(c.summary)}</p>
-    </div>`).join('');
+      <h3>${name} Provider Network</h3>
+      <p>Use verified local providers to support market-entry decisions. Provider verification should be completed before publication.</p>
+    </div>
+  `;
 
-  providerIntro.textContent=e.provider;
-  providerGrid.innerHTML=`<div class="panel"><h3>${U('contactsFeature')}</h3><p>${e.provider}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>`;
+  providerIntro.textContent=extraText().provider;
+  providerGrid.innerHTML=`
+    <div class="panel"><h3>${U('contactsFeature')}</h3><p>${extraText().provider}</p></div>
+    <div class="panel"><a class="btn gold" href="https://tally.so/r/A790be" target="_blank">${lang==='ja'?'プロバイダーとして申請':lang==='el'?'Αίτηση ως Provider':'Apply as a Provider'}</a></div>
+  `;
 
-  shareIntro.textContent=e.share;
-  shareGrid.innerHTML=`<div class="panel"><h3>${U('shareTitle')}</h3><p>${e.share}</p></div><div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>`;
+  shareIntro.textContent=extraText().share;
+  shareGrid.innerHTML=`
+    <div class="panel"><h3>${U('shareTitle')}</h3><p>${extraText().share}</p></div>
+    <div class="panel"><a class="btn gold" href="https://tally.so/r/kdzpWr" target="_blank">${lang==='ja'?'インサイトを共有':lang==='el'?'Μοιράσου Insight':'Share an Insight'}</a></div>
+  `;
 
-  briefGrid.innerHTML=`<div class="panel"><h3>${U('briefTitle')}</h3><p>${e.tools[2][1]}</p></div><div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>`;
+  briefGrid.innerHTML=`
+    <div class="panel"><h3>${U('briefTitle')}</h3><p>${extraText().tools[2][1]}</p></div>
+    <div class="panel"><a class="btn">${lang==='ja'?'ブリーフプレビュー':lang==='el'?'Brief Preview':'Brief Preview'}</a></div>
+  `;
 
-  founderPanel.innerHTML=`<p>${e.founder}</p>`;
+  founderPanel.innerHTML=`<p>${extraText().founder}</p>`;
 
-  // Cost summary in the live tool card.
   const costSummary=document.getElementById('toolCostSummary');
   if(costSummary){
     costSummary.innerHTML=`<div class="cost-total">€${low.toLocaleString()}+</div><div class="tool-note">illustrative starting budget</div>`;
@@ -252,7 +281,13 @@ function renderSections(){
 }
 
 function renderAll(){renderStatic();renderRegionFilter();renderPhone();renderCountries();renderProfile();renderSections()}
-languageSelect.onchange=e=>{lang=e.target.value;renderAll();advisorSetText()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
+languageSelect.onchange=e=>{lang=e.target.value;
+const pbRestoredCountry = pbRestoreSelectedCountry();
+if(pbRestoredCountry){
+  selected = pbRestoredCountry;
+}
+
+renderAll();advisorSetText()};searchInput.oninput=renderCountries;regionFilter.onchange=renderCountries;renderAll();
 
 
 
@@ -468,5 +503,25 @@ document.querySelectorAll(".advisor-example").forEach(btn => {
 
 
 advisorSetText();
+
+// Pocket Biz v16: persist the selected country across the preview and Market Entry Tools.
+const PB_SELECTED_COUNTRY_KEY = "pocketBizSelectedCountry";
+
+function pbSaveSelectedCountry(country){
+  try {
+    if(country?.code) localStorage.setItem(PB_SELECTED_COUNTRY_KEY, country.code);
+  } catch(e) {}
+}
+
+function pbRestoreSelectedCountry(){
+  try {
+    const code=localStorage.getItem(PB_SELECTED_COUNTRY_KEY);
+    if(!code) return null;
+    return DATA.countries.find(c=>c.code===code) || null;
+  } catch(e) {
+    return null;
+  }
+}
+
 </script>
 </body></html>
