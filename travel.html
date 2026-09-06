@@ -15,7 +15,7 @@ a{color:inherit}button,input,select{font:inherit}.container{max-width:1180px;mar
 .kicker{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--muted)}
 h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:14px 0}.lead{font-size:19px;line-height:1.65;color:var(--muted);max-width:680px}
 .card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 8px 30px rgba(28,24,18,.03)}
-.japan-card{background:var(--dark);color:#fff;border-radius:28px;padding:28px;position:relative;overflow:hidden}.japan-card:after{content:"🇯🇵";position:absolute;font-size:150px;right:-10px;bottom:-38px;opacity:.08}
+.japan-card{background:linear-gradient(90deg,rgba(15,14,13,.94) 0%,rgba(15,14,13,.78) 52%,rgba(15,14,13,.25) 100%),url("japan-hero.png") center/cover;color:#fff;border-radius:28px;padding:28px;position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-start}
 .japan-title{font-size:42px;letter-spacing:-.05em;margin:12px 0 8px}.jp-meta{color:#c9c4bc;line-height:1.6}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{border:0;border-radius:14px;padding:12px 17px;background:var(--dark);color:#fff;text-decoration:none;font-weight:850;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn.gold{background:var(--accent)}.btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
 .section{padding:38px 0}.section-title{font-size:clamp(34px,5vw,56px);letter-spacing:-.06em;margin:0 0 10px}.sub{color:var(--muted);font-size:17px;line-height:1.6}
@@ -24,7 +24,7 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 .search-panel{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px;align-items:end}.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted);margin:0 0 7px}.input,.select{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;outline:none}.input:focus,.select:focus{border-color:var(--accent)}
 .result{margin-top:16px;border-top:1px solid var(--line);padding-top:16px}.result-row{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.result-row:last-child{border-bottom:0}.price{font-size:20px;font-weight:950}.muted{color:var(--muted);font-size:13px}
 .notice{background:#faf7f1;border:1px solid var(--line);border-radius:18px;padding:16px;line-height:1.6;color:var(--muted);margin-top:16px}.notice strong{color:var(--text)}
-.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.city{padding:18px;border:1px solid var(--line);border-radius:20px;background:#fff}.city b{font-size:18px}.city span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.city{padding:18px;border:1px solid var(--line);border-radius:20px;background:#fff}.city b{font-size:18px}.city span{display:block;color:var(--muted);font-size:13px;margin-top:5px}.travel-link{display:inline-flex;align-items:center;gap:6px;margin-top:15px;color:var(--accent);font-weight:900;text-decoration:none}.travel-link:hover{text-decoration:underline}
 .cost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.cost{padding:20px;background:#fff;border:1px solid var(--line);border-radius:20px}.cost b{font-size:24px}.cost span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
 .checklist{display:grid;gap:0}.check{display:flex;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}.check:last-child{border-bottom:0}.check input{margin-top:4px}
 .footer{border-top:1px solid var(--line);padding:28px 0;margin-top:55px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
@@ -43,7 +43,7 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 
 <section class="hero">
 <div>
-<div class="kicker">JAPAN · TRAVEL HUB · v23</div>
+<div class="kicker">JAPAN · TRAVEL HUB · v25</div>
 <h1>Plan Japan without opening 47 tabs.</h1>
 <p class="lead">A Japan-first travel workspace inside Pocket Biz. Flights, accommodation, transport, cities, practical costs and trip preparation, all connected to the same country profile.</p>
 <div class="actions">
@@ -109,11 +109,32 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 <h2 class="section-title">🚆 Getting around Japan</h2>
 <p class="sub">A deterministic Japan transport layer. No AI needed.</p>
 <div class="grid2">
-<div class="card"><h3>Shinkansen</h3><p>Best for major intercity routes such as Tokyo–Kyoto–Osaka. Reserve seats when your itinerary needs certainty.</p></div>
-<div class="card"><h3>IC cards</h3><p>Suica, PASMO and other compatible IC systems are useful for everyday urban transport and small purchases where accepted.</p></div>
-<div class="card"><h3>Tokyo</h3><p>Use rail and metro for most city travel. Plan around station transfers rather than road distance.</p></div>
-<div class="card"><h3>Airport arrival</h3><p>Tokyo airports, Kansai and other gateways have dedicated rail and bus options. Pocket Biz can later add route-specific live transport APIs.</p></div>
+<div class="card">
+<h3>🚄 Shinkansen</h3>
+<p>Best for major intercity routes such as Tokyo–Kyoto–Osaka. Reserve seats when your itinerary needs certainty.</p>
+<a class="travel-link" href="https://smart-ex.jp/en/" target="_blank" rel="noreferrer">Buy / reserve on Smart EX ↗</a>
+<a class="travel-link" href="https://www.eki-net.com/en/jreast-train-reservation/Top/Index" target="_blank" rel="noreferrer">JR-EAST Train Reservation ↗</a>
 </div>
+<div class="card">
+<h3>💳 IC cards</h3>
+<p>Suica, Welcome Suica and PASMO are useful for everyday trains, buses and participating purchases.</p>
+<a class="travel-link" href="https://www.jreast.co.jp/en/multi/welcomesuica/purchase.html" target="_blank" rel="noreferrer">Buy Welcome Suica ↗</a>
+<a class="travel-link" href="https://www.pasmo.co.jp/visitors/en/issue/" target="_blank" rel="noreferrer">Buy PASMO ↗</a>
+</div>
+<div class="card">
+<h3>🚇 Tokyo</h3>
+<p>Use rail and metro for most city travel. Plan around station transfers rather than road distance.</p>
+<a class="travel-link" href="https://www.tokyometro.jp/tst/en/index.html" target="_blank" rel="noreferrer">Buy Tokyo Subway Ticket ↗</a>
+<a class="travel-link" href="https://www.tokyometro.jp/en/ticket/index.html" target="_blank" rel="noreferrer">Tokyo Metro tickets ↗</a>
+</div>
+<div class="card">
+<h3>✈️ Airport arrival</h3>
+<p>Choose the route that matches your airport. Narita Express is useful for Narita → Tokyo/Shinjuku/Shibuya; Keikyu provides rail access from Haneda.</p>
+<a class="travel-link" href="https://www.jreast.co.jp/en/multi/nex/tickets/" target="_blank" rel="noreferrer">Buy Narita Express tickets ↗</a>
+<a class="travel-link" href="https://www.keikyu.co.jp/en/visit/haneda-airport/access/train.html" target="_blank" rel="noreferrer">Haneda rail access ↗</a>
+</div>
+</div>
+<div class="notice"><strong>Official links:</strong> Pocket Biz sends the traveler directly to the operator's English booking or ticket page. We do not imitate the checkout process or collect payment.</div>
 </section>
 
 <section class="section" id="cities">
@@ -132,7 +153,7 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 
 <section class="section" id="activities">
 <h2 class="section-title">🎫 Activities</h2>
-<p class="sub">Keep experiences alongside the itinerary. Booking.com can later provide attraction data and booking/redirect flows.</p>
+<p class="sub">Explore attractions and experiences for your Japan itinerary.</p>
 <div class="grid3">
 <div class="card"><h3>Tokyo</h3><p>City observation decks, neighborhoods, museums, food experiences and day trips.</p></div>
 <div class="card"><h3>Kyoto</h3><p>Temples, shrines, traditional districts, gardens and cultural experiences.</p></div>
@@ -142,7 +163,7 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 
 <section class="section" id="budget">
 <h2 class="section-title">💴 Japan trip budget</h2>
-<p class="sub">Enter your own quoted prices. Pocket Biz should calculate, not hallucinate a €1,947.32 “average Japan trip” from the void.</p>
+<p class="sub">Build your trip budget from your own expected costs.</p>
 <div class="cost-grid">
 <div class="cost"><b>€ <span id="flightCost">0</span></b><span>Flights</span></div>
 <div class="cost"><b>€ <span id="stayCost">0</span></b><span>Accommodation</span></div>
@@ -177,7 +198,7 @@ h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:1
 <div class="notice"><strong>Architecture note:</strong> this page is API-ready but does not pretend to have live inventory. Booking.com credentials belong in a Vercel server-side function, never in this HTML.</div>
 </section>
 
-<footer class="footer"><span>Pocket Biz · Japan Travel</span><span>v23 · Japan-first travel pilot</span></footer>
+<footer class="footer"><span>Pocket Biz · Japan Travel · v25</span><span>v25 · Japan-first travel pilot + official ticket links</span></footer>
 </div>
 <script>
 function flightDemo(){
