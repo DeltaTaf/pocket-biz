@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pocket Biz v23 · Japan Travel</title>
+<style>
+:root{--bg:#f7f3ec;--panel:#fff;--text:#181816;--muted:#756e65;--line:#e5ddd2;--accent:#c48a3a;--dark:#151513;--green:#2f9b43;--shadow:0 20px 55px rgba(28,24,18,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}button,input,select{font:inherit}.container{max-width:1180px;margin:auto;padding:0 24px}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;text-decoration:none}.brand-mark{width:42px;height:42px;border-radius:14px;background:var(--dark);color:#fff;display:grid;place-items:center;font-size:14px}
+.nav-links{display:flex;align-items:center;gap:18px}.nav-links a{text-decoration:none;font-size:14px;font-weight:800;color:var(--muted)}.nav-links a:hover{color:var(--text)}
+.hero{padding:68px 0 46px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
+.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--muted)}
+h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.07em;margin:14px 0}.lead{font-size:19px;line-height:1.65;color:var(--muted);max-width:680px}
+.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 8px 30px rgba(28,24,18,.03)}
+.japan-card{background:var(--dark);color:#fff;border-radius:28px;padding:28px;position:relative;overflow:hidden}.japan-card:after{content:"🇯🇵";position:absolute;font-size:150px;right:-10px;bottom:-38px;opacity:.08}
+.japan-title{font-size:42px;letter-spacing:-.05em;margin:12px 0 8px}.jp-meta{color:#c9c4bc;line-height:1.6}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{border:0;border-radius:14px;padding:12px 17px;background:var(--dark);color:#fff;text-decoration:none;font-weight:850;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn.gold{background:var(--accent)}.btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+.section{padding:38px 0}.section-title{font-size:clamp(34px,5vw,56px);letter-spacing:-.06em;margin:0 0 10px}.sub{color:var(--muted);font-size:17px;line-height:1.6}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.travel-card{display:block;text-decoration:none;min-height:205px;transition:.2s}.travel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#cda36c}.icon{font-size:34px}.travel-card h3{font-size:23px;margin:13px 0 8px}.travel-card p{color:var(--muted);line-height:1.55;margin:0}.tag{display:inline-block;background:#f2eadf;color:#775e42;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850;margin-top:17px}
+.search-panel{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px;align-items:end}.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted);margin:0 0 7px}.input,.select{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;outline:none}.input:focus,.select:focus{border-color:var(--accent)}
+.result{margin-top:16px;border-top:1px solid var(--line);padding-top:16px}.result-row{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.result-row:last-child{border-bottom:0}.price{font-size:20px;font-weight:950}.muted{color:var(--muted);font-size:13px}
+.notice{background:#faf7f1;border:1px solid var(--line);border-radius:18px;padding:16px;line-height:1.6;color:var(--muted);margin-top:16px}.notice strong{color:var(--text)}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.city{padding:18px;border:1px solid var(--line);border-radius:20px;background:#fff}.city b{font-size:18px}.city span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+.cost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.cost{padding:20px;background:#fff;border:1px solid var(--line);border-radius:20px}.cost b{font-size:24px}.cost span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+.checklist{display:grid;gap:0}.check{display:flex;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}.check:last-child{border-bottom:0}.check input{margin-top:4px}
+.footer{border-top:1px solid var(--line);padding:28px 0;margin-top:55px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.search-panel{grid-template-columns:1fr 1fr}.city-grid,.cost-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.nav-links a{display:none}.container{padding:0 16px}.grid3,.grid2,.search-panel,.city-grid,.cost-grid{grid-template-columns:1fr}.hero{padding:45px 0 25px}}
+</style>
+</head>
+<body>
+<div class="container">
+<nav class="nav">
+<a class="brand" href="index.html"><span class="brand-mark">PB</span><span>Pocket Biz</span></a>
+<div class="nav-links">
+<a href="markets.html">Markets</a><a href="compare.html">Compare</a><a href="market-entry.html?country=JP">Market Entry</a><a href="travel.html">Travel</a><a href="advisor.html?country=JP">Advisor</a><a href="providers.html">Providers</a>
+</div>
+</nav>
+
+<section class="hero">
+<div>
+<div class="kicker">JAPAN · TRAVEL HUB · v23</div>
+<h1>Plan Japan without opening 47 tabs.</h1>
+<p class="lead">A Japan-first travel workspace inside Pocket Biz. Flights, accommodation, transport, cities, practical costs and trip preparation, all connected to the same country profile.</p>
+<div class="actions">
+<a class="btn gold" href="#stay">Find accommodation</a>
+<a class="btn secondary" href="#transport">Plan transport</a>
+<a class="btn secondary" href="country.html?country=JP">Japan business profile</a>
+</div>
+</div>
+<div class="japan-card">
+<div class="kicker" style="color:#bdb8b0">Selected destination</div>
+<div class="japan-title">🇯🇵 Japan</div>
+<div class="jp-meta">Tokyo · Kyoto · Osaka · Hiroshima · Sapporo · Fukuoka</div>
+<div class="actions">
+<a class="btn gold" href="#cities">Explore cities</a>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Your Japan trip</h2>
+<p class="sub">The first version is deliberately useful even before external booking APIs are connected.</p>
+<div class="grid3">
+<a class="card travel-card" href="#flights"><div class="icon">✈️</div><h3>Flights</h3><p>Set your departure airport, destination and dates. API connection can be added later without changing the page.</p><span class="tag">Provider-ready</span></a>
+<a class="card travel-card" href="#stay"><div class="icon">🏨</div><h3>Accommodation</h3><p>Search by Japanese city and dates. The Booking.com Demand API can power live results once partner access is configured.</p><span class="tag">Booking.com-ready</span></a>
+<a class="card travel-card" href="#transport"><div class="icon">🚆</div><h3>Transport</h3><p>Understand Shinkansen, IC cards, airport transfers, metro and regional travel before you arrive.</p><span class="tag">Structured data</span></a>
+<a class="card travel-card" href="#activities"><div class="icon">🎫</div><h3>Activities</h3><p>Keep attractions and day trips in the same travel plan instead of scattering them across browser tabs.</p><span class="tag">Provider-ready</span></a>
+<a class="card travel-card" href="#budget"><div class="icon">💴</div><h3>Budget</h3><p>Build a transparent trip budget from your actual flight, hotel, transport, food and activity costs.</p><span class="tag">No AI</span></a>
+<a class="card travel-card" href="#prepare"><div class="icon">🧳</div><h3>Prepare</h3><p>Entry, connectivity, money, etiquette and practical arrival checks for Japan.</p><span class="tag">Checklist</span></a>
+</div>
+</section>
+
+<section class="section" id="flights">
+<h2 class="section-title">✈️ Flights</h2>
+<p class="sub">Flight search is separated from Booking.com for now. Booking.com's current Demand API focuses on stays, car rentals and attractions, with flights listed as coming soon.</p>
+<div class="panel">
+<div class="search-panel">
+<div class="field"><label>From</label><input class="input" id="from" placeholder="e.g. Copenhagen, Athens"></div>
+<div class="field"><label>To</label><select class="select" id="flightTo"><option>Tokyo</option><option>Osaka</option><option>Fukuoka</option><option>Sapporo</option></select></div>
+<div class="field"><label>Departure</label><input class="input" id="flightDate" type="date"></div>
+<button class="btn" onclick="flightDemo()">Search</button>
+</div>
+<div class="notice" id="flightResult"><strong>Demo mode:</strong> Flight providers can be connected here later. No fake prices are displayed.</div>
+</div>
+</section>
+
+<section class="section" id="stay">
+<h2 class="section-title">🏨 Accommodation</h2>
+<p class="sub">Japan accommodation search with a clean provider boundary. Live Booking.com results require your Demand API partner credentials.</p>
+<div class="panel">
+<div class="search-panel">
+<div class="field"><label>City</label><select class="select" id="stayCity"><option>Tokyo</option><option>Kyoto</option><option>Osaka</option><option>Hiroshima</option><option>Sapporo</option><option>Fukuoka</option></select></div>
+<div class="field"><label>Check-in</label><input class="input" id="checkin" type="date"></div>
+<div class="field"><label>Check-out</label><input class="input" id="checkout" type="date"></div>
+<button class="btn gold" onclick="stayDemo()">Search</button>
+</div>
+<div class="result" id="stayResult">
+<div class="result-row"><div><b>Booking.com Demand API</b><div class="muted">Live accommodation results will appear here after API credentials are connected.</div></div><a class="btn secondary" href="https://developers.booking.com/demand/docs/accommodations/accommodation-tutorial" target="_blank" rel="noreferrer">API docs</a></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="transport">
+<h2 class="section-title">🚆 Getting around Japan</h2>
+<p class="sub">A deterministic Japan transport layer. No AI needed.</p>
+<div class="grid2">
+<div class="card"><h3>Shinkansen</h3><p>Best for major intercity routes such as Tokyo–Kyoto–Osaka. Reserve seats when your itinerary needs certainty.</p></div>
+<div class="card"><h3>IC cards</h3><p>Suica, PASMO and other compatible IC systems are useful for everyday urban transport and small purchases where accepted.</p></div>
+<div class="card"><h3>Tokyo</h3><p>Use rail and metro for most city travel. Plan around station transfers rather than road distance.</p></div>
+<div class="card"><h3>Airport arrival</h3><p>Tokyo airports, Kansai and other gateways have dedicated rail and bus options. Pocket Biz can later add route-specific live transport APIs.</p></div>
+</div>
+</section>
+
+<section class="section" id="cities">
+<h2 class="section-title">Major Japan bases</h2>
+<div class="city-grid">
+<div class="city"><b>Tokyo</b><span>Business · culture · nightlife</span></div>
+<div class="city"><b>Kyoto</b><span>Temples · traditional culture</span></div>
+<div class="city"><b>Osaka</b><span>Food · business · nightlife</span></div>
+<div class="city"><b>Hiroshima</b><span>History · Miyajima access</span></div>
+<div class="city"><b>Sapporo</b><span>Hokkaido · food · winter</span></div>
+<div class="city"><b>Fukuoka</b><span>Kyushu · food · compact city</span></div>
+<div class="city"><b>Nara</b><span>Day trip · heritage</span></div>
+<div class="city"><b>Hakone</b><span>Onsen · Fuji area</span></div>
+</div>
+</section>
+
+<section class="section" id="activities">
+<h2 class="section-title">🎫 Activities</h2>
+<p class="sub">Keep experiences alongside the itinerary. Booking.com can later provide attraction data and booking/redirect flows.</p>
+<div class="grid3">
+<div class="card"><h3>Tokyo</h3><p>City observation decks, neighborhoods, museums, food experiences and day trips.</p></div>
+<div class="card"><h3>Kyoto</h3><p>Temples, shrines, traditional districts, gardens and cultural experiences.</p></div>
+<div class="card"><h3>Osaka</h3><p>Food districts, entertainment, Osaka Castle and nearby day trips.</p></div>
+</div>
+</section>
+
+<section class="section" id="budget">
+<h2 class="section-title">💴 Japan trip budget</h2>
+<p class="sub">Enter your own quoted prices. Pocket Biz should calculate, not hallucinate a €1,947.32 “average Japan trip” from the void.</p>
+<div class="cost-grid">
+<div class="cost"><b>€ <span id="flightCost">0</span></b><span>Flights</span></div>
+<div class="cost"><b>€ <span id="stayCost">0</span></b><span>Accommodation</span></div>
+<div class="cost"><b>€ <span id="transportCost">0</span></b><span>Transport</span></div>
+<div class="cost"><b>€ <span id="foodCost">0</span></b><span>Food + activities</span></div>
+</div>
+<div class="panel" style="margin-top:14px">
+<div class="search-panel" style="grid-template-columns:repeat(4,1fr)">
+<div class="field"><label>Flights €</label><input class="input costInput" type="number" min="0" value="0" oninput="budget()"></div>
+<div class="field"><label>Stay €</label><input class="input costInput" type="number" min="0" value="0" oninput="budget()"></div>
+<div class="field"><label>Transport €</label><input class="input costInput" type="number" min="0" value="0" oninput="budget()"></div>
+<div class="field"><label>Food + activities €</label><input class="input costInput" type="number" min="0" value="0" oninput="budget()"></div>
+</div>
+<div style="margin-top:22px;font-size:15px;color:var(--muted)">Trip total</div>
+<div style="font-size:48px;font-weight:950;letter-spacing:-.06em" id="total">€0</div>
+</div>
+</section>
+
+<section class="section" id="prepare">
+<h2 class="section-title">🧳 Before you fly</h2>
+<p class="sub">A simple Japan preparation checklist that can later be connected to official sources.</p>
+<div class="card checklist">
+<label class="check"><input type="checkbox"> Check current entry and visa requirements for your passport.</label>
+<label class="check"><input type="checkbox"> Arrange travel insurance.</label>
+<label class="check"><input type="checkbox"> Decide whether you need a SIM/eSIM.</label>
+<label class="check"><input type="checkbox"> Check how you will pay and access cash.</label>
+<label class="check"><input type="checkbox"> Plan airport → accommodation transport.</label>
+<label class="check"><input type="checkbox"> Save your accommodation address and reservation offline.</label>
+<label class="check"><input type="checkbox"> Learn basic Japanese travel phrases.</label>
+<label class="check"><input type="checkbox"> Review Pocket Biz's Japan business etiquette if the trip is business-related.</label>
+</div>
+<div class="notice"><strong>Architecture note:</strong> this page is API-ready but does not pretend to have live inventory. Booking.com credentials belong in a Vercel server-side function, never in this HTML.</div>
+</section>
+
+<footer class="footer"><span>Pocket Biz · Japan Travel</span><span>v23 · Japan-first travel pilot</span></footer>
+</div>
+<script>
+function flightDemo(){
+ const from=document.getElementById('from').value.trim()||'your airport';
+ const to=document.getElementById('flightTo').value;
+ const date=document.getElementById('flightDate').value||'your selected date';
+ document.getElementById('flightResult').innerHTML='<strong>Ready for provider integration:</strong> '+from+' → '+to+' on '+date+'. Live prices are intentionally not invented.';
+}
+function stayDemo(){
+ const city=document.getElementById('stayCity').value;
+ const a=document.getElementById('checkin').value||'check-in';
+ const b=document.getElementById('checkout').value||'check-out';
+ document.getElementById('stayResult').innerHTML='<div class="result-row"><div><b>'+city+' accommodation</b><div class="muted">'+a+' → '+b+' · Booking.com Demand API connection point</div></div><span class="tag">Awaiting API credentials</span></div>';
+}
+function budget(){
+ const vals=[...document.querySelectorAll('.costInput')].map(x=>Number(x.value)||0);
+ ['flightCost','stayCost','transportCost','foodCost'].forEach((id,i)=>document.getElementById(id).textContent=vals[i].toLocaleString());
+ document.getElementById('total').textContent='€'+vals.reduce((a,b)=>a+b,0).toLocaleString();
+}
+</script>
+</body>
+</html>
